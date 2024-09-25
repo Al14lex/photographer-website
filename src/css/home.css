@@ -5,21 +5,76 @@
     right: 0;
     background: rgba(108, 84, 61, 0.534);
     z-index: 10;
+    box-shadow: 0px 0px 22px rgba(0, 0, 0, 0.3);
 }
 
-nav ul {
-    list-style-type: none;
+.nav-list {
+    list-style: none;
+    padding: 0;
     margin: 0;
-    padding: 10px;
     display: flex;
+    align-items: center;
     justify-content: space-around;
+    height: 50px;
 }
 
-nav a {
+.nav-list li {
+    position: relative;
+}
+
+.nav-list a {
+    font-family: "Playfair Display SC", system-ui;
+        font-weight: 400;
+        font-style: normal;
     text-decoration: none;
-    color: black;
+    padding: 10px 15px;
+    display: inline-block;
+    color: #000;
+    transition: color 250ms linear;
+}
+.nav-list a:hover,
+.nav-list a:focus{
+    color: #FFF8E7;
 }
 
+/* .nav-list a.active {
+    color: #FFF8E7;
+    font-weight: bold;
+    text-decoration: underline;
+} */
+
+.portfolio-dropdown .dropdown-menu {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color:rgb(136, 113, 92);
+    box-shadow: 0px 14px 22px rgba(0, 0, 0, 0.3);
+    padding: 0;
+    text-align: center;
+    list-style: none;
+    z-index: 1;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.portfolio-dropdown .dropdown-menu li a {
+    padding: 7px 10px;
+    display: block;
+    white-space: nowrap;
+}
+
+.portfolio-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+.dropdown-menu li a:hover {
+    color:#FFF8E7;
+    /* Ефект при наведенні на елементи меню */
+}
+/* ===============HERO==================== */
 .hero {
     height: 100vh;
     /* Висота секції "hero" на всю висоту вікна */
@@ -35,7 +90,7 @@ nav a {
     /* Вертикальне вирівнювання контенту */
     justify-content: center;
     /* Горизонтальне вирівнювання контенту */
-    color: white;
+    color: #F0F0F0;
     /* Колір тексту */
     position: relative;
     /* Важливо для абсолютного позиціювання внутрішнього контенту */

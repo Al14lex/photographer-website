@@ -1,7 +1,7 @@
-@import './home.css';
+/* @import './home.css';
 @import './about.css';
 @import './contacts.css';
-@import './get-photo.css';
+@import './get-photo.css'; */
 
 /* Ресет стилів */
 * {
@@ -10,15 +10,24 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: "Playfair Display SC", system-ui;
     font-weight: 400;
     font-style: normal;
     line-height: 1.6;
-    color: 4F4F4F;
+    color:#4B3E3E;
     background-color: #815e3b9a;
 }
 
+.nav-list a.active {
+    color: #FFF8E7;
+    /* font-weight: bold; */
+    /* text-decoration: underline; */
+}
 
 h1,
 h2,
@@ -36,7 +45,7 @@ ul {
 
 button {
     background-color:rgba(111, 85, 61, 0.666);
-    color: white;
+    color: #F0F0F0;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
