@@ -1,0 +1,110 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(108, 84, 61, 0.534);
+    z-index: 10;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+}
+
+.hero {
+    height: 100vh;
+    /* Висота секції "hero" на всю висоту вікна */
+    background-image: url('./images/your-background-image.jpg');
+    /* Ваша картинка */
+    background-size: cover;
+    /* Покриває всю секцію */
+    background-position: center;
+    /* Центрує зображення */
+    display: flex;
+    /* Додає гнучке позиціювання */
+    align-items: center;
+    /* Вертикальне вирівнювання контенту */
+    justify-content: center;
+    /* Горизонтальне вирівнювання контенту */
+    color: white;
+    /* Колір тексту */
+    position: relative;
+    /* Важливо для абсолютного позиціювання внутрішнього контенту */
+}
+
+.hero-content {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    /* Напівпрозорий фон для тексту */
+    padding: 20px;
+    border-radius: 10px;
+    /* Закруглені краї */
+    position: absolute;
+    /* Змінено на абсолютне позиціювання */
+    top: 50%;
+    /* Центрування по вертикалі */
+    left: 50%;
+    /* Центрування по горизонталі */
+    transform: translate(-50%, -50%);
+    /* Вирівнює контент по центру */
+}
+
+
+
+
+/* =================== */
+/* Стилі для модального вікна */
+.modal {
+    display: none;
+    /* Сховати за замовчуванням */
+    position: fixed;
+    z-index: 1;
+    /* Перекриває інші елементи */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Повна ширина */
+    height: 100%;
+    /* Повна висота */
+    overflow: auto;
+    /* Додає прокрутку, якщо потрібно */
+    background-color: rgb(0, 0, 0);
+    /* Чорний фон */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Прозорий фон */
+}
+
+/* Стилі для контенту модального вікна */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% зверху, центрування знизу */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    /* Ширина модального вікна */
+}
+
+/* Кнопка закриття */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
