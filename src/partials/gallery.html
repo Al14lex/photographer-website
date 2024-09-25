@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <link rel="stylesheet" href="styles/gallery.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contacts.html">Contact</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Album Section with Background Image -->
+    <section class="album">
+        <div class="album-info">
+            <h1>Album Title</h1>
+            <p>Photographer: [Photographer's Name]</p>
+            <p>Date: [Shooting Date]</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <div class="image-grid">
+            <!-- Images loaded from the server (placeholders for now) -->
+            <img src="image1.jpg" alt="Image 1">
+            <img src="image2.jpg" alt="Image 2">
+            <img src="image3.jpg" alt="Image 3">
+            <!-- Add more images as needed -->
+        </div>
+
+        <!-- Download Button -->
+        <button id="downloadBtn">Download Photos</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>All rights reserved &copy; 2024</p>
+    </footer>
+
+    <!-- Modal for Feedback -->
+    <div id="feedbackModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Leave a Review</h2>
+            <form>
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="message">Your Review:</label>
+                <textarea id="message" name="message"
