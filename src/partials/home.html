@@ -10,25 +10,29 @@
   <body>
     <header class="header">
       <div class="header-container container">
-        <img
-          class="logo"
-          src="../img/home/logo.png"
-          width="70"
-          height="50"
-          alt="Logo"
-        />
         <nav class="nav">
           <ul class="nav-list">
             <li><a href="home.html">Home</a></li>
             <li><a href="about.html">About Me</a></li>
             <li><a href="price.html">Price</a></li>
-            <li class="portfolio-dropdown">
-              <span>Portfolio</span>
-              <a href="individual.html">Individual</a>
-              <a href="family.html">Family</a>
-              <a href="children.html">Children</a>
-              <a href="newborn.html">Newborn</a>
+            <li>
+              <img
+                class="logo"
+                src="../img/home/logo.png"
+                width="160"
+                alt="Logo"
+              />
             </li>
+            <li class="portfolio-dropdown">
+              <a href="#">Portfolio</a>
+              <ul class="dropdown-menu">
+                <li><a href="individual.html">Individual</a></li>
+                <li><a href="family.html">Family</a></li>
+                <li><a href="children.html">Children</a></li>
+                <li><a href="newborn.html">Newborn</a></li>
+              </ul>
+            </li>
+            <li><a href="#reviews">Reviews</a></li>
             <li><a href="contact.html">Contact</a></li>
           </ul>
         </nav>
@@ -91,6 +95,11 @@
             <h2 class="portfolio-title">Children</h2>
             <a href="price.html" class="portfolio-link">More Details</a>
           </li>
+          <li class="portfolio-item">
+            <img src="" alt="" class="portfolio-image" />
+            <h2 class="portfolio-title">Newborn</h2>
+            <a href="price.html" class="portfolio-link">More Details</a>
+          </li>
         </ul>
       </div>
     </section>
@@ -117,7 +126,7 @@
     <!-- reviews -->
     <section class="reviews-section">
       <div class="reviews-container">
-        <h2 class="reviews-title">What my clients say</h2>
+        <h2 id="reviews" class="reviews-title">What my clients say</h2>
         <ul class="reviews">
           <li class="review">
             <img src="user1.jpg" alt="Review 1" class="review-image" />
