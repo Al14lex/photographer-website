@@ -1,3 +1,9 @@
+.container{
+    min-width: 320px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
 .header {
     position: fixed;
     top: 0;
@@ -6,8 +12,59 @@
     background: rgba(108, 84, 61, 0.534);
     z-index: 10;
     box-shadow: 0px 0px 22px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
+.header.hidden {
+    transform: translateY(-100%);
+    opacity: 0;  
+}
+
+.header-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav{
+    display: none;
+}
+
+.logo-mob{
+    margin-left: 20px;
+}
+.burger-menu {
+    /* background-color: transparent; */
+      display: block;
+      width: 40px;
+      height: 35px;
+      padding: 0;
+  }
+.icon {
+      width: 100%;
+      height: 100%;
+      fill: #000;
+  }
+/* ====================HEADER TAB============== */
+@media (min-width: 768px) {
+.container {
+    min-width: 768px;
+}
+
+.logo-mob{
+    display: none;
+}
+.burger-menu{
+    display: none;
+}
+.header-container{
+    display: block;
+}
+.logo{
+    width: 130px;
+}
+.nav{
+    display: block;
+}
 .nav-list {
     list-style: none;
     padding: 0;
@@ -15,21 +72,18 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    height: 50px;
+    height: 40px;
 }
-
 .nav-list li {
     position: relative;
 }
 
 .nav-list a {
-    font-family: "Playfair Display SC", system-ui;
-        font-weight: 400;
-        font-style: normal;
     text-decoration: none;
     padding: 10px 15px;
     display: inline-block;
     color: #000;
+    font-size: 16px;
     transition: color 250ms linear;
 }
 .nav-list a:hover,
@@ -37,17 +91,12 @@
     color: #FFF8E7;
 }
 
-/* .nav-list a.active {
-    color: #FFF8E7;
-    font-weight: bold;
-    text-decoration: underline;
-} */
-
 .portfolio-dropdown .dropdown-menu {
     display: block;
     opacity: 0;
     visibility: hidden;
     position: absolute;
+    width: 90px;
     top: 100%;
     left: 0;
     background-color:rgb(136, 113, 92);
@@ -60,9 +109,10 @@
 }
 
 .portfolio-dropdown .dropdown-menu li a {
-    padding: 7px 10px;
+    padding: 1px 10px 6px 10px;
     display: block;
     white-space: nowrap;
+    font-size: 14px;
 }
 
 .portfolio-dropdown:hover .dropdown-menu {
@@ -72,45 +122,56 @@
 
 .dropdown-menu li a:hover {
     color:#FFF8E7;
-    /* Ефект при наведенні на елементи меню */
 }
-/* ===============HERO==================== */
+
+}
+/* ================HEADER DESC================ */
+@media (min-width: 1024px) {
+.container {
+    min-width: 1024px;
+    max-width: 1440px;
+}
+.nav-list{
+    height: 50px;
+}
+.logo{
+    width: 140px;
+}
+.nav-list a{
+    font-size: 18px;
+}
+.portfolio-dropdown .dropdown-menu{
+    width: 100px;
+    padding-bottom: 5px;
+}
+.portfolio-dropdown .dropdown-menu li a{
+    font-size: 16px;
+}
+}
+
+/* ===============HERO MOB==================== */
+
 .hero {
     height: 100vh;
-    /* Висота секції "hero" на всю висоту вікна */
     background-image: url('./images/your-background-image.jpg');
-    /* Ваша картинка */
     background-size: cover;
-    /* Покриває всю секцію */
     background-position: center;
-    /* Центрує зображення */
     display: flex;
-    /* Додає гнучке позиціювання */
     align-items: center;
-    /* Вертикальне вирівнювання контенту */
     justify-content: center;
-    /* Горизонтальне вирівнювання контенту */
-    color: #F0F0F0;
-    /* Колір тексту */
     position: relative;
-    /* Важливо для абсолютного позиціювання внутрішнього контенту */
 }
 
 .hero-content {
     text-align: center;
-    background: rgba(0, 0, 0, 0.5);
-    /* Напівпрозорий фон для тексту */
+    background: rgba(111, 85, 61, 0.586);
     padding: 20px;
     border-radius: 10px;
-    /* Закруглені краї */
     position: absolute;
-    /* Змінено на абсолютне позиціювання */
     top: 50%;
-    /* Центрування по вертикалі */
     left: 50%;
-    /* Центрування по горизонталі */
+       color: #F0F0F0;
     transform: translate(-50%, -50%);
-    /* Вирівнює контент по центру */
 }
 
 
