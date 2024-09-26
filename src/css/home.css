@@ -9,7 +9,7 @@
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(108, 84, 61, 0.534);
+    background: rgba(191, 168, 146, 0.638);
     z-index: 10;
     box-shadow: 0px 0px 22px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, opacity 0.3s ease;
@@ -33,11 +33,14 @@
     margin-left: 20px;
 }
 .burger-menu {
-    /* background-color: transparent; */
+    background-color: transparent;
       display: block;
       width: 40px;
       height: 35px;
       padding: 0;
+  }
+button:hover {
+      background-color: rgba(116, 94, 71, 0.523);
   }
 .icon {
       width: 100%;
@@ -80,10 +83,11 @@
 
 .nav-list a {
     text-decoration: none;
+    /* font-weight: bold; */
     padding: 10px 15px;
     display: inline-block;
     color: #000;
-    font-size: 16px;
+    font-size: 14px;
     transition: color 250ms linear;
 }
 .nav-list a:hover,
@@ -96,12 +100,11 @@
     opacity: 0;
     visibility: hidden;
     position: absolute;
-    width: 90px;
-    top: 100%;
+    padding: 0 8px 5px 8px;
+    top: 133%;
     left: 0;
-    background-color:rgb(136, 113, 92);
-    box-shadow: 0px 14px 22px rgba(0, 0, 0, 0.3);
-    padding: 0;
+    background-color:rgba(191, 168, 146, 0.638);
+    box-shadow: 0px 12px 18px rgba(0, 0, 0, 0.3);
     text-align: center;
     list-style: none;
     z-index: 1;
@@ -112,7 +115,7 @@
     padding: 1px 10px 6px 10px;
     display: block;
     white-space: nowrap;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .portfolio-dropdown:hover .dropdown-menu {
@@ -135,7 +138,7 @@
     height: 50px;
 }
 .logo{
-    width: 140px;
+    width: 150px;
 }
 .nav-list a{
     font-size: 18px;
@@ -153,31 +156,72 @@
 
 .hero {
     height: 100vh;
-    background-image: url('./images/your-background-image.jpg');
+    background-image: url('../img/home/1-02.jpg');
     background-size: cover;
     background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+    z-index: 1;
 }
-
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:#6e645a41;;
+    z-index: -1;
+}
 .hero-content {
     text-align: center;
-    background: rgba(111, 85, 61, 0.586);
+    background:rgba(191, 168, 146, 0.605);
     padding: 20px;
     border-radius: 10px;
     position: absolute;
     top: 50%;
     left: 50%;
-       color: #F0F0F0;
+       color: #000;
     transform: translate(-50%, -50%);
 }
+.hero-content h1{
+    font-family: "Ephesis", system-ui;
+    font-size: 34px;
+    font-weight: 400;
+    font-style: normal;
+}
+/* =======================HERO TAB=================== */
+@media (min-width: 768px){
+.hero-content h1 {
+    font-size: 36px;
+}
+.hero-content{
+    background: rgba(191, 168, 146, 0.663);
+}
+.hero-content p {
+    font-size: 16px;
+}
+}
+/* ===================HERO DESK======================= */
+@media (min-width: 1024px) {
+.hero {
+    background-image: url('../img/home/1-19.jpg');
+    background-position: center;
+}
+.hero-content {
+    padding: 30px;
+}
+    .hero-content h1 {
+        font-size: 48px;
+    }
 
+    .hero-content p {
+        font-size: 20px;
+    }
+}
 
-
-
-/* =================== */
 /* Стилі для модального вікна */
 .modal {
     display: none;
