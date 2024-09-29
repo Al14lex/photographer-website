@@ -84,12 +84,17 @@ button:hover {
 .nav-list a {
     text-decoration: none;
     /* font-weight: bold; */
+    font-family: "Playfair Display SC", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.6;
     padding: 10px 15px;
     display: inline-block;
     color: #000;
     font-size: 14px;
     transition: color 250ms linear;
 }
+
 .nav-list a:hover,
 .nav-list a:focus{
     color: #FFF8E7;
@@ -112,6 +117,10 @@ button:hover {
 }
 
 .portfolio-dropdown .dropdown-menu li a {
+    font-family: "Playfair Display SC", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.6;
     padding: 1px 10px 6px 10px;
     display: block;
     white-space: nowrap;
@@ -143,12 +152,31 @@ button:hover {
 .nav-list a{
     font-size: 18px;
 }
-.portfolio-dropdown .dropdown-menu{
-    width: 100px;
-    padding-bottom: 5px;
+
+.portfolio-dropdown .dropdown-menu {
+    padding-bottom: 12px;
+    top: 132%;
+    width: 127px;
 }
-.portfolio-dropdown .dropdown-menu li a{
+
+.portfolio-dropdown .dropdown-menu li a {
+    font-family: "Playfair Display SC", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.6;
+    padding: 1px 10px 6px 10px;
+    display: block;
+    white-space: nowrap;
     font-size: 16px;
+}
+
+.portfolio-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+.dropdown-menu li a:hover {
+    color: #FFF8E7;
 }
 }
 
@@ -196,6 +224,13 @@ button:hover {
     font-size: 34px;
     font-weight: 400;
     font-style: normal;
+}
+.hero-content p{
+    font-family: "Playfair Display SC", system-ui;
+    font-weight: 400;
+    font-size: 14px;
+    font-style: normal;
+    line-height: 1.6;
 }
 /* =======================HERO TAB=================== */
 @media (min-width: 768px){
@@ -247,25 +282,136 @@ button:hover {
 }
 .about-container{
     display: flex;
-    width: 500px;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.about-container h2{
+    margin-bottom: 0;
+
+}
+.about-content{
+    display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: flex-start;
     gap: 20px;
 }
 .about-img{
-    width: 150px;
+    width: 160px;
     border-radius: 8px;
-    margin-top: 6px;
-}
-.about-content h3{
-    margin-bottom: 8px;
-}
-.about-content p{
-    font-size: 12px;
 }
 
+.about-content p{
+    line-height: 1.4;
+    font-size: 14px;
+}
+.about-link{
+    text-decoration: none;
+    background-color: rgba(149, 120, 94, 0.616);
+        color: #000;
+        border: none;
+        padding: 6px 11px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 5px;
+        font-weight: 500;
+        transition: background-color 250ms linear, color 250ms linear;
+}
+.about-link:hover {
+    background-color:rgba(129, 104, 78, 0.666);
+    color: #e8d1bc;
+}
 /* ========================ABOUT ME TAB==================== */
+@media (min-width: 768px){
+.about{
+    padding: 50px 0;
+}
+
+.about-img {
+    width: 240px;
+    border-radius: 8px;
+}
+.about-container{
+    gap: 30px;
+}
+.about-container h2 {
+    font-size: 30px;
+}
+.about-content{
+    gap: 35px
+}
+.about-content p {
+    line-height: 1.4;
+    font-size: 19px;
+    font-weight: 500;
+    width: 290px;
+}
+.about-link {
+    padding: 10px 15px;
+    font-size: 19px;
+    margin-top: 8px;
+}
+}
+
 /* ========================ABOUT ME DESC==================== */
+@media (min-width: 1024px) {
+    .about {
+        padding: 50px 0;
+    }
+
+    .about-img {
+        width: 300px;
+        border-radius: 8px;
+    }
+
+    .about-container {
+        gap: 38px;
+        position: relative;
+    }
+
+    .about-container h2 {
+        font-size: 38px;
+        position: absolute;
+        top: 2%;
+        left: 52%;
+    }
+
+    .about-content {
+        gap: 40px;
+    }
+
+    .about-content p {
+        line-height: 1.4;
+        font-size: 24px;
+        font-weight: 500;
+        width: 450px;
+        margin-bottom: 25px;
+    }
+
+    .about-link {
+        padding: 12px 17px;
+        font-size: 22px;
+        margin-top: 8px;
+        position: absolute;
+        top: 82%;
+        left: 58%;
+    }
+}
+/* ====================PORTFOLIO====================== */
+
+/* ====================PORTFOLIO TAB====================== */
+@media (min-width: 768px) {}
+
+/* ====================PORTFOLIO  DESC====================== */
+@media (min-width: 1024px) {}
+
+
+
+
+
+
+
+
 /* Стилі для модального вікна */
 .modal {
     display: none;
