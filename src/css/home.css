@@ -266,7 +266,7 @@ button:hover {
 }
 /* ========================ABOUT ME==================== */
 .about{
-    padding: 30px 0;
+    padding: 20px 0;
 }
 .about-container{
     display: flex;
@@ -312,7 +312,7 @@ button:hover {
 /* ========================ABOUT ME TAB==================== */
 @media (min-width: 768px){
 .about{
-    padding: 50px 0;
+    padding: 40px 0;
 }
 
 .about-img {
@@ -344,7 +344,7 @@ button:hover {
 /* ========================ABOUT ME DESC==================== */
 @media (min-width: 1024px) {
     .about {
-        padding: 50px 0;
+        padding: 40px 0;
     }
 
     .about-img {
@@ -385,7 +385,123 @@ button:hover {
         left: 58%;
     }
 }
+
+/* ===================what am I photographing================ */
+.photography{
+    padding: 20px 0;
+}
+ .image-container {
+     width: 100%;
+     overflow: hidden;
+     position: relative;
+ }
+
+ .image-wrapper {
+     display: flex;
+     width: calc(100% * 11);
+     animation: scroll 30s linear infinite;
+
+ }
+
+ .image-wrapper img {
+     width:100px;
+     height: auto;
+     flex-shrink: 0;
+ }
+
+ @keyframes scroll {
+     0% {
+         transform: translateX(0);
+     }
+
+     100% {
+         transform: translateX(-25%);
+     }
+ }
+
+
+/* ===================what am I photographing tab================ */
+@media (min-width: 768px){
+
+
+}
+/* ===================what am I photographing  desc================ */
+@media (min-width: 1024px){
+
+
+}
+
 /* ====================PORTFOLIO====================== */
+.portfolio{
+    padding: 20px 0;
+}
+.portfolio-list{
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+.portfolio-item {
+    width: 150px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.portfolio-item div {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.portfolio-item div::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.portfolio-title,
+.portfolio-link {
+    position: absolute;
+    z-index: 2;
+    color: white;
+}
+
+.portfolio-title {
+    top: 10px;
+    left: 10px;
+}
+
+.portfolio-link {
+    bottom: 10px;
+    left: 10px;
+}
+
+.portfolio-image1 {
+    background-image: url('path_to_your_image1.jpg');
+}
+
+.portfolio-image2 {
+    background-image: url('path_to_your_image2.jpg');
+}
+
+.portfolio-image3 {
+    background-image: url('path_to_your_image3.jpg');
+}
+
+.portfolio-image4 {
+    background-image: url('path_to_your_image4.jpg');
+}
 
 /* ====================PORTFOLIO TAB====================== */
 @media (min-width: 768px) {}
