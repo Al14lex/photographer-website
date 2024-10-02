@@ -184,7 +184,7 @@ button:hover {
 
 .hero {
     height: 100vh;
-    background-image: url('../img/home/1-02.jpg');
+    background-image: url('../img/home/hero_mob.jpg');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -247,7 +247,7 @@ button:hover {
 /* ===================HERO DESK======================= */
 @media (min-width: 1024px) {
 .hero {
-        background-image: url('../img/home/1-19.jpg');
+        background-image: url('../img/home/hero_desc.jpg');
     background-position: center;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 80%, rgb(196, 168, 141) 100%), url('../img/home/1-19.jpg');
         background-size: cover;
@@ -401,7 +401,7 @@ button:hover {
  .image-wrapper {
      display: flex;
      width: calc(100% * 11);
-     animation: scroll 30s linear infinite;
+     animation: scroll 40s linear infinite;
 
  }
 
