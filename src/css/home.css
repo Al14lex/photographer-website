@@ -1,3 +1,4 @@
+@import 'swiper/css';
 .container{
     min-width: 320px;
     margin: 0 auto;
@@ -6,6 +7,7 @@
 
 .header {
     position: fixed;
+    padding: 10px 0;
     top: 0;
     left: 0;
     right: 0;
@@ -49,6 +51,9 @@ button:hover {
   }
 /* ====================HEADER TAB============== */
 @media (min-width: 768px) {
+.header{
+    padding: 15px 0;
+}
 .container {
     min-width: 768px;
 }
@@ -312,7 +317,7 @@ button:hover {
 /* ========================ABOUT ME TAB==================== */
 @media (min-width: 768px){
 .about{
-    padding: 40px 0;
+    padding: 40px 0 30px 0;
 }
 
 .about-img {
@@ -344,9 +349,6 @@ button:hover {
 
 /* ========================ABOUT ME DESC==================== */
 @media (min-width: 1024px) {
-    .about {
-        padding: 40px 0;
-    }
 
     .about-img {
         width: 300px;
@@ -457,6 +459,9 @@ button:hover {
 
 /* ===================what am I photographing tab================ */
 @media (min-width: 768px){
+.photography {
+    padding: 30px 0;
+}
 .image-wrapper {
         width: calc(160px * 15);
     }
@@ -523,6 +528,9 @@ button:hover {
 .portfolio{
     padding: 20px 0;
 }
+.container{
+    padding: 0 15px;
+}
 .portfolio-list{
     display: flex;
     /* flex-direction: column; */
@@ -554,7 +562,7 @@ button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(80, 66, 50, 0.31);
+    background-color: rgba(98, 81, 63, 0.218);
     z-index: 1;
 }
 
@@ -604,6 +612,9 @@ button:hover {
 
 /* ====================PORTFOLIO TAB====================== */
 @media (min-width: 768px) {
+.portfolio{
+    padding: 20px 0 30px 0;
+}
 .portfolio-list {
         gap: 10px;
     }
@@ -634,10 +645,96 @@ button:hover {
     padding: 5px 8px;
 }
 }
+/* ======================REVIEWS====================== */
+.reviews-section {
+    padding: 20px 0;
+}
 
+.reviews-title {
+    text-align: center;
+    margin-bottom: 20px;
+    /* Відступ для заголовка */
+}
 
+.swiper {
+    width: 100%;
+    position: relative;
+    /* Додано для позиціювання кнопок */
+}
 
+.swiper-wrapper {
+    display: flex;
+    /* Встановлюємо флекс-контейнер для слайдів */
+}
 
+.swiper-slide {
+    flex: 0 0 auto;
+    /* Запобігаємо стисненню слайдів */
+    width: 100%;
+    /* Слайди займають 100% ширини контейнера */
+    max-width: 400px;
+    /* Максимальна ширина слайдів */
+    margin: 0 auto;
+    /* Центруємо слайди */
+    text-align: center;
+    /* Центруємо текст */
+}
+
+.review-image {
+    width: 100%;
+    /* Зображення займають 100% ширини слайда */
+    height: auto;
+    /* Зберігаємо пропорції зображення */
+}
+
+.review-content {
+    padding: 10px;
+    /* Внутрішні відступи для контенту */
+}
+
+.review-author {
+    font-weight: bold;
+    /* Жирний текст для автора */
+}
+
+.swiper-navigation {
+    display: flex;
+    justify-content: center;
+    /* Центруємо кнопки по горизонталі */
+    margin-top: 10px;
+    /* Відстань між слайдами та кнопками */
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    background: transparent;
+    /* Прозорий фон для кнопок */
+    border: none;
+    /* Без рамки */
+    cursor: pointer;
+    /* Курсор у вигляді руки */
+    margin: 0 10px;
+    /* Відстань між кнопками */
+}
+
+.icon-arr-prev,
+.icon-arr-next {
+    fill: #000;
+    /* Колір стрілок */
+    width: 30px;
+    /* Ширина іконок */
+    height: 20px;
+    /* Висота іконок */
+}
+
+/* ======================REVIEWS TAB====================== */
+@media (min-width: 768px){
+
+}
+/* ======================REVIEWS DESC====================== */
+@media (min-width: 1024px){
+
+}
 
 
 
