@@ -659,25 +659,38 @@ button:hover {
 .swiper {
     width: 100%;
     position: relative;
+    overflow: hidden;
     /* Додано для позиціювання кнопок */
 }
 
 .swiper-wrapper {
     display: flex;
-    /* Встановлюємо флекс-контейнер для слайдів */
+    transition: transform 0.3s ease-in-out;
+    /* Анімація для плавного переміщення */
+    will-change: transform;
+    /* Оптимізація */
 }
 
 .swiper-slide {
-    flex: 0 0 auto;
-    /* Запобігаємо стисненню слайдів */
+    flex: 0 0 100%;
+    /* Слайд займає всю ширину */
     width: 100%;
-    /* Слайди займають 100% ширини контейнера */
+    /* Забезпечує адаптивність */
     max-width: 400px;
-    /* Максимальна ширина слайдів */
+    /* Додаткове обмеження */
     margin: 0 auto;
-    /* Центруємо слайди */
     text-align: center;
-    /* Центруємо текст */
+}
+
+.swiper-navigation {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    cursor: pointer;
 }
 
 .review-image {
@@ -697,25 +710,6 @@ button:hover {
     /* Жирний текст для автора */
 }
 
-.swiper-navigation {
-    display: flex;
-    justify-content: center;
-    /* Центруємо кнопки по горизонталі */
-    margin-top: 10px;
-    /* Відстань між слайдами та кнопками */
-}
-
-.swiper-button-prev,
-.swiper-button-next {
-    background: transparent;
-    /* Прозорий фон для кнопок */
-    border: none;
-    /* Без рамки */
-    cursor: pointer;
-    /* Курсор у вигляді руки */
-    margin: 0 10px;
-    /* Відстань між кнопками */
-}
 
 .icon-arr-prev,
 .icon-arr-next {
@@ -729,11 +723,41 @@ button:hover {
 
 /* ======================REVIEWS TAB====================== */
 @media (min-width: 768px){
+.swiper-slide {
+        flex: 0 0 50%;
+        /* Три слайди на екрані */
+        max-width: 50%;
+        /* Встановлюємо ширину 33.33% */
+    }
 
+    .review-image {
+        width: 80%;
+        /* Можна трохи зменшити зображення */
+        margin: 0 auto;
+        /* Центрування */
+    }
+
+    .review-content {
+        padding: 10px 20px;
+        /* Більші відступи для планшетів */
+    }
 }
 /* ======================REVIEWS DESC====================== */
 @media (min-width: 1024px){
+.swiper-slide {
+        flex: 0 0 25%;
+        /* Чотири слайди на екрані */
+        max-width: 25%;
+    }
 
+    .review-image {
+        width: 70%;
+        /* Ще трохи менші зображення */
+    }
+
+    .review-content {
+        padding: 15px;
+    }
 }
 
 
