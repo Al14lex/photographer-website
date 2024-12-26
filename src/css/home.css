@@ -649,49 +649,15 @@ button:hover {
 .reviews-section {
     padding: 20px 0;
 }
-
+.swiper{
+    width: 345px;
+}
 .reviews-title {
     text-align: center;
     margin-bottom: 20px;
     /* Відступ для заголовка */
 }
 
-.swiper {
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    /* Додано для позиціювання кнопок */
-}
-
-.swiper-wrapper {
-    display: flex;
-    transition: transform 0.3s ease-in-out;
-    /* Анімація для плавного переміщення */
-    will-change: transform;
-    /* Оптимізація */
-}
-
-.swiper-slide {
-    flex: 0 0 100%;
-    /* Слайд займає всю ширину */
-    width: 100%;
-    /* Забезпечує адаптивність */
-    max-width: 400px;
-    /* Додаткове обмеження */
-    margin: 0 auto;
-    text-align: center;
-}
-
-.swiper-navigation {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.swiper-button-prev,
-.swiper-button-next {
-    cursor: pointer;
-}
 
 .review-image {
     width: 100%;
@@ -710,25 +676,30 @@ button:hover {
     /* Жирний текст для автора */
 }
 
-
+.swiper-navigation{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap:10px;
+    justify-content: center;
+}
 .icon-arr-prev,
 .icon-arr-next {
     fill: #000;
-    /* Колір стрілок */
     width: 30px;
-    /* Ширина іконок */
     height: 20px;
-    /* Висота іконок */
-}
+
+} 
 
 /* ======================REVIEWS TAB====================== */
 @media (min-width: 768px){
-.swiper-slide {
+.swiper{
+    width: 600px;
+}
+/* .swiper-slide {
         flex: 0 0 50%;
-        /* Три слайди на екрані */
         max-width: 50%;
-        /* Встановлюємо ширину 33.33% */
-    }
+    } */
 
     .review-image {
         width: 80%;
@@ -744,6 +715,9 @@ button:hover {
 }
 /* ======================REVIEWS DESC====================== */
 @media (min-width: 1024px){
+.swiper{
+    width: 970px;
+}
 .swiper-slide {
         flex: 0 0 25%;
         /* Чотири слайди на екрані */
@@ -752,7 +726,7 @@ button:hover {
 
     .review-image {
         width: 70%;
-        /* Ще трохи менші зображення */
+       
     }
 
     .review-content {
