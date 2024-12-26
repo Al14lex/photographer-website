@@ -1,3 +1,5 @@
-import './js/home'
-import './js/gallery'
-import './js/swiper'
+import './js/home/header'
+import './js/home/mobile-menu'
+import './js/home/modal'
+import './js/home/photo-feed'
+import './js/home/swiper'
