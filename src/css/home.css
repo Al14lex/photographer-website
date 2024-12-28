@@ -652,32 +652,36 @@ button:hover {
 .swiper{
     width: 345px;
 }
+.swiper-slide{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .reviews-title {
     text-align: center;
     margin-bottom: 20px;
-    /* Відступ для заголовка */
 }
-
-
 .review-image {
-    width: 100%;
-    /* Зображення займають 100% ширини слайда */
     height: auto;
-    /* Зберігаємо пропорції зображення */
 }
-
 .review-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 10px;
-    /* Внутрішні відступи для контенту */
 }
-
 .review-author {
     font-weight: bold;
-    /* Жирний текст для автора */
+}
+.review-text{
+    text-align: center;
 }
 
 .swiper-navigation{
     width: 100%;
+    margin-top: 15px;
     display: flex;
     align-items: center;
     gap:10px;
@@ -692,35 +696,27 @@ button:hover {
 } 
 
 /* ======================REVIEWS TAB====================== */
-@media (min-width: 768px){
+/* @media (min-width: 768px){
 .swiper{
     width: 600px;
 }
-/* .swiper-slide {
-        flex: 0 0 50%;
-        max-width: 50%;
-    } */
-
     .review-image {
         width: 80%;
-        /* Можна трохи зменшити зображення */
         margin: 0 auto;
-        /* Центрування */
     }
 
     .review-content {
         padding: 10px 20px;
-        /* Більші відступи для планшетів */
+
     }
-}
+} */
 /* ======================REVIEWS DESC====================== */
-@media (min-width: 1024px){
+/* @media (min-width: 1024px){
 .swiper{
     width: 970px;
 }
 .swiper-slide {
         flex: 0 0 25%;
-        /* Чотири слайди на екрані */
         max-width: 25%;
     }
 
@@ -732,7 +728,7 @@ button:hover {
     .review-content {
         padding: 15px;
     }
-}
+} */
 
 
 
