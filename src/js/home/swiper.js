@@ -7,27 +7,20 @@ const btnNext = document.querySelector('.swiper-button-next');
 const swiper = new Swiper('.swiper', {
   direction: 'horizontal',
     loop: true,
-
-    autoHeight: true,
+    // autoHeight: false,
 
      // Default parameters
-  slidesPerView: 1,
-  // Responsive breakpoints
+    slidesPerView: 1,
     breakpoints: {
-
-        // when window width is >= 480px
         768: {
             slidesPerView: 2,
-            spaceBetween: 20
+            spaceBetween: 20,
         },
-        // when window width is >= 640px
         1024: {
             slidesPerView: 4,
             spaceBetween: 20
         }
     },
-    // centerInsufficientSlides: true,
-    // centeredSlides:true,
 });
 
 btnPrev.addEventListener('click', () => {
