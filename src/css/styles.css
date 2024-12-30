@@ -37,9 +37,8 @@ h3,
 h4,
 h5,
 h6 {
-    margin-bottom: 1rem;
+    margin-bottom: 10px;
 }
-
 
 ul {
     list-style-type: none;
@@ -56,7 +55,7 @@ button {
 }
 
 /* button:hover {
-    background-color:rgba(80, 62, 43, 0.666);
+    background-color:rgba(116, 94, 71, 0.523);
 } */
 
 /* .container {
