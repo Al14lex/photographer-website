@@ -526,7 +526,7 @@ button:hover {
 
 /* ====================PORTFOLIO====================== */
 .portfolio{
-    padding: 20px 0;
+    padding: 20px 0 30px 0;
 }
 .container{
     padding: 0 15px;
@@ -613,7 +613,7 @@ button:hover {
 /* ====================PORTFOLIO TAB====================== */
 @media (min-width: 768px) {
 .portfolio{
-    padding: 20px 0 30px 0;
+    padding: 20px 0 40px 0;
 }
 .portfolio-list {
         gap: 10px;
@@ -625,7 +625,11 @@ button:hover {
 }
 
 /* ====================PORTFOLIO  DESC====================== */
+
 @media (min-width: 1024px) {
+    .portfolio {
+            padding: 20px 0 50px 0;
+        }
 .portfolio-list {
     gap: 16px;
 }
@@ -646,6 +650,26 @@ button:hover {
 }
 }
 /* ======================REVIEWS====================== */
+.background-photo-rev {
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0) 80%, rgb(195, 167, 140) 100%), url('../img/home/hero_desc.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.background-photo-rev::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(110, 100, 90, 0.25);
+    /* Можна залишити цей напівпрозорий шар */
+    z-index: -1;
+}
 .reviews-section {
     padding: 20px 0;
 }
@@ -653,6 +677,7 @@ button:hover {
     width: 310px;
 }
 .swiper-slide{
+   
 padding: 6px;
 }
 .reviews-title {
@@ -663,6 +688,8 @@ padding: 6px;
     height: auto;
 }
 .review-content {
+    background-color: 
+    rgb(173, 151, 130);
     padding:20px 10px;
     height: 130px;
     border-radius: 8px;
@@ -728,6 +755,7 @@ padding: 6px;
 }
 /* ======================REVIEWS DESC====================== */
 @media (min-width: 1024px){
+    
 .reviews-title {
         font-size: 38px;
         margin-bottom: 20px;
@@ -764,10 +792,12 @@ padding: 6px;
 }
 /* ====================== GET IN TOUCH ====================== */
 .contact{
-    padding:10px 0 20px 0;
+    padding:10px 0 0 0;
 }
 .contact-title{
+    color:#fefefed7 ;
     text-align: center;
+    margin-bottom: 15px;
 }
 .contact-form{
     display: flex;
@@ -783,16 +813,20 @@ padding: 6px;
     align-items:flex-start;
 }
 .form-input{
-    height: 30px;
+    height: 35px;
 }
 .form-textarea{
     height: 85px;
 }
 .form-input,
 .form-textarea{ 
+    background: rgba(191, 168, 146, 0.567);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 14px;
+    text-align: center;
     padding:10px;
-    width: 220px;
-    background-color: transparent;
+    width: 250px;
+    /* background-color: transparent; */
     border: none;
     resize: none;
     border-radius: 5px;
@@ -806,7 +840,7 @@ padding: 6px;
 .form-textarea::placeholder{
 font-family: Ephesis;
 font-size: 16px;
-color: #322d29c1;
+color: #322d29fa;
 }
 
 
@@ -815,20 +849,20 @@ color: #322d29c1;
 .form-textarea:focus,
 .form-textarea:active{
     outline: none;
-    background-color: rgba(116, 94, 71, 0.523);
+    background-color: rgb(191, 168, 146);
     font-size: 14px;
     font-family: "Cormorant Garamond", serif;
-    color: #f0f0f0;
+    color: #322d29;
 }
 .form-button {
     text-decoration: none;
-    background-color: rgba(149, 120, 94, 0.616);
+    background-color: rgba(191, 168, 146, 0.567);
     color: #000;
     border: none;
     padding: 6px 20px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 5px;
+    margin-top: 8px;
     font-weight: 500;
     font-family: "Cormorant Garamond", serif;
     font-size: 16px;
@@ -836,12 +870,15 @@ color: #322d29c1;
 }
 
 .form-button:hover {
-    background-color: rgba(129, 104, 78, 0.666);
-    color: #e8d1bc;
+    background-color:rgb(191, 168, 146);
+    color:#fefefe;
 }
 
 /* ====================== GET IN TOUCH TAB====================== */
 @media (min-width: 768px) {
+    .contact {
+            padding: 10px 0 10px 0;
+        }
 .contact-title {
        font-size: 30px;
        margin-bottom: 20px;
@@ -851,15 +888,16 @@ color: #322d29c1;
 }
 
 .form-input {
-    height: 38px;
+    height: 45px;
 }
 .form-textarea {
     height: 110px;
 }
 .form-input,
 .form-textarea {
+    font-size: 18px;
     padding:10px 14px;
-    width: 300px;
+    width: 330px;
 }
 
 .form-input::placeholder,
@@ -880,6 +918,9 @@ padding: 10px 25px;
 }
 /* ====================== GET IN TOUCH DESC====================== */
 @media (min-width: 1024px){
+    .contact {
+            padding: 10px 0 15px 0;
+        }
 .contact-title {
         font-size: 38px;
         margin-bottom: 25px;
@@ -890,15 +931,16 @@ padding: 10px 25px;
     }
 
     .form-input {
-        height: 45px;
+        height: 53px;
     }
 .form-textarea{
     height: 160px;
 }
     .form-input,
     .form-textarea {
+        font-size: 20px;
         padding: 10px 20px;
-        width: 400px;
+        width: 430px;
     }
 
     .form-input::placeholder,
@@ -920,50 +962,52 @@ padding: 10px 25px;
 
 }
 
+/*================== MODAL ====================*/
 
-/* Стилі для модального вікна */
 .modal {
     display: none;
-    /* Сховати за замовчуванням */
     position: fixed;
     z-index: 1;
-    /* Перекриває інші елементи */
     left: 0;
     top: 0;
     width: 100%;
-    /* Повна ширина */
     height: 100%;
-    /* Повна висота */
     overflow: auto;
-    /* Додає прокрутку, якщо потрібно */
     background-color: rgb(0, 0, 0);
-    /* Чорний фон */
-    background-color: rgba(0, 0, 0, 0.4);
-    /* Прозорий фон */
+    background-color: rgba(0, 0, 0, 0.278);
 }
 
-/* Стилі для контенту модального вікна */
 .modal-content {
-    background-color: #fefefe;
+    background-color: rgb(198, 169, 141);
     margin: 15% auto;
-    /* 15% зверху, центрування знизу */
-    padding: 20px;
-    border: 1px solid #888;
+    padding: 10px 20px 25px 20px;
+    color: #322d29;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
     width: 80%;
-    /* Ширина модального вікна */
 }
 
-/* Кнопка закриття */
 .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+    color: transparent;
+    font-size: 0px;
 }
+/*================== MODAL TAB ====================*/
+@media (min-width: 768px){
+.modal-content p{
+    font-size: 16px;
+    }
+.modal-content h2 {
+    font-size: 30pxpx;
+}
+}
+/*================== MODAL DESC ====================*/
+@media (min-width: 1024px) {
+    .modal-content p {
+        font-size: 20px;
+    }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+    .modal-content h2 {
+        font-size: 38px;
+    }
 }
