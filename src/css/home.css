@@ -11,9 +11,9 @@
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(191, 168, 146, 0.638);
+    background: rgb(173, 151, 130);
     z-index: 10;
-    box-shadow: 0px 0px 22px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 45px rgba(0, 0, 0, 0.7);
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
@@ -88,7 +88,6 @@ button:hover {
 
 .nav-list a {
     text-decoration: none;
-    /* font-weight: bold; */
     font-family: "Playfair Display SC", system-ui;
     font-weight: 400;
     font-style: normal;
@@ -110,10 +109,11 @@ button:hover {
     opacity: 0;
     visibility: hidden;
     position: absolute;
-    padding: 0 8px 5px 8px;
-    top: 133%;
+    padding:5px 10px;
+    top: 100%;
+    border-radius: 10px;
     left: 0;
-    background-color:rgba(191, 168, 146, 0.638);
+    background-color:rgb(173, 151, 130);
     box-shadow: 0px 12px 18px rgba(0, 0, 0, 0.3);
     text-align: center;
     list-style: none;
@@ -1010,4 +1010,48 @@ padding: 10px 25px;
     .modal-content h2 {
         font-size: 38px;
     }
+}
+/*===================== FOOTER ====================*/
+.footer{
+    background-color: rgba(110, 91, 73, 0.666);
+    padding: 20px 0;
+}
+.footer-content{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.footer-logo{
+    height: 70px;
+
+}
+.footer-nav-list{
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    font-family: "Playfair Display SC", system-ui;
+    font-size: 14px;
+    text-align: center;
+}
+.footer-nav-list a{
+    transition: color 250ms linear;
+}
+.footer-nav-list a:focus,
+.footer-nav-list a:hover{
+    color: #FFF8E7;
+}
+.footer-links{
+    font-size: 12px;
+    text-align: center;
+    
+}
+.footer-links a{
+    transition: color 250ms linear;
+}
+.footer-links a:hover,
+.footer-links a:focus{
+    color: #FFF8E7;
 }
