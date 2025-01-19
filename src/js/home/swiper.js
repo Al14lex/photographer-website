@@ -1,13 +1,18 @@
 import Swiper from 'swiper';
 import 'swiper/css';
+import { Pagination } from 'swiper/modules';
+import 'swiper/css/pagination';
 
-const btnPrev = document.querySelector('.swiper-button-prev');
-const btnNext = document.querySelector('.swiper-button-next');
 
 const swiper = new Swiper('.swiper', {
-  direction: 'horizontal',
+  modules: [Pagination],
+    direction: 'horizontal',
+    pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets',
+        dynamicBullets: true,
+    },
     loop: true,
-    // autoHeight: false,
 
      // Default parameters
     slidesPerView: 1,
@@ -23,9 +28,9 @@ const swiper = new Swiper('.swiper', {
     },
 });
 
-btnPrev.addEventListener('click', () => {
-    swiper.slidePrev();
-});
-btnNext.addEventListener('click', () => {
-    swiper.slideNext();
-});
+// btnPrev.addEventListener('click', () => {
+//     swiper.slidePrev();
+// });
+// btnNext.addEventListener('click', () => {
+//     swiper.slideNext();
+// });

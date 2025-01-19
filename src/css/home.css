@@ -654,7 +654,7 @@ button:hover {
     height: 100%;
     position: relative;
     z-index: 1;
-    background: linear-gradient(to top, rgba(255, 255, 255, 0) 80%, rgb(195, 167, 140) 100%), url('../img/home/hero_desc.jpg');
+    background: linear-gradient(to top, rgba(255, 255, 255, 0) 80%, rgb(195, 167, 140) 100%), url('../img/home/what6.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -667,7 +667,6 @@ button:hover {
     width: 100%;
     height: 100%;
     background-color: rgba(110, 100, 90, 0.25);
-    /* Можна залишити цей напівпрозорий шар */
     z-index: -1;
 }
 .reviews-section {
@@ -675,9 +674,9 @@ button:hover {
 }
 .swiper{
     width: 310px;
+    height: 175px;
 }
 .swiper-slide{
-   
 padding: 6px;
 }
 .reviews-title {
@@ -708,7 +707,7 @@ padding: 6px;
     font-size: 14px;
 }
 
-.swiper-navigation{
+/* .swiper-navigation{
     width: 100%;
     margin-top: 15px;
     display: flex;
@@ -722,18 +721,23 @@ padding: 6px;
     width: 30px;
     height: 20px;
 
-} 
-
+}  */
+:root {
+    --swiper-pagination-color: #FFF8E7;;
+    --swiper-pagination-bullet-horizontal-gap: 3px;
+}
 /* ======================REVIEWS TAB====================== */
 @media (min-width: 768px){
 .reviews-section {
-    padding: 20px 0 30px 0;
+    padding: 20px 0 20px 0;
 }
 .reviews-title {
+    margin-bottom: 25px;
     font-size: 30px;
 }
 .swiper{
     width: 680px;
+    height: 225px;
 }
 .review-content {
     height: 170px;
@@ -752,6 +756,7 @@ padding: 6px;
 .swiper-navigation {
     gap: 20px;
 }
+
 }
 /* ======================REVIEWS DESC====================== */
 @media (min-width: 1024px){
@@ -762,6 +767,7 @@ padding: 6px;
     }
 .swiper {
         width: 984px;
+        height: 245px;
     }
 .review-content {
         height: 190px;
@@ -789,13 +795,24 @@ padding: 6px;
     width: 35px;
     height: 25px;
 }
+:root {
+    --swiper-pagination-bullet-horizontal-gap: 4px;
+    --swiper-pagination-bullet-size: 10px;
+}
 }
 /* ====================== GET IN TOUCH ====================== */
 .contact{
-    padding:10px 0 0 0;
+    padding:15px 0 15px 0;
+}
+.get-in-container{
+    margin-right: auto;
+    margin-left: auto;
+    padding: 10px;
+    max-width: 298px;
+    background-color: rgba(191, 168, 146, 0.567);
+    border-radius: 10px;
 }
 .contact-title{
-    color:#fefefed7 ;
     text-align: center;
     margin-bottom: 15px;
 }
@@ -820,7 +837,7 @@ padding: 6px;
 }
 .form-input,
 .form-textarea{ 
-    background: rgba(191, 168, 146, 0.567);
+    background: rgb(173, 151, 130);
     font-family: "Cormorant Garamond", serif;
     font-size: 14px;
     text-align: center;
@@ -830,10 +847,10 @@ padding: 6px;
     border: none;
     resize: none;
     border-radius: 5px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1),
-            0 -4px 12px rgba(0, 0, 0, 0.05),
-            4px 0 12px rgba(0, 0, 0, 0.05),
-            -4px 0 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15),
+            0 -4px 15px rgba(0, 0, 0, 0.1),
+            4px 0 15px rgba(0, 0, 0, 0.1),
+            -4px 0 15px rgba(0, 0, 0, 0.15);
     transition: background-color 250ms linear, color 250ms linear, outline 250ms linear;
 }
 .form-input::placeholder,
@@ -843,24 +860,58 @@ font-size: 16px;
 color: #322d29fa;
 }
 
-
 .form-input:focus,
+.form-input:hover,
 .form-input:active,
 .form-textarea:focus,
+.form-textarea:hover,
 .form-textarea:active{
     outline: none;
-    background-color: rgb(191, 168, 146);
+    background-color: rgb(199, 175, 152);
     font-size: 14px;
     font-family: "Cormorant Garamond", serif;
     color: #322d29;
 }
+.form-input:focus,
+.form-input:hover,
+.form-input:active,
+.form-textarea:focus,
+.form-textarea:hover,
+.form-textarea:active,
+.form-input:not(:placeholder-shown),
+.form-textarea:not(:placeholder-shown) {
+    outline: none;
+    background-color: rgb(199, 175, 152);
+    font-size: 14px;
+    font-family: "Cormorant Garamond", serif;
+    color: #322d29;
+}
+.form-input:-webkit-autofill,
+.form-textarea:-webkit-autofill {
+    background-color: rgb(199, 175, 152) !important;
+    color: #322d29 !important;
+    font-size: 14px;
+    font-family: "Cormorant Garamond", serif;
+    transition: background-color 5000s ease-in-out 0s;
+}
+input:-moz-autofill,
+textarea:-moz-autofill {
+    background-color: rgb(199, 175, 152);
+    color: #322d29;
+    font-size: 14px;
+    font-family: "Cormorant Garamond", serif;
+}
 .form-button {
     text-decoration: none;
-    background-color: rgba(191, 168, 146, 0.567);
+    background-color: rgb(173, 151, 130);
     color: #000;
     border: none;
     padding: 6px 20px;
     border-radius: 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2),
+            0 -4px 15px rgba(0, 0, 0, 0.1),
+            4px 0 15px rgba(0, 0, 0, 0.1),
+            -4px 0 15px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     margin-top: 8px;
     font-weight: 500;
@@ -870,15 +921,21 @@ color: #322d29fa;
 }
 
 .form-button:hover {
-    background-color:rgb(191, 168, 146);
+    background-color:rgb(199, 175, 152);
     color:#fefefe;
 }
 
 /* ====================== GET IN TOUCH TAB====================== */
 @media (min-width: 768px) {
     .contact {
-            padding: 10px 0 10px 0;
+            padding: 10px 0 40px 0;
         }
+ .get-in-container {
+    padding: 15px;
+    max-width: 650px;
+    background-color: rgba(191, 168, 146, 0.567);
+    border-radius: 10px;
+}
 .contact-title {
        font-size: 30px;
        margin-bottom: 20px;
@@ -918,9 +975,7 @@ padding: 10px 25px;
 }
 /* ====================== GET IN TOUCH DESC====================== */
 @media (min-width: 1024px){
-    .contact {
-            padding: 10px 0 15px 0;
-        }
+
 .contact-title {
         font-size: 38px;
         margin-bottom: 25px;
@@ -974,11 +1029,11 @@ padding: 10px 25px;
     height: 100%;
     overflow: auto;
     background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.278);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
-    background-color: rgb(198, 169, 141);
+    background-color:rgb(199, 175, 152);
     margin: 15% auto;
     padding: 10px 20px 25px 20px;
     color: #322d29;
@@ -1013,7 +1068,7 @@ padding: 10px 25px;
 }
 /*===================== FOOTER ====================*/
 .footer{
-    background-color: rgba(110, 91, 73, 0.666);
+    background-color: rgb(144, 123, 104);
     padding: 20px 0;
 }
 .footer-content{
@@ -1035,6 +1090,7 @@ padding: 10px 25px;
     font-family: "Playfair Display SC", system-ui;
     font-size: 14px;
     text-align: center;
+    color: #000;
 }
 .footer-nav-list a{
     transition: color 250ms linear;
@@ -1054,4 +1110,47 @@ padding: 10px 25px;
 .footer-links a:hover,
 .footer-links a:focus{
     color: #FFF8E7;
+}
+/*===================== FOOTER TAB ====================*/
+@media (min-width: 768px){
+    .footer-content {
+        margin-bottom: 10px;
+    }
+    .footer-logo {
+        height: 90px;
+
+    }
+    .footer-nav-list {
+        gap: 20px;
+    }
+
+    .footer-links {
+        font-size: 12px;
+        text-align: center;
+
+    }
+}
+
+/*===================== FOOTER DESC ====================*/
+@media (min-width: 1024px){
+.footer {
+        padding: 30px 0;
+    }
+    .footer-content {
+        margin-bottom: 20px;
+    }
+
+    .footer-logo {
+        height: 120px;
+
+    }
+
+    .footer-nav-list {
+        gap: 30px;
+        font-size: 18px;
+    }
+    .footer-links {
+        font-size: 16px;
+    }
+
 }

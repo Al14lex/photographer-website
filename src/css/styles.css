@@ -56,7 +56,9 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
+p{
+    cursor:default;
+}
 /* button:hover {
     background-color:rgba(116, 94, 71, 0.523);
 } */
