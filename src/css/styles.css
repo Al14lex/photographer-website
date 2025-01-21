@@ -1,9 +1,110 @@
-/* @import './home.css';
-@import './about.css';
-@import './contacts.css';
-@import './get-photo.css'; */
+/* Home Page Sections */
+@import './home/header-sec.css';
+@import './home/mobile-menu.css';
+@import './home/hero-sec.css';
+@import './home/about-me-sec.css';
+@import './home/portfolio-sec.css';
+@import './home/what-sec.css';
+@import './home/reviews-sec.css';
+@import './home/get-in-touch.css';
+@import './home/modal.css';
+@import './home/footer-sec.css';
 
-/* Ресет стилів */
+/*=========== BASIC =============*/
+:root {
+    /* Fonts */
+    --font-main: "Cormorant Garamond", serif;
+    --font-secondary: "Playfair Display SC", serif;
+
+    /* Colors */
+    --color-text-primary: #322d29;
+    --color-bg-body: rgb(173, 151, 130);
+    --color-bg-hover: rgb(199, 175, 152);
+    --color-link-active: #FFF8E7;
+    --color-button-bg: rgba(111, 85, 61, 0.666);
+    --color-button-text: #F0F0F0;
+
+    /* Shadows */
+    --box-shadow-small: 0 4px 6px rgba(0, 0, 0, 0.1),
+        0 -4px 6px rgba(0, 0, 0, 0.05),
+        4px 0 6px rgba(0, 0, 0, 0.05),
+        -4px 0 6px rgba(0, 0, 0, 0.05);
+    --box-shadow-large: 0 4px 10px rgba(0, 0, 0, 0.1),
+        0 -4px 10px rgba(0, 0, 0, 0.05),
+        4px 0 10px rgba(0, 0, 0, 0.05),
+        -4px 0 10px rgba(0, 0, 0, 0.05);
+
+    /* Font Sizes */
+    --font-small: 14px;
+    --font-medium: 18px;
+    --font-large: 24px;
+
+    /* Spacing */
+    --padding-small: 10px;
+    --padding-medium: 15px;
+    --padding-large: 20px;
+
+    /* Alignment */
+    --text-align-center: center;
+}
+
+.text-main {
+    font-family: var(--font-main);
+}
+
+.text-secondary {
+    font-family: var(--font-secondary);
+}
+
+.text-center {
+    text-align: var(--text-align-center);
+}
+
+.responsive-font {
+    font-size: var(--font-small);
+}
+
+.responsive-padding {
+    padding: var(--padding-small);
+}
+
+@media (min-width: 768px) {
+    .responsive-font {
+        font-size: var(--font-medium);
+    }
+
+    .responsive-padding {
+        padding: var(--padding-medium);
+    }
+}
+
+@media (min-width: 1024px) {
+    .responsive-font {
+        font-size: var(--font-large);
+    }
+
+    .responsive-padding {
+        padding: var(--padding-large);
+    }
+}
+
+.box-shadow-small {
+    box-shadow: var(--box-shadow-small);
+}
+
+.box-shadow-large {
+    box-shadow: var(--box-shadow-large);
+}
+
+.bg-primary {
+    background-color: var(--color-bg-body);
+    /* Уточнено */
+}
+
+.bg-hover:hover {
+    background-color: var(--color-bg-hover);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -15,20 +116,14 @@ html {
 }
 
 body {
-    font-family: "Cormorant Garamond", serif;
+    font-family: var(--font-main);
     font-weight: 400;
     font-size: 16px;
     font-style: normal;
     line-height: 1.3;
-    color:#322d29;
-    background-color: rgb(173, 151, 130);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-body);
     overflow-x: hidden;
-}
-
-.nav-list a.active {
-    color: #FFF8E7;
-    font-weight: bold;
-    /* text-decoration: underline; */
 }
 
 h1,
@@ -37,34 +132,47 @@ h3,
 h4,
 h5,
 h6 {
+    font-family: var(--font-main);
     margin-bottom: 10px;
 }
 
+.nav-list a.active {
+    color: var(--color-link-active);
+    font-weight: bold;
+}
+
 ul {
-    list-style-type: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
-a{
+
+a {
     text-decoration: none;
-    color: #322d29;;
+    color: var(--color-text-primary);
+    transition: color 0.3s ease;
 }
-button {
-    background-color:rgba(111, 85, 61, 0.666);
-    color: #F0F0F0;
+
+a:hover {
+    color: var(--color-link-active);
+}
+
+button,
+.btn {
+    background-color: var(--color-button-bg);
+    color: var(--color-button-text);
     border: none;
-    padding: 10px 20px;
+    padding: var(--padding-small) var(--padding-medium);
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-p{
-    cursor:default;
-}
-/* button:hover {
-    background-color:rgba(116, 94, 71, 0.523);
-} */
 
-/* .container {
-    max-width: 1024px;
-    margin: 0 auto;
-    padding: 15px;
-} */
+button:hover,
+.btn:hover {
+    background-color: var(--color-bg-hover);
+    color: var(--color-text-primary);
+}
+p{
+    cursor: default;
+}

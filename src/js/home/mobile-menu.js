@@ -1,6 +1,11 @@
 const burgerMenu = document.querySelector('.burger-menu');
-const navList = document.querySelector('.nav-list');
+const mobileMenu = document.querySelector('.mobile-menu');
+const closeMenu = document.querySelector('.close-menu');
 
 burgerMenu.addEventListener('click', () => {
-  navList.classList.toggle('active');
+    mobileMenu.classList.add('open');
+});
+
+closeMenu.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
 });

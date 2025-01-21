@@ -1,0 +1,94 @@
+/*===================== FOOTER ====================*/
+.footer {
+    background-color: rgb(144, 123, 104);
+    padding: var(--padding-medium) 0;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--padding-medium);
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: var(--padding-large);
+}
+
+.footer-logo {
+    height: 70px;
+}
+
+.footer-nav-list {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--padding-small);
+    font-family: var(--font-secondary);
+    font-size: var(--font-small);
+    text-align: center;
+    color: var(--color-text-primary);
+}
+
+.footer-nav-list a {
+    transition: color 250ms linear;
+}
+
+.footer-nav-list a:focus,
+.footer-nav-list a:hover {
+    color: var(--color-link-active);
+}
+
+.footer-links {
+    font-size: var(--font-small);
+    text-align: center;
+}
+
+.footer-links a {
+    transition: color 250ms linear;
+}
+
+.footer-links a:hover,
+.footer-links a:focus {
+    color: var(--color-link-active);
+}
+
+/*===================== FOOTER TAB ====================*/
+@media (min-width: 768px) {
+    .footer-content {
+        margin-bottom: var(--padding-small);
+    }
+
+    .footer-logo {
+        height: 90px;
+    }
+
+    .footer-nav-list {
+        gap: var(--padding-medium);
+    }
+
+    .footer-links {
+        font-size: var(--font-small);
+    }
+}
+
+/*===================== FOOTER DESC ====================*/
+@media (min-width: 1024px) {
+    .footer {
+        padding: var(--padding-large) 0;
+    }
+
+    .footer-content {
+        margin-bottom: var(--padding-medium);
+    }
+
+    .footer-logo {
+        height: 120px;
+    }
+
+    .footer-nav-list {
+        gap: var(--padding-large);
+        font-size: var(--font-medium);
+    }
+
+    .footer-links {
+        font-size: var(--font-medium);
+    }
+}
