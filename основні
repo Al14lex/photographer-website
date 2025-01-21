@@ -1,4 +1,51 @@
-/* колір боді  background-color: #815e3b9a; */
-/* колір кнопок background-color:rgba(111, 85, 61, 0.666); */
-/* колір тексту основний  color:#322d29;*/
-/* колір тексту ховер color: #FFF8E7; */
+/* колір боді background-color: #815e3b9a; */ /* колір кнопок
+background-color:rgba(111, 85, 61, 0.666); */ /* колір тексту основний
+color:#322d29;*/ /* колір тексту ховер color: #FFF8E7; */
+
+<body>
+  <div id="header-sec"></div>
+  <div id="hero-sec"></div>
+  <div id="about-me-sec"></div>
+  <div id="what-sec"></div>
+  <div id="portfolio-sec"></div>
+  <div id="reviews-sec"></div>
+  <div id="footer-sec"></div>
+  <div id="modal"></div>
+
+  <script>
+    async function loadHTML(selector, url, callback) {
+      const response = await fetch(url);
+      if (response.ok) {
+        document.querySelector(selector).innerHTML = await response.text();
+        if (typeof callback === "function") callback();
+      } else {
+        console.error(`Failed to load ${url}`);
+      }
+    }
+
+    // Виклик із завантаженням скриптів після секції
+    loadHTML("#header-sec", "./partials/home/header-sec.html", () => {
+      console.log("Header section loaded!");
+      // Тут можна викликати код з header.js
+      const headerElement = document.querySelector("#header-sec");
+      if (headerElement) {
+        console.log("Header is ready:", headerElement);
+      }
+    });
+
+    loadHTML("#header-sec", "./partials/home/header-sec.html");
+    loadHTML("#hero-sec", "./partials/home/hero-sec.html");
+    loadHTML("#about-me-sec", "./partials/home/about_me-sec.html");
+    loadHTML("#what-sec", "./partials/home/what-sec.html");
+    loadHTML("#portfolio-sec", "./partials/home/portfolio-sec.html");
+    loadHTML("#reviews-sec", "./partials/home/reviews-sec.html");
+    loadHTML("#footer-sec", "./partials/home/footer-sec.html");
+    loadHTML("#modal", "./partials/home/modal.html");
+  </script>
+
+  <script type="module" src="./js/home/header.js"></script>
+  <script type="module" src="./js/home/mobile-menu.js"></script>
+  <script type="module" src="./js/home/photo-feed.js"></script>
+  <script type="module" src="./js/home/swiper.js"></script>
+  <script type="module" src="./js/home/modal.js"></script>
+</body>

@@ -1,0 +1,172 @@
+/* ======================REVIEWS====================== */
+.background-photo-rev {
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0) 80%, rgb(195, 167, 140) 100%), url('../img/home/what6.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.background-photo-rev::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(110, 100, 90, 0.25);
+    z-index: -1;
+}
+
+.reviews-section {
+    padding: 20px 0;
+}
+
+.swiper {
+    width: 310px;
+    height: 175px;
+}
+
+.swiper-slide {
+    padding: 6px;
+}
+
+.reviews-title {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.review-image {
+    height: auto;
+}
+
+.review-content {
+    background-color:
+        rgb(173, 151, 130);
+    padding: 20px 10px;
+    height: 130px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+        0 -4px 6px rgba(0, 0, 0, 0.05),
+        4px 0 6px rgba(0, 0, 0, 0.05),
+        -4px 0 6px rgba(0, 0, 0, 0.05);
+}
+
+.review-author {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.review-text {
+    text-align: center;
+    font-size: 14px;
+}
+
+/* .swiper-navigation{
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap:10px;
+    justify-content: center;
+}
+.icon-arr-prev,
+.icon-arr-next {
+    fill: #000;
+    width: 30px;
+    height: 20px;
+
+}  */
+:root {
+    --swiper-pagination-color: #FFF8E7;
+    ;
+    --swiper-pagination-bullet-horizontal-gap: 3px;
+}
+
+/* ======================REVIEWS TAB====================== */
+@media (min-width: 768px) {
+    .reviews-section {
+        padding: 20px 0 20px 0;
+    }
+
+    .reviews-title {
+        margin-bottom: 25px;
+        font-size: 30px;
+    }
+
+    .swiper {
+        width: 680px;
+        height: 225px;
+    }
+
+    .review-content {
+        height: 170px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1),
+            0 -4px 10px rgba(0, 0, 0, 0.05),
+            4px 0 10px rgba(0, 0, 0, 0.05),
+            -4px 0 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .review-author {
+        font-size: 20px;
+    }
+
+    .review-text {
+        font-size: 18px;
+    }
+
+    .swiper-navigation {
+        gap: 20px;
+    }
+
+}
+
+/* ======================REVIEWS DESC====================== */
+@media (min-width: 1024px) {
+
+    .reviews-title {
+        font-size: 38px;
+        margin-bottom: 20px;
+    }
+
+    .swiper {
+        width: 984px;
+        height: 245px;
+    }
+
+    .review-content {
+        height: 190px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1),
+            0 -4px 10px rgba(0, 0, 0, 0.05),
+            4px 0 10px rgba(0, 0, 0, 0.05),
+            -4px 0 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .review-author {
+        font-size: 22px;
+    }
+
+    .review-text {
+        font-size: 20px;
+    }
+
+    .swiper-navigation {
+        margin-top: 20px;
+        gap: 30px;
+    }
+
+    .icon-arr-prev,
+    .icon-arr-next {
+        width: 35px;
+        height: 25px;
+    }
+
+    :root {
+        --swiper-pagination-bullet-horizontal-gap: 4px;
+        --swiper-pagination-bullet-size: 10px;
+    }
+}

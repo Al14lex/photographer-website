@@ -1,0 +1,89 @@
+/* Загальні стилі для мобільного меню */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(rgba(191, 168, 146, 0.2),
+            /* Напівпрозорий чорний фон */
+            rgba(191, 168, 146, 0.2)),
+        url('../../img/home/individual.jpg');
+    /* Фонове зображення */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--padding-large) var(--padding-medium);
+    transition: transform 0.5s ease-in-out;
+    /* Плавний перехід */
+    transform: translateX(100%);
+    /* Початкова позиція поза екраном */
+}
+
+.mobile-menu.open {
+    transform: translateX(0);
+    /* Показати меню */
+}
+
+.mobile-menu .close-menu {
+    align-self: flex-end;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-bottom: var(--padding-large);
+}
+
+.mobile-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-medium);
+}
+
+.mobile-menu-list li {
+    text-align: center;
+}
+
+.mobile-menu-list a {
+    text-decoration: none;
+    font-family: var(--font-main);
+    font-size: var(--font-medium);
+    color: var(--color-text-primary);
+    padding: var(--padding-small) var(--padding-medium);
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.mobile-menu-list a:hover {
+    background-color: var(--color-bg-hover);
+    color: var(--color-link-active);
+}
+
+/* Для dropdown меню */
+.mobile-portfolio-dropdown .dropdown-menu {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin-top: var(--padding-small);
+}
+
+.mobile-portfolio-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li a {
+    font-size: calc(var(--font-small) + 2px);
+    padding: var(--padding-small) var(--padding-medium);
+}
+
+.dropdown-menu li a:hover {
+    background-color: var(--color-bg-hover);
+    color: var(--color-link-active);
+}

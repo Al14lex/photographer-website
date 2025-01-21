@@ -1,0 +1,200 @@
+/* ==================== CONTAINER AND HEADER ==================== */
+.container {
+    min-width: 320px;
+    margin: 0 auto;
+    padding: var(--padding-medium);
+}
+
+.header {
+    position: fixed;
+    padding: var(--padding-small) 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-bg-body);
+    z-index: 10;
+    box-shadow: var(--box-shadow-large);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.header.hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav {
+    display: none;
+}
+
+.logo-mob {
+    margin-left: var(--padding-large);
+}
+
+.burger-menu {
+    background-color: transparent;
+    display: block;
+    width: 40px;
+    height: 35px;
+    padding: 0;
+}
+
+button:hover {
+    background-color: var(--color-bg-hover);
+}
+
+.icon {
+    width: 100%;
+    height: 100%;
+    fill: var(--color-text-primary);
+}
+
+/* ==================== HEADER TAB =========================== */
+@media (min-width: 768px) {
+    .header {
+        padding: var(--padding-medium) 0;
+    }
+
+    .container {
+        min-width: 768px;
+    }
+
+    .logo-mob {
+        display: none;
+    }
+
+    .burger-menu {
+        display: none;
+    }
+
+    .header-container {
+        display: block;
+    }
+
+    .logo {
+        width: 130px;
+    }
+
+    .nav {
+        display: block;
+    }
+
+    .nav-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        height: 40px;
+    }
+
+    .nav-list li {
+        position: relative;
+    }
+
+    .nav-list a {
+        text-decoration: none;
+        font-family: var(--font-secondary);
+        font-weight: 400;
+        line-height: 1.6;
+        padding: var(--padding-small) var(--padding-medium);
+        display: inline-block;
+        color:black;
+        font-size: var(--font-small);
+        transition: color 250ms linear;
+    }
+
+    .nav-list a:hover,
+    .nav-list a:focus {
+        color: var(--color-link-active);
+    }
+
+    .portfolio-dropdown .dropdown-menu {
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        padding:5px 10px;
+        top: 100%;
+        border-radius: 10px;
+        left: 0;
+        background-color: var(--color-bg-body);
+        box-shadow: var(--box-shadow-small);
+        text-align: center;
+        list-style: none;
+        z-index: 1;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .portfolio-dropdown .dropdown-menu li a {
+        font-family: var(--font-secondary);
+        font-weight: 400;
+        line-height: 1.6;
+        padding: 1px 10px 6px 10px;
+        display: block;
+        white-space: nowrap;
+        font-size: calc(var(--font-small) - 2px);
+    }
+
+    .portfolio-dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .dropdown-menu li a:hover {
+        color: var(--color-link-active);
+    }
+}
+
+/* ==================== HEADER DESC =========================== */
+@media (min-width: 1024px) {
+    .header-container{
+max-width: 1025px;
+    }
+    .container {
+        min-width: 1024px;
+        
+    }
+
+    .nav-list {
+        height: 50px;
+    }
+
+    .logo {
+        width: 150px;
+    }
+
+    .nav-list a {
+        font-size: var(--font-medium);
+    }
+
+    .portfolio-dropdown .dropdown-menu {
+        top: 100%;
+        width: 130px;
+    }
+
+    .portfolio-dropdown .dropdown-menu li a {
+        font-family: var(--font-secondary);
+        font-weight: 400;
+        line-height: 1.6;
+        padding: 1px 10px 6px 10px;
+        display: block;
+        white-space: nowrap;
+        font-size: calc(var(--font-medium) - 2px);
+    }
+
+    .portfolio-dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .dropdown-menu li a:hover {
+        color: var(--color-link-active);
+    }
+}
