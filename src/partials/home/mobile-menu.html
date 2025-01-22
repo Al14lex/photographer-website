@@ -1,15 +1,20 @@
 <div class="mobile-menu">
   <button class="close-menu">
-    <svg class="icon icon-close" width="30" height="30">
+    <svg class="icon icon-close" width="25" height="25">
       <use href="../../img/sprite.svg#icon-close-btn"></use>
     </svg>
   </button>
   <ul class="mobile-menu-list">
     <li><a href="home-page.html">HOME</a></li>
     <li><a href="#about-me">ABOUT ME</a></li>
-    <li class="mobile-portfolio-dropdown">
-      <a href="#">PORTFOLIO</a>
-      <ul class="dropdown-menu">
+    <li class="mobile-portfolio-accordion">
+      <button class="accordion-header">
+        <svg class="icon icon-arrow" width="20" height="20">
+          <use href="../../img/sprite.svg#icon-arrow-down"></use>
+        </svg>
+        PORTFOLIO
+      </button>
+      <ul class="accordion-content">
         <li><a href="individual-page.html">Individual</a></li>
         <li><a href="family-page.html">Family</a></li>
         <li><a href="children-page.html">Children</a></li>
@@ -20,4 +25,25 @@
     <li><a href="price-page.html">PRICE</a></li>
     <li><a href="./contact-page.html">CONTACT</a></li>
   </ul>
+  <div class="social-links">
+    <a
+      href="https://www.instagram.com"
+      target="_blank"
+      class="social-icon instagram"
+    >
+      <svg width="24" height="24">
+        <use href="../../img/sprite.svg#icon-instagram"></use>
+      </svg>
+    </a>
+    <a href="https://t.me" target="_blank" class="social-icon telegram">
+      <svg width="24" height="24">
+        <use href="../../img/sprite.svg#icon-telegram"></use>
+      </svg>
+    </a>
+    <a href="https://wa.me" target="_blank" class="social-icon whatsapp">
+      <svg width="24" height="24">
+        <use href="../../img/sprite.svg#icon-whatsapp"></use>
+      </svg>
+    </a>
+  </div>
 </div>
