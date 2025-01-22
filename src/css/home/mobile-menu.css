@@ -141,28 +141,10 @@
     align-items: center;
     width: 40px;
     height: 40px;
-    background-color: var(--color-bg-hover);
     border-radius: 50%;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.social-icon svg {
-    fill: var(--color-text-primary);
+    transition: transform 0.3s ease;
 }
 
 .social-icon:hover {
-    background-color: var(--color-link-active);
-    transform: scale(1.1);
-}
-
-.social-icon.instagram svg {
-    fill: #e1306c;
-}
-
-.social-icon.telegram svg {
-    fill: #0088cc;
-}
-
-.social-icon.whatsapp svg {
-    fill: #25d366;
+    transform: scale(1.3);
 }
