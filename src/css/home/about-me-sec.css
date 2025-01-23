@@ -8,8 +8,14 @@
     flex-direction: column;
     align-items: center;
     gap: 15px;
+    opacity: 0;
+    transform: translateY(50px); 
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
-
+.about-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 .about-container h2 {
     margin-bottom: 0;
     font-family: var(--font-secondary);
@@ -21,11 +27,14 @@
     align-items: center;
     justify-content: center;
     gap: 15px;
+    overflow: hidden;
 }
 
 .about-img {
     width: 160px;
     border-radius: 8px;
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
 }
 
 .about-content p {
@@ -50,7 +59,25 @@
     background-color: rgba(129, 104, 78, 0.666);
     color: var(--color-link-active);
 }
+.about-content p.line-visible {
+    transform: translateX(0);
+    opacity: 1;
+}
 
+.about-img.visible {
+    transform: translateX(0)
+}
+.about-text .line {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.about-text .line.visible {
+    opacity: 1;
+    transform: translateX(0);
+
+}
 /* ========================ABOUT ME TAB==================== */
 @media (min-width: 768px) {
     .about {
@@ -103,14 +130,16 @@
     .about-container h2 {
         font-size: 38px;
         position: absolute;
-        top: 2%;
-        left: 52%;
+        left: 50%;
     }
 
     .about-content {
-        gap: 40px;
+        gap: 50px;
     }
 
+    .about-text .line{
+        margin: 0;
+    }
     .about-content p {
         line-height: 1.4;
         font-size: var(--font-large);
@@ -124,7 +153,8 @@
         font-size: 22px;
         margin-top: 8px;
         position: absolute;
-        top: 82%;
-        left: 58%;
+        top: 85%;
+        left: 60%;
     }
 }
+
