@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     aboutTextLines.forEach((line, index) => {
                         setTimeout(() => {
                             line.classList.add('line-visible');
-                        }, index * 150); // По рядках з затримкою
+                        }, index * 350); 
                     });
                 } else {
                     aboutSection.classList.remove('visible');

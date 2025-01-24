@@ -34,7 +34,7 @@
 }
 
 .photography-content {
-    padding: var(--padding-large);
+    padding: 25px 20px 15px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -70,6 +70,29 @@
     color: var(--color-link-active);
 }
 
+.photography-content>* {
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.photography-title,
+.photography-link {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+}
+.photography-description {
+    position: relative;
+    top: -17px;
+    overflow: hidden;
+    line-height: normal;
+}
+.photography-description .line {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
 /* =================== what am I photographing tab ================= */
 @media (min-width: 768px) {
     .photography {
@@ -88,6 +111,7 @@
     }
 
     .photography-content {
+        padding: 30px 40px 20px;
         gap: calc(var(--padding-medium) + 5px);
         max-width: 1025px;
         margin-left: auto;
