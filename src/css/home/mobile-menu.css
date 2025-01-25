@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: var(--padding-medium);
+    padding: var(--padding-large);
     transition: transform 0.5s ease-in-out;
     transform: translateX(100%);
 }
@@ -40,7 +40,7 @@
     flex-direction: column;
     gap: var(--padding-medium);
     position: relative;
-    top: 15%;
+    top: 10%;
     right: -28%;
 }
 
@@ -60,7 +60,7 @@
 }
 
 .mobile-menu-list a:hover {
-    background-color: var(--color-bg-hover);
+    background-color: rgba(199, 175, 152, 0.619);
     color: var(--color-text-primary);
 }
 
@@ -85,7 +85,7 @@
 }
 
 .accordion-header:hover {
-    background-color: var(--color-bg-hover);
+    background-color: rgba(199, 175, 152, 0.619);
 }
 
 .icon-arrow {
@@ -122,19 +122,27 @@
 }
 
 .accordion-content li a:hover {
-    background-color: var(--color-link-active);
+    background-color: #fff8e7a7;
     color: var(--color-text-primary);
 }
 
 .social-links {
     position: absolute;
-    bottom: var(--padding-large);
+    bottom:35px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     gap: var(--padding-medium);
+    transition: all 0.4s ease;
 }
-
+.social-links.vertical {
+    /* position: fixed; */
+    bottom: 50%;
+    left: 20px;
+    transform: translateY(50%);
+    flex-direction: column;
+    gap: var(--padding-small);
+}
 .social-icon {
     display: flex;
     justify-content: center;

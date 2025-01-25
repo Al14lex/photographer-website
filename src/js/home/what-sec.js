@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
         span.className = "line";
         span.style.opacity = "0";
         span.style.transform = "translateY(20px)";
-        span.style.transition = `opacity 0.9s ease-out ${index * 0.2}s, transform 0.9s ease-out ${index * 0.2}s`;
+        span.style.transition = `opacity 0.9s ease-out ${index * 0.4}s, transform 0.9s ease-out ${index * 0.4}s`;
         span.innerHTML = line.trim() || "&nbsp;"; 
         paragraph.appendChild(span);
 
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
           setTimeout(() => {
             link.style.opacity = "1";
             link.style.transform = "translateY(0)";
-          }, 900); 
+          }, 1000); 
         }
       } else {
         if (isVisible) {
