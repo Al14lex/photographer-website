@@ -3,49 +3,76 @@ background-color:rgba(111, 85, 61, 0.666); */ /* колір тексту осн�
 color:#322d29;*/ /* колір тексту ховер color: #FFF8E7; */
 
 <body>
-  <div id="header-sec"></div>
-  <div id="hero-sec"></div>
-  <div id="about-me-sec"></div>
-  <div id="what-sec"></div>
-  <div id="portfolio-sec"></div>
-  <div id="reviews-sec"></div>
-  <div id="footer-sec"></div>
-  <div id="modal"></div>
-
-  <script>
-    async function loadHTML(selector, url, callback) {
-      const response = await fetch(url);
-      if (response.ok) {
-        document.querySelector(selector).innerHTML = await response.text();
-        if (typeof callback === "function") callback();
-      } else {
-        console.error(`Failed to load ${url}`);
-      }
-    }
-
-    // Виклик із завантаженням скриптів після секції
-    loadHTML("#header-sec", "./partials/home/header-sec.html", () => {
-      console.log("Header section loaded!");
-      // Тут можна викликати код з header.js
-      const headerElement = document.querySelector("#header-sec");
-      if (headerElement) {
-        console.log("Header is ready:", headerElement);
-      }
-    });
-
-    loadHTML("#header-sec", "./partials/home/header-sec.html");
-    loadHTML("#hero-sec", "./partials/home/hero-sec.html");
-    loadHTML("#about-me-sec", "./partials/home/about_me-sec.html");
-    loadHTML("#what-sec", "./partials/home/what-sec.html");
-    loadHTML("#portfolio-sec", "./partials/home/portfolio-sec.html");
-    loadHTML("#reviews-sec", "./partials/home/reviews-sec.html");
-    loadHTML("#footer-sec", "./partials/home/footer-sec.html");
-    loadHTML("#modal", "./partials/home/modal.html");
-  </script>
-
+  <load ="./partials/home/header-sec.html" />
+  <!-- mobile menu -->
+  <load ="./partials/home/mobile-menu.html" />
+  <!-- hero -->
+  <load ="./partials/home/hero-sec.html" />
+  <!-- about me -->
+  <load ="./partials/home/about_me-sec.html" />
+  <!-- what am I photographing? -->
+  <load ="./partials/home/what-sec.html" />
+  <!-- portfolio -->
+  <load ="./partials/home/portfolio-sec.html" />
+  <!-- reviews -->
+  <load ="./partials/home/reviews-sec.html" />
+  <!-- Footer -->
+  <load ="./partials/home/footer-sec.html" />
+  <!-- Modal -->
+  <load ="./partials/home/modal.html" />
   <script type="module" src="./js/home/header.js"></script>
   <script type="module" src="./js/home/mobile-menu.js"></script>
+  <script type="module" src="./js/home/accordion.js"></script>
+  <script type="module" src="./js/home/about-me.js"></script>
   <script type="module" src="./js/home/photo-feed.js"></script>
+  <script type="module" src="./js/home/reviews-background.js"></script>
   <script type="module" src="./js/home/swiper.js"></script>
   <script type="module" src="./js/home/modal.js"></script>
+  <script type="module" src="./js/home/what-sec.js"></script>
+</body>
+
+<body>
+  <div id="header"></div>
+  <div id="mobile-menu"></div>
+  <div id="hero"></div>
+  <div id="about-me"></div>
+  <div id="what"></div>
+  <div id="portfolio"></div>
+  <div id="reviews"></div>
+  <div id="footer"></div>
+  <div id="modal"></div>
+
+  <script type="module">
+    // Load partials dynamically
+    const loadPartials = async () => {
+      const sections = [
+        { id: "header", url: "./partials/home/header-sec.html" },
+        { id: "mobile-menu", url: "./partials/home/mobile-menu.html" },
+        { id: "hero", url: "./partials/home/hero-sec.html" },
+        { id: "about-me", url: "./partials/home/about_me-sec.html" },
+        { id: "what", url: "./partials/home/what-sec.html" },
+        { id: "portfolio", url: "./partials/home/portfolio-sec.html" },
+        { id: "reviews", url: "./partials/home/reviews-sec.html" },
+        { id: "footer", url: "./partials/home/footer-sec.html" },
+        { id: "modal", url: "./partials/home/modal.html" },
+      ];
+
+      for (const section of sections) {
+        const response = await fetch(section.url);
+        const content = await response.text();
+        document.getElementById(section.id).innerHTML = content;
+      }
+    };
+
+    loadPartials();
+  </script>
+  <script type="module" src="./js/home/header.js"></script>
+  <script type="module" src="./js/home/mobile-menu.js"></script>
+  <script type="module" src="./js/home/accordion.js"></script>
+  <script type="module" src="./js/home/about-me.js"></script>
+  <script type="module" src="./js/home/photo-feed.js"></script>
+  <script type="module" src="./js/home/reviews-background.js"></script>
+  <script type="module" src="./js/home/swiper.js"></script>
+  <script type="module" src="./js/home/modal.js"></script>
+  <script type="module" src="./js/home/what-sec.js"></script>
 </body>
