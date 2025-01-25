@@ -6,7 +6,7 @@
     width: 100%;
     height: 100vh;
     background: linear-gradient(rgba(191, 168, 146, 0.3), rgba(191, 168, 146, 0.3)),
-        url('../../img/home/mobile-menu.jpg');
+        url('/img/home/mobile-menu.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
