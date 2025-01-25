@@ -203,7 +203,7 @@ button:hover {
 
 .hero {
     height: 100vh;
-    background-image: url('../img/home/hero_mob.jpg');
+    background-image: url('/img/home/hero_mob.jpg');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -211,7 +211,7 @@ button:hover {
     justify-content: center;
     position: relative;
     z-index: 1;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 80%, rgb(194, 169, 143) 100%), url('../img/home/hero_mob.jpg');
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 80%, rgb(194, 169, 143) 100%), url('/img/home/hero_mob.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -266,9 +266,9 @@ button:hover {
 /* ===================HERO DESK======================= */
 @media (min-width: 1024px) {
 .hero {
-        background-image: url('../img/home/hero_desc.jpg');
+        background-image: url('/img/home/hero_desc.jpg');
     background-position: center;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 80%, rgb(196, 168, 141) 100%), url('../img/home/hero_desc.jpg');
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 80%, rgb(196, 168, 141) 100%), url('/img/home/hero_desc.jpg');
         background-size: cover;
         background-position: center;
 }
@@ -609,19 +609,19 @@ button:hover {
     text-decoration: underline;
 }
 .portfolio-image1 {
-    background-image: url('../img/home/individual.jpg');
+    background-image: url('/img/home/individual.jpg');
 }
 
 .portfolio-image2 {
-    background-image: url('../img/home/family.jpg');
+    background-image: url('/img/home/family.jpg');
 }
 
 .portfolio-image3 {
-    background-image: url('../img/home/children.jpg');
+    background-image: url('/img/home/children.jpg');
 }
 
 .portfolio-image4 {
-    background-image: url('../img/home/newborn.jpg');
+    background-image: url('/img/home/newborn.jpg');
 }
 
 /* ====================PORTFOLIO TAB====================== */
@@ -668,7 +668,7 @@ button:hover {
     height: 100%;
     position: relative;
     z-index: 1;
-    background: linear-gradient(to top, rgba(255, 255, 255, 0) 80%, rgb(195, 167, 140) 100%), url('../img/home/what6.jpg');
+    background: linear-gradient(to top, rgba(255, 255, 255, 0) 80%, rgb(195, 167, 140) 100%), url('/img/home/what6.jpg');
     background-size: cover;
     background-position: center;
 }

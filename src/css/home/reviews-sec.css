@@ -11,7 +11,7 @@
     left: 0;
     width: 100%;
     height: 120%;
-    background-image: url('../img/home/what6.jpg');
+    background-image: url('/img/home/what6.jpg');
     background-size: cover;
     background-position: center;
     transform: translateY(0);
