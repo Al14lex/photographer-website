@@ -6,9 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const link = document.querySelector(".photography-link");
 
   if (paragraph && title && link) {
-    const text = paragraph.innerHTML; 
-    const lines = text.split("<br>"); 
-    paragraph.innerHTML = ""; 
+    const text = paragraph.innerHTML;
+    const lines = text.split("<br>");
+    paragraph.innerHTML = "";
 
     lines.forEach((line, index) => {
       if (line.trim()) {
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
         span.style.opacity = "0";
         span.style.transform = "translateY(20px)";
         span.style.transition = `opacity 0.9s ease-out ${index * 0.4}s, transform 0.9s ease-out ${index * 0.4}s`;
-        span.innerHTML = line.trim() || "&nbsp;"; 
+        span.innerHTML = line.trim() || "&nbsp;";
         paragraph.appendChild(span);
 
         if (index < lines.length - 1) {
@@ -27,42 +27,36 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    let isVisible = false;
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: [0.4], 
+    };
 
-    function handleScroll() {
-      const rect = paragraph.getBoundingClientRect();
-      const lines = paragraph.querySelectorAll(".line");
+    function handleIntersect(entries, observer) {
+      entries.forEach((entry) => {
+        const lines = paragraph.querySelectorAll(".line");
 
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        if (!isVisible) {
-          isVisible = true; 
+        if (entry.isIntersecting) {
           console.log("Section is visible");
 
           lines.forEach((line, index) => {
             setTimeout(() => {
               line.style.opacity = "1";
               line.style.transform = "translateY(0)";
-              console.log(
-                `Line ${index} styles applied:`,
-                line.style.opacity,
-                line.style.transform
-              );
-            }, index * 300); 
+            }, index * 300);
           });
 
           setTimeout(() => {
             title.style.opacity = "1";
             title.style.transform = "translateY(0)";
-          }, 200); 
+          }, 200);
 
           setTimeout(() => {
             link.style.opacity = "1";
             link.style.transform = "translateY(0)";
-          }, 1000); 
-        }
-      } else {
-        if (isVisible) {
-          isVisible = false; 
+          }, 1000);
+        } else {
           console.log("Section is hidden");
 
           lines.forEach((line) => {
@@ -70,19 +64,18 @@ document.addEventListener("DOMContentLoaded", function () {
             line.style.transform = "translateY(20px)";
           });
 
-         title.style.opacity = "0";
+          title.style.opacity = "0";
           title.style.transform = "translateY(20px)";
 
           link.style.opacity = "0";
           link.style.transform = "translateY(20px)";
         }
-      }
+      });
     }
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); 
+    const observer = new IntersectionObserver(handleIntersect, observerOptions);
+    observer.observe(document.querySelector(".photography-content"));
   } else {
     console.error("Required elements not found!");
   }
 });
-
