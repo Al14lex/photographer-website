@@ -29,20 +29,20 @@
 .hero-content {
     text-align: center;
     background: rgba(191, 168, 146, 0.6);
-    padding: 20px;
-    width: 300px;
+    padding: 15px;
+    min-width: 300px;
     border-radius: 10px;
     position: absolute;
     top: 50%;
     left: 50%;
-    color:black;
+    color:var(--color-text-primary);
     transform: translate(-50%, -50%);
 }
 
 .hero-content h1 {
     font-family: "Ephesis", system-ui;
-        font-size: 34px;
-        font-weight: 400;
+        font-size: 38px;
+        font-weight: 500;
         font-style: normal;
 }
 
@@ -56,13 +56,14 @@
 /* ======================= HERO TAB =================== */
 @media (min-width: 768px) {
     .hero-content h1 {
-        font-size: 36px;
+        font-size: 42px;
     }
 
     .hero-content {
         color: var(--color-text-primary);
+        padding: 20px;
         background: rgba(191, 168, 146, 0.66);
-        width: 700px;
+        min-width: 700px;
     }
 
     .hero-content p {
@@ -81,13 +82,12 @@
     }
 
     .hero-content {
-        width: 800px;
+        min-width: 1000px;
         padding: 30px;
-        padding: var(--padding-large);
     }
 
     .hero-content h1 {
-        font-size: 48px;
+        font-size: 52px;
     }
 
     .hero-content p {
