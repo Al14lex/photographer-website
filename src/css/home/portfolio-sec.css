@@ -14,14 +14,14 @@
     align-items: center;
     justify-content: center;
 }
-
 .portfolio-item {
     width: 160px;
-    height: 210px;
+    height: 220px;
     position: relative;
     overflow: hidden;
     border-radius: 8px;
 }
+
 
 .portfolio-content {
     position: relative;
@@ -49,34 +49,43 @@
     transform: scale(1.2);
 }
 
-.portfolio-title {
-    position: absolute;
-    bottom: var(--padding-small);
-    left: var(--padding-small);
-    margin: 0;
-    font-size: var(--font-medium);
-    font-family: var(--font-main);
-    color: var(--color-button-text);
-    z-index: 2;
-}
-
 .portfolio-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 150px;
     position: absolute;
-    bottom: calc(var(--padding-small) - 2px);
-    right: calc(var(--padding-small) - 2px);
-    text-decoration: none;
-    padding: 4px 6px;
-    border-radius: 5px;
-    border: 1px solid var(--color-button-text);
+    bottom: 8px;
+    left:9px;
+    margin: 0;
+    line-height: 0;
+    padding: 4px ;
+    font-size: var(--font-large);
+    font-family: var(--font-main);
+    font-weight: 600;
     color: var(--color-button-text);
     z-index: 2;
-    transition: text-decoration 350ms linear;
+    text-decoration: none;
+    transition:transform 350ms ease;
 }
-
-.portfolio-link:hover {
-    text-decoration: underline;
+.portfolio-icon-arrow{
+    transform: rotate(-90deg);
+    padding: 0;
+    line-height: 0;
+    transition: transform 350ms ease;
 }
-
+ .portfolio-link:hover .portfolio-icon-arrow{ 
+    transform: rotate(-450deg);
+} 
+@media (min-width: 420px) and (max-width: 767px) {
+    .portfolio-item {
+        width: 185px;
+        height: 240px;
+    }
+    .portfolio-link{
+        width: 170px;
+    }
+}
 /* ==================== PORTFOLIO TAB ====================== */
 @media (min-width: 768px) {
     .portfolio {
@@ -84,12 +93,21 @@
     }
 
     .portfolio-list {
-        gap: 10px;
+        gap: 30px;
     }
 
     .portfolio-item {
-        width: 175px;
-        height: 235px;
+        width: 300px;
+        height: 350px;
+    }
+    .portfolio-link {
+        font-size: 30px;
+        padding: 6px 10px;
+    width: 285px;
+    }
+    .portfolio-icon-arrow{
+        width: 40px;
+        height: 40px;
     }
 }
 
@@ -108,15 +126,9 @@
         height: 300px;
     }
 
-    .portfolio-title {
-        font-size: calc(var(--font-large) - 4px);
-        left: calc(var(--padding-medium) - 5px);
-    }
-
     .portfolio-link {
-        font-size: calc(var(--font-medium) + 2px);
-        bottom: var(--padding-small);
-        right: var(--padding-small);
+        font-size: 32px;
         padding: 5px 8px;
+        width: 225px;
     }
 }

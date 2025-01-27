@@ -34,7 +34,7 @@
 }
 
 .photography-content {
-    padding: 25px 20px 15px 20px;
+    padding: 25px 15px 0 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -111,7 +111,7 @@
     }
 
     .photography-content {
-        padding: 30px 40px 20px;
+        padding: 30px 15px 15px 15px;
         gap: calc(var(--padding-medium) + 5px);
         max-width: 1025px;
         margin-left: auto;
