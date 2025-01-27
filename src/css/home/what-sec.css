@@ -57,10 +57,10 @@
     background-color: rgba(149, 120, 94, 0.6);
     color: var(--color-text-primary);
     border: none;
-    padding: 6px 11px;
+    padding: 10px 14px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: var(--padding-small);
+    margin-top: 15px;
     font-weight: 500;
     transition: background-color 250ms linear, color 250ms linear;
 }
@@ -127,7 +127,7 @@
     }
 
     .photography-link {
-        padding: calc(var(--padding-medium) - 5px) var(--padding-large);
+        padding: 12px 17px;
         font-size: var(--font-medium);
         margin-top: calc(var(--padding-small) + 3px);
     }
@@ -154,15 +154,12 @@
     }
 
     .photography-title {
-        font-size: calc(var(--font-large) + 14px);
-    }
-
-    .photography-description {
-        font-size: calc(var(--font-medium) + 6px);
+        font-size: 38px;
+        margin-top: 10px;
     }
 
     .photography-link {
         padding: 12px 17px;
-        font-size: calc(var(--font-medium) + 4px);
+        font-size: 20px;
     }
 }
