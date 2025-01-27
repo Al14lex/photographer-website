@@ -6,12 +6,16 @@
 .get-in-container {
     margin-right: auto;
     margin-left: auto;
-    padding: var(--padding-small);
-    max-width: 298px;
+    padding: 10px  0 15px 0;
+    max-width: 335px;
     background-color: rgba(191, 168, 146, 0.567);
     border-radius: 10px;
 }
-
+@media (min-width: 425px) and (max-width: 767px){
+.get-in-container {
+        max-width: 382px;
+    }
+}
 .contact-title {
     text-align: center;
     margin-bottom: var(--padding-medium);
@@ -75,7 +79,7 @@
 .form-textarea:not(:placeholder-shown) {
     outline: none;
     background-color: rgb(199, 175, 152);
-    font-size: 14px;
+    font-size: 16px;
     font-family: "Cormorant Garamond", serif;
     color: #322d29;
 }
@@ -84,7 +88,7 @@
 .form-textarea:-webkit-autofill {
     background-color: rgb(199, 175, 152) !important;
     color: #322d29 !important;
-    font-size: 14px;
+    font-size: 16px;
     font-family: "Cormorant Garamond", serif;
     transition: background-color 5000s ease-in-out 0s;
 }
@@ -93,7 +97,7 @@ input:-moz-autofill,
 textarea:-moz-autofill {
     background-color: rgb(199, 175, 152);
     color: #322d29;
-    font-size: 14px;
+    font-size: 16px;
     font-family: "Cormorant Garamond", serif;
 }
 .form-button {
@@ -101,7 +105,7 @@ textarea:-moz-autofill {
     background-color: var(--color-bg-body);
     color: #000;
     border: none;
-    padding: 6px 20px;
+    padding: 10px 20px;
     /* padding: var(--padding-small) var(--padding-medium); */
     border-radius: 5px;
     box-shadow: var(--box-shadow-small);
@@ -109,7 +113,7 @@ textarea:-moz-autofill {
     margin-top: var(--padding-small);
     font-weight: 500;
     font-family: var(--font-main);
-    font-size: var(--font-medium);
+    font-size: var(--font-small);
     transition: background-color 250ms linear, color 250ms linear;
 }
 
@@ -125,12 +129,12 @@ textarea:-moz-autofill {
     }
 
     .get-in-container {
-        padding: var(--padding-medium);
-        max-width: 650px;
+        padding: 20px 0 25px 0;
+        max-width: 620px;
     }
 
     .contact-title {
-        font-size: var(--font-large);
+        font-size: 32px;
         margin-bottom: var(--padding-medium);
     }
 
@@ -140,7 +144,7 @@ textarea:-moz-autofill {
 
     .form-input {
         height: 45px;
-        font-size: var(--font-medium);
+        font-size: 20px;
     }
 
     .form-textarea {
@@ -150,24 +154,41 @@ textarea:-moz-autofill {
     .form-input,
     .form-textarea {
         width: 330px;
-        font-size: var(--font-medium);
+        font-size: 20px;
         padding: var(--padding-small) var(--padding-medium);
     }
 
     .form-input::placeholder,
     .form-textarea::placeholder {
-        font-size: var(--font-medium);
+        font-size: 20px;
     }
+        .form-input:focus,
+        .form-input:hover,
+        .form-input:active,
+        .form-textarea:focus,
+        .form-textarea:hover,
+        .form-textarea:active,
+        .form-input:not(:placeholder-shown),
+        .form-textarea:not(:placeholder-shown) {
+            font-size: 20px;
+        }
+    
+        .form-input:-webkit-autofill,
+        .form-textarea:-webkit-autofill {
+            font-size: 20px;
+        }
 
 .form-button {
-    font-size: 18px;
-    padding: 10px 25px;
+    font-size: 20px;
+    padding: 12px 25px;
 }
 }
 
 /* ====================== GET IN TOUCH DESC====================== */
 @media (min-width: 1024px) {
-
+    .contact {
+            padding:25px 0 38px 0;
+        }
     .contact-title {
         font-size: 38px;
         margin-bottom: var(--padding-large);
@@ -194,7 +215,7 @@ textarea:-moz-autofill {
 
     .form-input::placeholder,
     .form-textarea::placeholder {
-        font-size: 22px;
+        font-size: 20px;
     }
 
     .form-input:focus,
@@ -205,7 +226,7 @@ textarea:-moz-autofill {
     }
 
     .form-button {
-        font-size: 22px;
+        font-size: 20px;
         padding: 12px 30px;
     }
 

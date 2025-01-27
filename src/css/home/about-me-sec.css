@@ -82,7 +82,9 @@
     opacity: 1;
     transform: translateY(0);
 }
-
+.about-title.visible{
+    font-size:26px;
+}
 .about-title,
 .about-text .line,
 .about-link {
@@ -142,11 +144,6 @@
     .about-img {
        height: 350px;
     }
-
-    .about-container h2 {
-        font-size: 30px;
-    }
-
     .about-content {
     gap: 25px;
     }
@@ -161,7 +158,9 @@
         margin-top: 8px;
     }
 }
-
+.about-title.visible{
+    font-size: 32px;
+}
 /* ========================ABOUT ME DESC==================== */
 @media (min-width: 1024px) {
 .about-title{
@@ -177,6 +176,7 @@
 .about-title2.visible{
     text-align: center;
     opacity: 1;
+    font-size: 30px;
     margin-bottom: 25px;
     transform: translateY(0);
 }
@@ -190,10 +190,10 @@
         .about-container {
         gap: 35px;
         }
-        .about-container h2 {
+        /* .about-container h2 {
             font-size: 30px;
         }
-    
+     */
         .about-content {
             max-width: 970px;
             display: flex;
