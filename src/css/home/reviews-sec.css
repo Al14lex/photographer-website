@@ -124,7 +124,9 @@
 
 /* ======================REVIEWS DESC====================== */
 @media (min-width: 1024px) {
-
+.container{
+    max-width: 1024px;
+}
     .reviews-title {
         font-size: 38px;
     }

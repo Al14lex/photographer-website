@@ -1,8 +1,9 @@
 /* ==================== CONTAINER AND HEADER ==================== */
 .container {
-    min-width: 320px;
+    width: 100%;
     margin: 0 auto;
     padding: var(--padding-medium);
+    box-sizing: border-box;
 }
 
 .header {
@@ -26,6 +27,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 90%;
 }
 
 .nav {
