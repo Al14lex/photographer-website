@@ -15,9 +15,10 @@
 
 .modal-content {
     position: relative;
+    top: 20%;
     z-index: 5;
     background-color: rgb(199, 175, 152);
-    margin: 15% auto;
+    margin: 0 auto;
     padding: 10px 20px 25px 20px;
     color: #322d29;
     text-align: center;
