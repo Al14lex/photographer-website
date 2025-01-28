@@ -12,8 +12,9 @@
     background-repeat: no-repeat;
     z-index: 100;
     display: flex;
+    justify-content: center;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     padding: var(--padding-large);
     transition: transform 0.5s ease-in-out;
     transform: translateX(100%);
@@ -24,6 +25,8 @@
 }
 
 .mobile-menu .close-menu {
+    position: relative;
+        top: -26%;
     align-self: flex-end;
     background: transparent;
     border: none;
@@ -39,9 +42,9 @@
     align-items: flex-end;
     flex-direction: column;
     gap: var(--padding-medium);
-    position: relative;
+    /* position: relative;
     top: 15%;
-    right: -25%;
+    right: -20%; */
 }
 
 .mobile-menu-list li {
@@ -128,7 +131,7 @@
 
 .social-links {
     position: absolute;
-    bottom: 10%;
+    bottom: 5%;
     left: 50%;
     transform: translateX(-50%);
     display: flex;

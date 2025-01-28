@@ -38,11 +38,11 @@
     margin-bottom: 0;
 }
 .about-bec-img{
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
-    min-width: 350px;
     background-image: url('/img/home/about-me-bec.jpg');
     background-size: cover;
     background-position: center;
@@ -67,8 +67,12 @@
     opacity: 1;
     transform: translateY(0);
 }
+.about-bec-img h2{
+    font-size: 26px;
+}
+
 .about-img {
-    height: 250px;
+    height: 230px;
     border-left: 4px solid;
     border-right: 4px solid;
     border-color: rgb(173, 151, 130);
@@ -82,9 +86,7 @@
     opacity: 1;
     transform: translateY(0);
 }
-.about-title.visible{
-    font-size:26px;
-}
+
 .about-title,
 .about-text .line,
 .about-link {
@@ -99,9 +101,10 @@
     opacity: 1;
     transform: translateY(0);
 }
-.about-text{
-    padding: 0 15px;
+.about-title.visible{
+    font-size:26px;
 }
+
 .about-text .line {
     line-height: 1.4;
     text-align: center;
@@ -147,7 +150,9 @@
     .about-content {
     gap: 25px;
     }
-
+.about-title.visible {
+    font-size: 32px;
+}
 .about-text .line {
     line-height: 1.5;
     font-size: var(--font-medium);
@@ -157,9 +162,6 @@
         font-size: var(--font-medium);
         margin-top: 8px;
     }
-}
-.about-title.visible{
-    font-size: 32px;
 }
 /* ========================ABOUT ME DESC==================== */
 @media (min-width: 1024px) {

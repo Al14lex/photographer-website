@@ -8,20 +8,20 @@
 }
 
 .portfolio-list {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     gap: var(--padding-medium);
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 .portfolio-item {
-    width: 160px;
+    width: 47%;
     height: 220px;
     position: relative;
     overflow: hidden;
     border-radius: 8px;
 }
-
 
 .portfolio-content {
     position: relative;
@@ -53,14 +53,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 150px;
+    width: 90%;
     position: absolute;
     bottom: 8px;
     left:9px;
     margin: 0;
     line-height: 0;
     padding: 4px ;
-    font-size: var(--font-large);
+    font-size: 22px;
     font-family: var(--font-main);
     font-weight: 600;
     color: var(--color-button-text);

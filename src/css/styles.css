@@ -98,7 +98,6 @@
 
 .bg-primary {
     background-color: var(--color-bg-body);
-    /* Уточнено */
 }
 
 .bg-hover:hover {
@@ -109,6 +108,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* outline: 1px solid red; */
 }
 
 html {

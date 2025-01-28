@@ -7,15 +7,12 @@
     margin-right: auto;
     margin-left: auto;
     padding: 10px  0 15px 0;
-    max-width: 335px;
+    /* max-width: 335px; */
+    width: 90%;
     background-color: rgba(191, 168, 146, 0.567);
     border-radius: 10px;
 }
-@media (min-width: 425px) and (max-width: 767px){
-.get-in-container {
-        max-width: 382px;
-    }
-}
+
 .contact-title {
     text-align: center;
     margin-bottom: var(--padding-medium);
