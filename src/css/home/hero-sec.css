@@ -30,8 +30,7 @@
     text-align: center;
     background: rgba(191, 168, 146, 0.6);
     padding: 15px;
-    min-width: 300px;
-    max-width: 90%;
+    width: 90%;
     border-radius: 10px;
     position: absolute;
     top: 50%;
@@ -42,14 +41,14 @@
 
 .hero-content h1 {
     font-family: "Ephesis", system-ui;
-        font-size: 38px;
+        font-size: 40px;
         font-weight: 500;
         font-style: normal;
 }
 
 .hero-content p {
     font-family: var(--font-secondary);
-    font-weight: 400;
+    font-weight: 500;
     font-size: var(--font-small);
     line-height: 1.6;
 }

@@ -25,8 +25,6 @@
 }
 
 .mobile-menu .close-menu {
-    position: relative;
-        top: -26%;
     align-self: flex-end;
     background: transparent;
     border: none;
@@ -42,9 +40,6 @@
     align-items: flex-end;
     flex-direction: column;
     gap: var(--padding-medium);
-    /* position: relative;
-    top: 15%;
-    right: -20%; */
 }
 
 .mobile-menu-list li {
