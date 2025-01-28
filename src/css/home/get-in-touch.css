@@ -52,7 +52,7 @@
 .form-input::placeholder,
 .form-textarea::placeholder {
     font-family: Ephesis;
-    font-size: var(--font-medium);
+    font-size: var(--font-small);
     color: var(--color-text-primary);
 }
 

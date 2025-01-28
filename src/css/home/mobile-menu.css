@@ -25,6 +25,8 @@
 }
 
 .mobile-menu .close-menu {
+    position: relative;
+    top: -27%;
     align-self: flex-end;
     background: transparent;
     border: none;
