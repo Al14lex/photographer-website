@@ -11,9 +11,10 @@
 
 .image-wrapper {
     display: flex;
-    width: calc(120px * 15);
+    width: calc(120px * 30);
     animation: scroll 60s linear infinite;
     will-change: transform;
+    animation-play-state: paused;
 }
 
 .image-wrapper img {
@@ -100,12 +101,12 @@
     }
 
     .image-wrapper {
-        width: calc(160px * 15);
+        width: calc(170px * 30);
     }
 
     .image-wrapper img {
-        width: 160px;
-        height: 200px;
+        width: 170px;
+        height: 220px;
         object-fit: cover;
         flex-shrink: 0;
     }

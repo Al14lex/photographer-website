@@ -21,6 +21,10 @@
     position: relative;
     overflow: hidden;
     border-radius: 8px;
+    opacity: 0;
+        /* Початково приховані */
+        transform: translateY(100px);
+        transition: opacity 2s ease, transform 2s ease;
 }
 
 .portfolio-content {
@@ -42,12 +46,19 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    filter: grayscale(100%);
+    transition: filter 1.5s ease-in-out;
 }
-
-.portfolio-item:hover .portfolio-img {
-    transform: scale(1.2);
+.portfolio-item.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
+.portfolio-img.color {
+    filter: grayscale(0%);
+}
+/* .portfolio-item.visible .portfolio-img {
+filter: grayscale(0%);
+} */
 
 .portfolio-link {
     display: flex;
@@ -102,7 +113,6 @@
     .portfolio-link {
         font-size: 32px;
         padding: 10px 0 10px 10px;
-    /* width: 285px; */
     }
     .portfolio-icon-arrow{
         width: 40px;

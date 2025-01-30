@@ -1,17 +1,18 @@
 /* ======================REVIEWS====================== */
 .background-photo-rev {
-    transform: translateY(0px);
     position: relative;
     min-height: 100vh;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
-
 .background-photo-rev .parallax-bg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 120%;
+    height:100vh;
     background-image: url('/img/home/what6.jpg');
     background-size: cover;
     background-position: center;
@@ -35,6 +36,7 @@
     position: relative;
     z-index: 2;
     padding: 20px 0;
+    flex: 1;
 }
 .reviews-title {
     text-align: center;
@@ -96,8 +98,12 @@
         margin-bottom: 32px;
         font-size: 32px;
     }
-
-    .swiper {
+        .background-photo-rev .parallax-bg {
+            height: 100vh;
+            /* Завжди на всю висоту екрану */
+        }    
+        
+        .swiper {
         width: 100%;
         height: 250px;
     }
