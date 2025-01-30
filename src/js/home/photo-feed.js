@@ -1,26 +1,27 @@
-const wrapper = document.querySelector('.image-wrapper');
-const images = document.querySelectorAll('.image-wrapper img');
-const totalImages = images.length;
 
-for (let i = 0; i < totalImages; i++) {
-    const clone = images[i].cloneNode(true);
-    wrapper.appendChild(clone);
-}
+document.addEventListener("DOMContentLoaded", () => {
+    const wrapper = document.querySelector(".image-wrapper");
+    const images = document.querySelectorAll(".image-wrapper img");
+    const totalImages = images.length;
 
-let isScrolling = false;
-
-function checkScroll() {
-    const rect = wrapper.getBoundingClientRect();
-    const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
-
-    if (inViewport && !isScrolling) {
-        isScrolling = true;
-        wrapper.style.animationPlayState = 'running';
-    } else if (!inViewport) {
-        isScrolling = false;
-        wrapper.style.animationPlayState = 'paused';
+    for (let i = 0; i < totalImages; i++) {
+        const clone = images[i].cloneNode(true);
+        wrapper.appendChild(clone);
     }
-}
 
-window.addEventListener('scroll', checkScroll);
-window.addEventListener('resize', checkScroll);
+    let observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    wrapper.style.animationPlayState = "running"; 
+                } else {
+                    wrapper.style.animationPlayState = "paused"; 
+                }
+            });
+        },
+        { threshold: 0 }
+    );
+
+    observer.observe(wrapper);
+
+});
