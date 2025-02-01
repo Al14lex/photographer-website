@@ -1,43 +1,60 @@
 
-// document.querySelector(".contact-form").addEventListener("submit", async function (event) {
-//   event.preventDefault();
+const modal = document.getElementById("modal");
+const form = document.querySelector(".contact-form");
 
-//   const userName = document.getElementById("user_name").value;
-//   const userEmail = document.getElementById("user_email").value;
-//   const message = document.getElementById("message").value;
+form.addEventListener("submit", async function (event) {
+  event.preventDefault();
 
-//   try {
-//     const response = await emailjs.send("service_i8bcmth", "template_1fpbo2w", {
-//       user_name: userName,
-//       user_email: userEmail,
-//       message: message,
-//     });
+  const userName = document.getElementById("user_name").value;
+  const userEmail = document.getElementById("user_email").value;
+  const message = document.getElementById("message").value;
 
-//     if (response.status === 200) {
-//       alert("Your message was sent successfully!");
-//       document.querySelector(".contact-form").reset();
-//     } else {
-//       throw new Error("Failed to send email. Please try again later.");
-//     }
-//   } catch (error) {
-//     console.error("Error:", error);
-//     alert("There was an error sending your message. Please try again later.");
-//   }
-// });
+  console.log("Form submitted!");
+  console.log("User Name:", userName);
+  console.log("User Email:", userEmail);
+  console.log("Message:", message);
 
-document.querySelector(".contact-form").addEventListener("submit", function (event) {
-  event.preventDefault(); // Зупиняємо стандартну поведінку форми
+  try {
+    const response = await emailjs.send("service_i8bcmth", "template_1fpbo2w", {
+      user_name: userName,
+      user_email: userEmail,
+      message: message,
+    });
 
-  // Отримуємо значення з полів за допомогою правильних селекторів
-  const name = document.querySelector("#name").value.trim();
-  const email = document.querySelector("#email").value.trim();
-  const message = document.querySelector("#message").value.trim();
+    console.log("EmailJS Response:", response);
 
-  // Виводимо дані для перевірки
-  console.log("Name:", name || "No data");
-  console.log("Email:", email || "No data");
-  console.log("Message:", message || "No data");
+    if (response.status === 200) {
+      showModal(); 
+      form.reset();
+    } else {
+      throw new Error("Failed to send email. Please try again later.");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+});
 
-  // Показуємо користувачу зібрані дані
-  alert(`Collected Data:\nName: ${name}\nEmail: ${email}\nMessage: ${message}`);
+function showModal() {
+  modal.style.display = "flex";
+  setTimeout(() => {
+    modal.classList.add("active"); 
+  }, 10);
+
+  setTimeout(() => {
+    closeModal();
+  }, 5000); 
+}
+
+function closeModal() {
+  modal.classList.remove("active"); 
+
+  setTimeout(() => {
+    modal.style.display = "none"; 
+  }, 500);
+}
+
+modal.addEventListener("click", function (event) {
+  if (event.target === modal) {
+    closeModal();
+  }
 });
