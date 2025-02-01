@@ -1,0 +1,81 @@
+
+section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--padding-large);
+    background-color: var(--color-bg-body);
+    box-shadow: var(--box-shadow-large);
+    border-radius: 10px;
+}
+section button{
+    margin-bottom: 20px;
+}
+section h1 {
+    font-size: 2rem;
+    text-align: var(--text-align-center);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--color-link-active);
+    padding-bottom: 10px;
+}
+
+section h2 {
+    font-size: 1.8rem;
+    margin-top: 30px;
+}
+
+section h3 {
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+
+section h4 {
+    font-size: 1.3rem;
+    margin-top: 15px;
+}
+
+section p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+section p strong {
+    font-family: var(--font-secondary);
+    font-weight: bold;
+}
+
+section p a {
+    color: var(--color-link-active);
+    text-decoration: underline;
+}
+
+section p a:hover {
+    color: var(--color-text-primary);
+}
+
+section ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+section ul li {
+    margin-bottom: 10px;
+}
+
+footer {
+    text-align: var(--text-align-center);
+    font-size: 0.9rem;
+    color: var(--color-text-primary);
+    padding: var(--padding-medium) 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: var(--color-bg-hover);
+}
+
+footer p {
+    margin: 0;
+}
+/*============= POLISY TAB ==============*/
+@media (min-width: 768px){
+    
+}

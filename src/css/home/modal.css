@@ -1,5 +1,4 @@
 /*================== MODAL ====================*/
-
 .modal {
     display: none;
     position: fixed;
@@ -8,32 +7,36 @@
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
-    display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.modal-content {
-    position: relative;
-    top: -20%;
-    z-index: 5;
-    background-color: rgb(199, 175, 152);
-    margin: 0 auto;
-    padding: 10px 20px 25px 20px;
-    color: #322d29;
-    text-align: center;
-    border: none;
-    border-radius: 10px;
-    width: 80%;
+.modal.active {
+    display: flex;
+    opacity: 1;
 }
 
-.close {
-    color: transparent;
-    font-size: 0px;
+.modal-content {
+    position: relative;
+    top:-20%;
+    background-color: rgb(199, 175, 152);
+    padding: 20px 30px;
+    color: #322d29;
+    text-align: center;
+    border-radius: 10px;
+    width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 1.2rem;
+    transform: translateY(-30px);
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+.modal.active .modal-content {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 /*================== MODAL TAB ====================*/
@@ -50,11 +53,10 @@
 /*================== MODAL DESC ====================*/
 @media (min-width: 1024px) {
     .modal-content p {
-        font-size: 20px;
+        font-size: 22px;
     }
 
     .modal-content h2 {
         font-size: 38px;
     }
-
 }
