@@ -1,38 +1,43 @@
-document.addEventListener('DOMContentLoaded', () => {
-  emailjs.init('w78d87LS8NmzMC5tY');
 
-    const form = document.querySelector('.contact-form');
-    console.log(form);
+// document.querySelector(".contact-form").addEventListener("submit", async function (event) {
+//   event.preventDefault();
 
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
+//   const userName = document.getElementById("user_name").value;
+//   const userEmail = document.getElementById("user_email").value;
+//   const message = document.getElementById("message").value;
 
-    const userName = document.getElementById('user_name').value;
-    const userEmail = document.getElementById('user_email').value;
-    const userMessage = document.getElementById('message').value;
+//   try {
+//     const response = await emailjs.send("service_i8bcmth", "template_1fpbo2w", {
+//       user_name: userName,
+//       user_email: userEmail,
+//       message: message,
+//     });
 
-    console.log('User Name:', userName);
-    console.log('User Email:', userEmail);
-    console.log('User Message:', userMessage);
+//     if (response.status === 200) {
+//       alert("Your message was sent successfully!");
+//       document.querySelector(".contact-form").reset();
+//     } else {
+//       throw new Error("Failed to send email. Please try again later.");
+//     }
+//   } catch (error) {
+//     console.error("Error:", error);
+//     alert("There was an error sending your message. Please try again later.");
+//   }
+// });
 
-    if (!userName || !userEmail || !userMessage) {
-      alert('Please fill in all fields.');
-      return;
-    }
+document.querySelector(".contact-form").addEventListener("submit", function (event) {
+  event.preventDefault(); // Зупиняємо стандартну поведінку форми
 
-    emailjs
-      .send('service_i8bcmth', 'template_1fpbo2w', {
-        user_name: userName,
-        user_email: userEmail,
-        message: userMessage,
-      })
-      .then(() => {
-        alert('Thank you! Your message has been sent.');
-        form.reset();
-      })
-      .catch((error) => {
-        console.error('Error sending email:', error);
-        alert('Oops! Something went wrong. Please try again.');
-      });
-  });
+  // Отримуємо значення з полів за допомогою правильних селекторів
+  const name = document.querySelector("#name").value.trim();
+  const email = document.querySelector("#email").value.trim();
+  const message = document.querySelector("#message").value.trim();
+
+  // Виводимо дані для перевірки
+  console.log("Name:", name || "No data");
+  console.log("Email:", email || "No data");
+  console.log("Message:", message || "No data");
+
+  // Показуємо користувачу зібрані дані
+  alert(`Collected Data:\nName: ${name}\nEmail: ${email}\nMessage: ${message}`);
 });
