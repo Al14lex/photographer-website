@@ -1,18 +1,36 @@
-const modal = document.getElementById("modal");
-const span = document.getElementById ("close");
+const modal = document.querySelector(".modal");
+const form = document.querySelector(".contact-form");
 
-document.querySelector(".contact-form").onsubmit = function(event) {
-    event.preventDefault(); 
-    modal.style.display = "block";
+form.onsubmit = function(event) {
+    event.preventDefault();
+    showModal();
     this.reset();
 };
 
-span.onclick = function() {
-    modal.style.display = "none";
-};
+function showModal() {
+    modal.style.display = "flex"; 
+    setTimeout(() => {
+        modal.style.opacity = "1";
+    }, 10); 
 
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    setTimeout(closeModal, 4000);
+}
+
+function closeModal() {
+    modal.style.opacity = "0"; 
+    setTimeout(() => {
+        modal.style.display = "none"; 
+    }, 500); 
+}
+
+modal.addEventListener("click", function(event) {
+    if (event.target === modal) {
+        closeModal();
     }
-};
+});
+
+modal.addEventListener("touchstart", function(event) {
+    if (event.target === modal) {
+        closeModal();
+    }
+});
