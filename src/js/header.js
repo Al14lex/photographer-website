@@ -1,20 +1,21 @@
 let lastScrollTop = 0;
 const header = document.querySelector('.header');
-const heroSection = document.querySelector('.hero'); 
+
+const heroSection = document.querySelector('[class^="hero"]');
 
 window.addEventListener('scroll', () => {
   const scrollTop = window.scrollY || document.documentElement.scrollTop;
-  const heroHeight = heroSection.offsetHeight / 2; 
+
+  const heroHeight = heroSection ? heroSection.offsetHeight / 2 : 0;
 
   if (scrollTop > lastScrollTop && scrollTop > heroHeight) {
-    header.classList.add('hidden');
+    header?.classList.add('hidden'); 
   } else {
-    header.classList.remove('hidden');
+    header?.classList.remove('hidden');
   }
 
-  lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; 
+  lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
 });
-
 
 // =============== active page ====================
 const currentPage = window.location.pathname.split("/").pop(); 

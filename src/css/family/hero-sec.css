@@ -1,0 +1,96 @@
+/* =============== HERO MOB ==================== */
+
+.hero-family {
+    height: 100vh;
+    background-image: url('/img/home/hero_mob.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 80%, rgb(194, 169, 143) 100%), url('/img/home/hero_mob.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-family::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(110, 100, 90, 0.25);
+    z-index: -1;
+}
+
+.family-hero-content {
+    text-align: center;
+    background: rgba(191, 168, 146, 0.6);
+    padding: 15px;
+    width: 90%;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: var(--color-text-primary);
+    transform: translate(-50%, -50%);
+}
+
+.family-hero-content h1 {
+    font-family: "Ephesis", system-ui;
+    font-size: 40px;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.family-hero-content p {
+    font-family: var(--font-secondary);
+    font-weight: 500;
+    font-size: var(--font-small);
+    line-height: 1.6;
+}
+
+/* ======================= HERO TAB =================== */
+@media (min-width: 768px) {
+    .family-hero-content h1 {
+        font-size: 42px;
+    }
+
+    .family-hero-content {
+        color: var(--color-text-primary);
+        padding: 20px;
+        background: rgba(191, 168, 146, 0.66);
+        min-width: 700px;
+    }
+
+    .family-hero-content p {
+        font-size: calc(var(--font-small) + 2px);
+    }
+}
+
+/* =================== HERO DESK ======================== */
+@media (min-width: 1024px) {
+    .hero-family {
+        background-image: url('/img/home/hero_desc.jpg');
+        background-position: center;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 80%, rgb(196, 168, 141) 100%), url('/img/home/hero_desc.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .family-hero-content {
+        min-width: 1000px;
+        padding: 30px;
+    }
+
+    .family-hero-content h1 {
+        font-size: 52px;
+    }
+
+    .family-hero-content p {
+        font-size: var(--font-medium);
+    }
+}
