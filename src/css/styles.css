@@ -9,6 +9,10 @@
 @import './home/get-in-touch.css';
 @import './home/modal.css';
 @import './home/footer-sec.css';
+/* INDIVIDUAL Page Sections */
+@import './individual/hero-sec.css';
+@import './individual/galery-sec.css';
+
 
 /*=========== BASIC =============*/
 :root {
