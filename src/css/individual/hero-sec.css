@@ -2,16 +2,13 @@
 
 .hero-individual {
     height: 100vh;
-    background-image: url('/img/home/hero_mob.jpg');
-    background-size: cover;
-    background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     z-index: 1;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 80%, rgb(194, 169, 143) 100%), url('/img/home/hero_mob.jpg');
-    background-size: cover;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 80%, rgb(194, 169, 143) 97%), url('/img/individual/individual-hero-mob.jpg');
+    /* background-size: cover; */
     background-position: center;
 }
 
@@ -44,6 +41,7 @@
     font-size: 40px;
     font-weight: 500;
     font-style: normal;
+    line-height: 0.9;
 }
 
 .indiv-hero-content p {
@@ -55,6 +53,9 @@
 
 /* ======================= HERO TAB =================== */
 @media (min-width: 768px) {
+    .hero-individual{
+        background-size: cover;
+    }
     .indiv-hero-content h1 {
         font-size: 42px;
     }
@@ -74,11 +75,9 @@
 /* =================== HERO DESK ======================== */
 @media (min-width: 1024px) {
     .hero-individual {
-        background-image: url('/img/home/hero_desc.jpg');
-        background-position: center;
-        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 80%, rgb(196, 168, 141) 100%), url('/img/home/hero_desc.jpg');
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 80%, rgb(196, 168, 141) 100%), url('/img/individual/individual-hero-mob.jpg');
         background-size: cover;
-        background-position: center;
+        background-position-y: 40%;
     }
 
     .indiv-hero-content {
