@@ -2,15 +2,12 @@
 
 .hero-newborn {
     height: 100vh;
-    background-image: url('/img/home/hero_mob.jpg');
-    background-size: cover;
-    background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     z-index: 1;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 80%, rgb(194, 169, 143) 100%), url('/img/home/hero_mob.jpg');
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 80%, rgb(194, 169, 143) 100%), url('/img/newborn/newborn-hero.jpeg');
     background-size: cover;
     background-position: center;
 }
@@ -74,9 +71,7 @@
 /* =================== HERO DESK ======================== */
 @media (min-width: 1024px) {
     .hero-newborn {
-        background-image: url('/img/home/hero_desc.jpg');
-        background-position: center;
-        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 80%, rgb(196, 168, 141) 100%), url('/img/home/hero_desc.jpg');
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 80%, rgb(196, 168, 141) 100%), url('/img/newborn/newborn-hero.jpeg');
         background-size: cover;
         background-position: center;
     }
