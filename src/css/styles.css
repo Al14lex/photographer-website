@@ -10,21 +10,19 @@
 @import './home/modal.css';
 @import './home/footer-sec.css';
 
+
+@import './galery-sec.css';
 /* INDIVIDUAL Page Sections */
 @import './individual/hero-sec.css';
-@import './individual/galery-sec.css';
 
 /* FAMILY Page Sections */
 @import './family/hero-sec.css';
-@import './family/galery-sec.css';
 
 /* CHILDREN Page Sections */
 @import './children/hero-sec.css';
-@import './children/galery-sec.css';
 
 /* NEWBORN Page Sections */
 @import './newborn/hero-sec.css';
-@import './newborn/galery-sec.css';
 
 
 /*=========== BASIC =============*/

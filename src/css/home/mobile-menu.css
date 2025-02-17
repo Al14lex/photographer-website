@@ -24,16 +24,18 @@
     transform: translateX(0);
 }
 
+
 .mobile-menu .close-menu {
-    position: relative;
-    top: -27%;
-    align-self: flex-end;
+    position: absolute;
+    top: 20px;
+    right: 15px;
     background: transparent;
     border: none;
     cursor: pointer;
-    padding: 5px;
-}
+    padding: 10px;
+    z-index: 101;
 
+}
 .mobile-menu-list {
     list-style: none;
     padding: 0;
