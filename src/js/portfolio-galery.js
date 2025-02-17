@@ -9,16 +9,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (!src) return;
 
-                // Завантажуємо фото
                 img.src = src;
-                img.removeAttribute("data-src"); // Видаляємо data-src після завантаження
-                
+                img.removeAttribute("data-src"); 
                 img.onload = () => {
-                    img.classList.add("loaded"); // Фото плавно з'являється
-                    img.classList.add("visible"); // Запускається анімація
+                    img.classList.add("loaded"); 
+                    img.classList.add("visible"); 
                 };
 
-                observer.unobserve(img); // Відключаємо спостереження після завантаження
+                observer.unobserve(img); 
             }
         });
     }, { threshold: 0.5 });
