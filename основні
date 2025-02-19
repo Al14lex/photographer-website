@@ -77,4 +77,6 @@ color:#322d29;*/ /* колір тексту ховер color: #FFF8E7; */
   <script type="module" src="./js/home/what-sec.js"></script>
 </body>
 
-service_i8bcmth template_1fpbo2w w78d87LS8NmzMC5tY
+service_i8bcmth template_1fpbo2w w78d87LS8NmzMC5tY showPendingReviews() –
+показати список всіх відгуків approveReview(index) – схвалити відгук
+rejectReview(index) – видалити відгук

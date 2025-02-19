@@ -1,0 +1,100 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Review Moderation</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <div class="admin-container container">
+      <h2 class="admin-title">Pending Reviews</h2>
+      <div id="reviewList"></div>
+
+      <h2 class="admin-title">Approved Reviews</h2>
+      <div id="approvedReviewList"></div>
+    </div>
+
+    <script>
+      function loadReviews() {
+        let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+        const reviewList = document.getElementById("reviewList");
+        const approvedList = document.getElementById("approvedReviewList");
+
+        reviewList.innerHTML = "";
+        approvedList.innerHTML = "";
+
+        reviews.forEach((review, index) => {
+          const reviewItem = document.createElement("div");
+          reviewItem.classList.add("review-item");
+
+          if (!review.approved) {
+            // 📌 Відгуки, які ще не схвалені
+            reviewItem.innerHTML = `
+              <p><strong>${review.name}"</strong></p>
+              <p>${review.text}"</p>
+              <div class="review-buttons">
+                  <button class="approve-btn" onclick="approveReview(${index})">Approve</button>
+                  <button class="reject-btn" onclick="rejectReview(${index})">Reject</button>
+              </div>
+            `;
+            reviewList.appendChild(reviewItem);
+          } else {
+            // 📌 Відгуки, які вже схвалені (з кнопкою "Delete")
+            reviewItem.innerHTML = `
+            
+              <p><strong>Name: "${review.name}"</strong></p>
+              <p>Comment: "${review.text}"</p>
+              <div class="review-buttons">
+                  <button class="delete-btn" onclick="deleteReview(${index})">Delete</button>
+              </div>
+        
+            `;
+            approvedList.appendChild(reviewItem);
+          }
+        });
+      }
+
+      function approveReview(index) {
+        let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+        if (reviews[index]) {
+          reviews[index].approved = true;
+          localStorage.setItem("reviews", JSON.stringify(reviews));
+          loadReviews(); // Оновлюємо обидва списки
+        }
+      }
+
+      function rejectReview(index) {
+        let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+        reviews.splice(index, 1);
+        localStorage.setItem("reviews", JSON.stringify(reviews));
+        loadReviews();
+      }
+
+      function deleteReview(index) {
+        let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+        reviews.splice(index, 1);
+        localStorage.setItem("reviews", JSON.stringify(reviews));
+        loadReviews();
+      }
+
+      document.addEventListener("DOMContentLoaded", loadReviews);
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const adminPassword = "Taranenko1421";
+
+        let enteredPassword = localStorage.getItem("adminAccess");
+        if (enteredPassword !== adminPassword) {
+          let userInput = prompt("Enter admin password:");
+          if (userInput === adminPassword) {
+            localStorage.setItem("adminAccess", adminPassword);
+          } else {
+            alert("Access denied!");
+            window.location.href = "./index.html";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

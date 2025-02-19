@@ -38,6 +38,11 @@
     padding: 30px 0;
     flex: 1;
 }
+.reviews-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .reviews-title {
     text-align: center;
     font-size: 26px;
@@ -62,13 +67,17 @@
 .review-content {
     background-color:
         rgb(173, 151, 130);
-    padding: 20px 10px;
+    padding:15px 10px;
     height: 150px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
         0 -4px 6px rgba(0, 0, 0, 0.05),
         4px 0 6px rgba(0, 0, 0, 0.05),
         -4px 0 6px rgba(0, 0, 0, 0.05);
+        display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            /* Вирівнюємо текст до верху */
 }
 
 .review-author {
@@ -80,8 +89,39 @@
 .review-text {
     text-align: center;
     font-size: 16px;
+    max-height: 90%;
+    overflow-y: auto;
+    padding-right: 5px;
+    line-height: 1.4;
+    scrollbar-width: thin;
+    margin-bottom: auto;
+}
+.review-text::-webkit-scrollbar {
+    width: 6px;
+}
+.review-text::-webkit-scrollbar-track {
+    background: transparent;
+}
+.review-form-button {
+    background-color: rgba(191, 168, 146, 0.567);
+    border: none;
+    font-family: "Cormorant Garamond, serif";
+    font-size: 20px;
+    margin-top: 25px;
+    color:#322d29;
+    padding: 10px 14px;
+    border-radius: 5px;
+    box-shadow: var(--box-shadow-small);
+    cursor: pointer;
+    font-size: var(--font-small);
+    transition: background-color 250ms linear;
 }
 
+.review-form-button:hover,
+.review-form-button:focus {
+    background-color: var(--color-bg-hover);
+
+}
 :root {
     --swiper-pagination-color: #FFF8E7;
     ;
@@ -126,7 +166,13 @@
     .review-text {
         font-size: 20px;
     }
-
+.review-form-button {
+    font-size: 22px;
+    margin-top: 32px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow-medium);
+}
 }
 
 /* ======================REVIEWS DESC====================== */

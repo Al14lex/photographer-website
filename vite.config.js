@@ -12,7 +12,6 @@ export default defineConfig(({ command }) => {
     publicDir: '../public', 
     build: {
       sourcemap: true,
-
       rollupOptions: {
         input: glob.sync('./src/**/*.html'),
         output: {
@@ -25,6 +24,11 @@ export default defineConfig(({ command }) => {
         },
       },
       outDir: '../dist',
+    },
+    server: {
+      fs: {
+        allow: ['..'], // Дозволяємо доступ до кореневого каталогу
+      },
     },
     plugins: [injectHTML(), FullReload(['./src/**/**.html'])],
   };

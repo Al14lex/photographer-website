@@ -7,7 +7,6 @@
     margin-right: auto;
     margin-left: auto;
     padding: 10px  0 15px 0;
-    /* max-width: 335px; */
     width: 90%;
     background-color: rgba(191, 168, 146, 0.567);
     border-radius: 10px;
@@ -33,7 +32,12 @@
     gap: 3px;
     align-items: flex-start;
 }
-
+.form-input{
+    height: 42px;
+}
+.form-textarea{
+    height: 128px;
+}
 .form-input,
 .form-textarea {
     background: var(--color-bg-body);
@@ -47,6 +51,7 @@
     border-radius: 5px;
     box-shadow: var(--box-shadow-small);
     transition: background-color 250ms linear, color 250ms linear, outline 250ms linear;
+    box-sizing: border-box;
 }
 
 .form-input::placeholder,
@@ -103,7 +108,6 @@ textarea:-moz-autofill {
     color: #000;
     border: none;
     padding: 10px 20px;
-    /* padding: var(--padding-small) var(--padding-medium); */
     border-radius: 5px;
     box-shadow: var(--box-shadow-small);
     cursor: pointer;

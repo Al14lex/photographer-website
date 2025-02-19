@@ -17,6 +17,42 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      setTimeout(function () {
+        const logo = document.getElementById("logo");
+        if (!logo) {
+          console.log("Логотип не знайдено!");
+          return;
+        }
+
+        console.log("Логотип знайдено, додаємо обробник подій...");
+
+        const adminPassword = "Taranenko1421";
+
+        logo.addEventListener("click", function (event) {
+          event.preventDefault(); // Запобігаємо оновленню сторінки
+
+          let enteredPassword = localStorage.getItem("adminAccess");
+          console.log("Отриманий пароль з localStorage:", enteredPassword);
+
+          if (enteredPassword !== adminPassword) {
+            let userInput = prompt("Enter admin password:");
+            if (userInput === adminPassword) {
+              localStorage.setItem("adminAccess", adminPassword);
+              alert("Access granted! Click on the logo again to enter.");
+            } else {
+              alert("Access denied!");
+            }
+          } else {
+            console.log("✅ Перенаправляємо на адмінку...");
+            window.location.href = "/admin_review_page.html";
+          }
+        });
+      }, 1000);
+    });
+  </script>
+
   <body>
     <load ="./partials/home/header-sec.html" />
     <!-- mobile menu -->
@@ -31,6 +67,7 @@
     <load ="./partials/home/portfolio-sec.html" />
     <!-- reviews -->
     <load ="./partials/home/reviews-sec.html" />
+    <load ="./partials/home/review-modal.html" />
     <!-- Footer -->
     <load ="./partials/footer-sec.html" />
     <!-- Modal -->
@@ -46,6 +83,8 @@
     <script type="module" src="./js/home/swiper.js"></script>
     <script type="module" src="./js/home/what-sec.js"></script>
     <script type="module" src="./js/home/email.js"></script>
+    <script type="module" src="./js/home/modal-review.js"></script>
+    <script type="module" src="./js/home/reviews.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
       emailjs.init("w78d87LS8NmzMC5tY");

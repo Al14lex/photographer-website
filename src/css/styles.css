@@ -8,10 +8,14 @@
 @import './home/reviews-sec.css';
 @import './home/get-in-touch.css';
 @import './home/modal.css';
+@import './home/modal-review.css';
 @import './home/footer-sec.css';
 
 
 @import './galery-sec.css';
+@import './admin-page.css';
+
+
 /* INDIVIDUAL Page Sections */
 @import './individual/hero-sec.css';
 
