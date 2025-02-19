@@ -1,0 +1,36 @@
+.admin{
+    padding: 50px 0;
+}
+ .admin-container {
+    text-align: center;
+     margin: auto;
+     padding:40px 20px;
+ }
+ .admin-title{
+    margin-bottom: 20px;
+ }
+
+ .review-item p{
+    margin-bottom: 10px;
+ }
+ .review-buttons button{
+    margin: 0 10px;
+ }
+ #reviewList{
+    padding:20px 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 30px;
+ }
+ #approvedReviewList{
+    padding: 20px 15px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        margin-bottom: 30px;
+ }
