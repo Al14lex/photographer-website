@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite';
-import { globSync } from 'glob';
+// import { globSync } from 'glob';
+import pkg from 'file:///home/runner/work/photographer-website/photographer-website/node_modules/glob/glob.js';
+const { globSync } = pkg;
 import injectHTML from 'vite-plugin-html-inject';
 import FullReload from 'vite-plugin-full-reload';
 
