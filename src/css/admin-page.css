@@ -1,5 +1,11 @@
 .admin{
-    padding: 50px 0;
+    padding: 30px 10;
+}
+.admin-btn-home{
+   padding:10px  20px;
+   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+   border-radius: 8px;
+   margin-left: 20px;
 }
  .admin-container {
     text-align: center;

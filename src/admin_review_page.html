@@ -6,14 +6,16 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <div class="admin-container container">
-      <h2 class="admin-title">Pending Reviews</h2>
-      <div id="reviewList"></div>
+    <section class="admin">
+      <a href="./index.html" class="admin-btn-home">Home</a>
+      <div class="admin-container container">
+        <h2 class="admin-title">Pending Reviews</h2>
+        <div id="reviewList"></div>
 
-      <h2 class="admin-title">Approved Reviews</h2>
-      <div id="approvedReviewList"></div>
-    </div>
-
+        <h2 class="admin-title">Approved Reviews</h2>
+        <div id="approvedReviewList"></div>
+      </div>
+    </section>
     <script>
       function loadReviews() {
         let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
