@@ -1,22 +1,20 @@
 import { defineConfig } from 'vite';
-// import { globSync } from 'glob';
-import pkg from 'file:///home/runner/work/photographer-website/photographer-website/node_modules/glob/glob.js';
-const { globSync } = pkg;
+import { glob } from 'glob';
 import injectHTML from 'vite-plugin-html-inject';
 import FullReload from 'vite-plugin-full-reload';
 
-export default defineConfig(({ command }) => {
+export default defineConfig(async ({ command }) => {
   return {
     define: {
-  global: {},
-  _global: {},
-},
+      global: {},
+      _global: {},
+    },
     root: 'src',
     publicDir: '../public', 
     build: {
       sourcemap: true,
       rollupOptions: {
-        input: globSync('./src/**/*.html'),
+        input: await glob('./src/**/*.html'),
         output: {
           manualChunks(id) {
             if (id.includes('node_modules')) {
