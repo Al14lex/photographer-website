@@ -2,7 +2,7 @@
   "name": "photographer-website",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -13,8 +13,18 @@
     "vite": "^5.4.1"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongodb": "^6.13.0",
+    "mongoose": "^8.10.1",
     "swiper": "^11.1.15",
     "vite-plugin-full-reload": "^1.0.5",
     "vite-plugin-html-inject": "^1.0.1"
-  }
+  },
+  "main": "vite.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

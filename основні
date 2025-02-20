@@ -79,4 +79,5 @@ color:#322d29;*/ /* колір тексту ховер color: #FFF8E7; */
 
 service_i8bcmth template_1fpbo2w w78d87LS8NmzMC5tY showPendingReviews() –
 показати список всіх відгуків approveReview(index) – схвалити відгук
-rejectReview(index) – видалити відгук
+rejectReview(index) – видалити відгук ===
+mongodb+srv://akhomenko1421:swmEyEamzeIrzAjO@cluster0.izz6l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
