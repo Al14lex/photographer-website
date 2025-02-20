@@ -6,8 +6,8 @@ import FullReload from 'vite-plugin-full-reload';
 export default defineConfig(({ command }) => {
   return {
     define: {
-  global: 'undefined' !== typeof global ? global : {},
-  _global: 'undefined' !== typeof global ? global : {},
+  global: {},
+  _global: {},
 },
     root: 'src',
     publicDir: '../public', 
