@@ -28,9 +28,3 @@ const swiper = new Swiper('.swiper', {
     },
 });
 
-// btnPrev.addEventListener('click', () => {
-//     swiper.slidePrev();
-// });
-// btnNext.addEventListener('click', () => {
-//     swiper.slideNext();
-// });
