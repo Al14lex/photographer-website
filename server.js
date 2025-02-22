@@ -7,29 +7,22 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Підключення до MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(() => console.log("✅ Підключено до MongoDB"))
-.catch(err => console.error("❌ Помилка підключення:", err));
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log("✅ Підключено до MongoDB"))
+    .catch(err => console.error("❌ Помилка підключення:", err));
 
-// Створення моделі відгуків
 const reviewSchema = new mongoose.Schema({
     name: String,
     message: String,
-    status: { type: String, default: "pending" } // Додаємо статус: pending або approved
+    status: { type: String, default: "pending" } 
 });
 
 const Review = mongoose.model("Review", reviewSchema);
 
-// Головна сторінка API
 app.get("/", (req, res) => {
     res.send("Сервер працює! 🚀");
 });
 
-// 📌 **Отримати всі відгуки (і pending, і approved)**
 app.get("/reviews", async (req, res) => {
     try {
         const reviews = await Review.find();
@@ -39,7 +32,6 @@ app.get("/reviews", async (req, res) => {
     }
 });
 
-// 📌 **Отримати тільки схвалені відгуки**
 app.get("/reviews/approved", async (req, res) => {
     try {
         const approvedReviews = await Review.find({ status: "approved" });
@@ -49,7 +41,6 @@ app.get("/reviews/approved", async (req, res) => {
     }
 });
 
-// 📌 **Додати новий відгук (POST)**
 app.post("/reviews", async (req, res) => {
     try {
         const newReview = new Review({
@@ -64,7 +55,6 @@ app.post("/reviews", async (req, res) => {
     }
 });
 
-// 📌 **Схвалити відгук (PUT)**
 app.put("/reviews/:id", async (req, res) => {
     try {
         const updatedReview = await Review.findByIdAndUpdate(
@@ -78,7 +68,6 @@ app.put("/reviews/:id", async (req, res) => {
     }
 });
 
-// 📌 **Видалити відгук (DELETE)**
 app.delete("/reviews/:id", async (req, res) => {
     try {
         await Review.findByIdAndDelete(req.params.id);
@@ -88,7 +77,6 @@ app.delete("/reviews/:id", async (req, res) => {
     }
 });
 
-// Запуск сервера
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`🚀 Сервер працює на порту ${PORT}`);

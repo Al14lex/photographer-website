@@ -25,13 +25,10 @@
           console.log("Логотип не знайдено!");
           return;
         }
-
-        console.log("Логотип знайдено, додаємо обробник подій...");
-
         const adminPassword = "Taranenko1421";
 
         logo.addEventListener("click", function (event) {
-          event.preventDefault(); // Запобігаємо оновленню сторінки
+          event.preventDefault();
 
           let enteredPassword = localStorage.getItem("adminAccess");
           console.log("Отриманий пароль з localStorage:", enteredPassword);
@@ -55,22 +52,14 @@
 
   <body>
     <load ="./partials/home/header-sec.html" />
-    <!-- mobile menu -->
     <load ="./partials/mobile-menu.html" />
-    <!-- hero -->
     <load ="./partials/hero-sec.html" />
-    <!-- about me -->
     <load ="./partials/home/about_me-sec.html" />
-    <!-- what am I photographing? -->
     <load ="./partials/home/what-sec.html" />
-    <!-- portfolio -->
     <load ="./partials/home/portfolio-sec.html" />
-    <!-- reviews -->
     <load ="./partials/home/reviews-sec.html" />
     <load ="./partials/home/review-modal.html" />
-    <!-- Footer -->
     <load ="./partials/footer-sec.html" />
-    <!-- Modal -->
     <load ="./partials/home/modal.html" />
     <script type="module" src="./js/header.js"></script>
     <script type="module" src="./js/mobile-menu.js"></script>
