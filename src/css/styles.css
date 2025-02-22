@@ -31,6 +31,7 @@
 /* CONTACT Page Sections */
 @import './contact/hero-sec.css';
 @import './contact/get-in-touch-sec.css';
+@import './contact/footer-sec.css';
 
 
 /*=========== BASIC =============*/
@@ -40,7 +41,7 @@
     --font-secondary: "Playfair Display SC", serif;
 
     /* Colors */
-    --color-text-primary: #322d29;
+    --color-text-primary: #2e2a26;
     --color-bg-body: rgb(173, 151, 130);
     --color-bg-hover: rgb(199, 175, 152);
     --color-link-active: #FFF8E7;
