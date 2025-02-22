@@ -28,6 +28,9 @@
 /* NEWBORN Page Sections */
 @import './newborn/hero-sec.css';
 
+/* CONTACT Page Sections */
+@import './contact/hero-sec.css';
+@import './contact/get-in-touch-sec.css';
 
 
 /*=========== BASIC =============*/
