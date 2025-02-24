@@ -1,26 +1,22 @@
 /* =============== contact-hero MOB ==================== */
 
 .contact-hero {
-    height: 75vh;
-    padding: 20px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
+    padding: 140px 0 40px;
     background: rgb(144, 123, 104);
 }
-
+.container-div{
+        padding: 0 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+}
 .contact-hero-content {
+    background: linear-gradient(to bottom,rgba(191, 168, 146, 0.567)  80%,rgba(255, 255, 255, 0) 100%);
+    border-radius: 10px;
     text-align: center;
-    box-shadow: 10px;
-    padding: 15px;
-    width: 90%;
-    position: absolute;
-    top: 57%;
-    left: 50%;
+    padding: 15px 15px 30px 15px;
+    width: 96%;
     color: var(--color-text-primary);
-    transform: translate(-50%, -50%);
 }
 
 .contact-hero-content h1 {
@@ -43,12 +39,17 @@
 
 /* ======================= contact-hero TAB =================== */
 @media (min-width: 768px) {
+    .contact-hero {
+            padding: 140px 0 50px;
+            background: rgb(144, 123, 104);
+        }
     .contact-hero-content h1 {
         font-size: 42px;
     }
 
     .contact-hero-content {
-        padding: 20px;
+        width: 90%;
+    padding: 15px 15px 50px 15px;
     }
 
 .hero-txt {
@@ -64,16 +65,15 @@
 /* =================== contact-hero DESK ======================== */
 @media (min-width: 1024px) {
     .contact-hero-content {
-        /* min-width: 90%; */
         max-width: 1000px;
         padding: 30px;
     }
 
     .contact-hero-content h1 {
-        font-size: 52px;
+        font-size: 50px;
     }
 .hero-txt {
-    font-size: var(--font-large);
+    font-size: 22px;
 }
 
 .hero-small-txt {
