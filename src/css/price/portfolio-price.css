@@ -1,0 +1,81 @@
+.price-section {
+    background-color: var(--color-bg-body);
+    color: var(--color-text-primary);
+    padding: 50px 0;
+}
+
+.price-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: var(--padding-large);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: var(--box-shadow-small);
+}
+
+.price-info {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.price-title {
+    font-size: var(--font-large);
+    font-family: var(--font-main);
+    margin-bottom: 15px;
+}
+
+.price-list {
+    list-style: none;
+    padding: 0;
+    font-size: var(--font-medium);
+}
+
+.price-list li {
+    margin-bottom: 8px;
+}
+
+.price-button {
+    background-color: var(--color-button-bg);
+    color: var(--color-button-text);
+    padding: var(--padding-small) var(--padding-medium);
+    border: none;
+    cursor: pointer;
+    font-size: var(--font-medium);
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.price-button:hover {
+    background-color: var(--color-bg-hover);
+    color: var(--color-text-primary);
+}
+
+.price-swiper {
+    width: 350px;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow-large);
+}
+
+.price-swiper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+    .price-item {
+        flex-direction: column;
+        text-align: var(--text-align-center);
+    }
+
+    .price-info {
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+}
