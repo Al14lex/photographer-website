@@ -36,6 +36,8 @@
 /* PRISE Page Sections */
 @import './price/portfolio-price.css';
 @import './price/hero-sec.css';
+@import './price/modal-book.css';
+@import './price/modal-thanks.css';
 
 /*=========== BASIC =============*/
 :root {
