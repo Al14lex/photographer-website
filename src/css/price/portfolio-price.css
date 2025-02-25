@@ -35,16 +35,20 @@
 .price-list li {
     margin-bottom: 8px;
 }
-
+.mini-session{
+    margin:25px 0 15px 0;
+}
 .price-button {
     background-color: var(--color-button-bg);
     color: var(--color-button-text);
     padding: var(--padding-small) var(--padding-medium);
     border: none;
     cursor: pointer;
-    font-size: var(--font-medium);
+    font-size: var(--font-small);
     border-radius: 5px;
     transition: background-color 0.3s ease;
+    margin-top: 10px;
+    font-family: var(--font-main);
 }
 
 .price-button:hover {
@@ -53,17 +57,21 @@
 }
 
 .price-swiper {
-    width: 350px;
-    height: 250px;
+    width: 340px;
+    height: 450px;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: var(--box-shadow-large);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .price-swiper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     border-radius: 10px;
 }
 

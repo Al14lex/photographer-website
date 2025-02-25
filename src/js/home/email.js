@@ -7,17 +7,20 @@ form.addEventListener("submit", async function (event) {
 
   const userName = document.getElementById("user_name").value;
   const userEmail = document.getElementById("user_email").value;
+  const userPhone = document.getElementById("user_phone").value;
   const message = document.getElementById("message").value;
 
   console.log("Form submitted!");
   console.log("User Name:", userName);
   console.log("User Email:", userEmail);
+   console.log("User Phone:", userPhone);
   console.log("Message:", message);
 
   try {
     const response = await emailjs.send("service_i8bcmth", "template_1fpbo2w", {
       user_name: userName,
       user_email: userEmail,
+      user_phone: userPhone,
       message: message,
     });
 

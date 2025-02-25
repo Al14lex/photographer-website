@@ -1,0 +1,274 @@
+/* ====================== GET IN TOUCH ====================== */
+.booking-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(191, 168, 146, 0.3), rgba(191, 168, 146, 0.3)),
+            url('/img/home/what6.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+}
+
+.booking-modal.show {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+}
+
+.booking-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 40px;
+    cursor: pointer;
+    color: #333;
+}
+.get-in-container {
+    margin-right: auto;
+    margin-left: auto;
+    padding: 20px 0;
+    width: 90%;
+    background-color: rgba(191, 168, 146, 0.597);
+    border-radius: 10px;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.contact-title {
+    text-align: center;
+    margin-bottom: var(--padding-medium);
+    font-size: var(--font-large);
+}
+.contact-small-title{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--padding-small);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    align-items: flex-start;
+}
+
+.form-input {
+    height: 42px;
+}
+
+.form-textarea {
+    height: 128px;
+}
+
+.form-input,
+.form-textarea {
+    background: var(--color-bg-body);
+    font-family: var(--font-main);
+    font-size: var(--font-small);
+    text-align: center;
+    padding: var(--padding-small);
+    width: 250px;
+    border: none;
+    resize: none;
+    border-radius: 5px;
+    box-shadow: var(--box-shadow-small);
+    transition: background-color 250ms linear, color 250ms linear, outline 250ms linear;
+    box-sizing: border-box;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    font-family: Ephesis;
+    font-size: var(--font-small);
+    color: var(--color-text-primary);
+}
+
+.form-input:focus,
+.form-input:hover,
+.form-input:active,
+.form-textarea:focus,
+.form-textarea:hover,
+.form-textarea:active {
+    outline: none;
+    background-color: var(--color-bg-hover);
+    color: var(--color-text-primary);
+}
+
+.form-input:focus,
+.form-input:hover,
+.form-input:active,
+.form-textarea:focus,
+.form-textarea:hover,
+.form-textarea:active,
+.form-input:not(:placeholder-shown),
+.form-textarea:not(:placeholder-shown) {
+    outline: none;
+    background-color: rgb(199, 175, 152);
+    font-size: 16px;
+    font-family: "Cormorant Garamond", serif;
+    color: #322d29;
+}
+
+.form-input:-webkit-autofill,
+.form-textarea:-webkit-autofill {
+    background-color: rgb(199, 175, 152) !important;
+    color: #322d29 !important;
+    font-size: 16px;
+    font-family: "Cormorant Garamond", serif;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-moz-autofill,
+textarea:-moz-autofill {
+    background-color: rgb(199, 175, 152);
+    color: #322d29;
+    font-size: 16px;
+    font-family: "Cormorant Garamond", serif;
+}
+
+.form-button {
+    text-decoration: none;
+    background-color: var(--color-bg-body);
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: var(--box-shadow-small);
+    cursor: pointer;
+    margin-top: var(--padding-small);
+    font-weight: 500;
+    font-family: var(--font-main);
+    font-size: var(--font-small);
+    transition: background-color 250ms linear, color 250ms linear;
+}
+
+.form-button:hover {
+    background-color: var(--color-bg-hover);
+    color: #fefefe;
+}
+
+/* ====================== GET IN TOUCH TAB====================== */
+@media (min-width: 768px) {
+    .contact {
+        padding: var(--padding-small) 0 38px 0;
+    }
+
+    .get-in-container {
+        padding: 20px 0 25px 0;
+        max-width: 620px;
+    }
+
+    .contact-title {
+        font-size: 32px;
+        margin-bottom: var(--padding-medium);
+    }
+
+    .contact-form {
+        gap: var(--padding-medium);
+    }
+
+    .form-input {
+        height: 45px;
+        font-size: 20px;
+    }
+
+    .form-textarea {
+        height: 110px;
+    }
+
+    .form-input,
+    .form-textarea {
+        width: 330px;
+        font-size: 20px;
+        padding: var(--padding-small) var(--padding-medium);
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+        font-size: 20px;
+    }
+
+    .form-input:focus,
+    .form-input:hover,
+    .form-input:active,
+    .form-textarea:focus,
+    .form-textarea:hover,
+    .form-textarea:active,
+    .form-input:not(:placeholder-shown),
+    .form-textarea:not(:placeholder-shown) {
+        font-size: 20px;
+    }
+
+    .form-input:-webkit-autofill,
+    .form-textarea:-webkit-autofill {
+        font-size: 20px;
+    }
+
+    .form-button {
+        font-size: 20px;
+        padding: 12px 25px;
+    }
+}
+
+/* ====================== GET IN TOUCH DESC====================== */
+@media (min-width: 1024px) {
+    .contact {
+        padding: 25px 0 38px 0;
+    }
+
+    .contact-title {
+        font-size: 38px;
+        margin-bottom: var(--padding-large);
+    }
+
+    .contact-form {
+        gap: var(--padding-large);
+    }
+
+    .form-input {
+        height: 53px;
+    }
+
+    .form-textarea {
+        height: 160px;
+    }
+
+    .form-input,
+    .form-textarea {
+        font-size: 20px;
+        padding: var(--padding-small) var(--padding-large);
+        width: 430px;
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+        font-size: 20px;
+    }
+
+    .form-input:focus,
+    .form-input:active,
+    .form-textarea:focus,
+    .form-textarea:active {
+        font-size: 20px;
+    }
+
+    .form-button {
+        font-size: 20px;
+        padding: 12px 30px;
+    }
+
+}
