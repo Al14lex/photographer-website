@@ -1,7 +1,3 @@
-// @ts-check
-/**
- * @type {import('vite').UserConfig}
- */
 import { defineConfig } from 'vite';
 import { glob } from 'glob';
 import injectHTML from 'vite-plugin-html-inject';
@@ -17,8 +13,6 @@ export default defineConfig(async ({ command }) => {
     publicDir: '../public', 
     build: {
       sourcemap: true,
-      outDir: '../dist', // 🔹 Можливо, треба змінити на просто 'dist'
-      emptyOutDir: true, // ✅ Додаємо, щоб очищати `dist` перед збіркою
       rollupOptions: {
         input: await glob('./src/**/*.html'),
         output: {
@@ -30,6 +24,7 @@ export default defineConfig(async ({ command }) => {
           entryFileNames: 'commonHelpers.js',
         },
       },
+      outDir: '../dist',
     },
     server: {
       fs: {
