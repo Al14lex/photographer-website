@@ -29,6 +29,7 @@ form.addEventListener("submit", async function (event) {
     if (response.status === 200) {
       showModal(); 
       form.reset();
+      resetFieldStyles();
     } else {
       throw new Error("Failed to send email. Please try again later.");
     }
@@ -36,7 +37,14 @@ form.addEventListener("submit", async function (event) {
     console.error("Error:", error);
   }
 });
-
+function resetFieldStyles() {
+  const inputs = document.querySelectorAll(".form-input");
+  inputs.forEach((input) => {
+    input.classList.remove("filled"); 
+    input.style.backgroundColor = "";
+    input.style.boxShadow = ""; 
+  });
+}
 function showModal() {
   modal.style.display = "flex";
   setTimeout(() => {

@@ -34,7 +34,7 @@ section h4 {
 }
 
 section p {
-    font-size: 1rem;
+    font-size: 18px;
     line-height: 1.6;
     margin-bottom: 15px;
 }
@@ -74,8 +74,4 @@ footer {
 
 footer p {
     margin: 0;
-}
-/*============= POLISY TAB ==============*/
-@media (min-width: 768px){
-    
 }

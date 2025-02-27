@@ -6,16 +6,36 @@ document.addEventListener("DOMContentLoaded", function () {
     const thankYouModal = document.getElementById("thankYouReviewModal");
     const closeThankYouModal = document.getElementById("closeThankYouReviewModal");
 
+    function openModal(modal) {
+        modal.style.display = "flex";
+        setTimeout(() => {
+            modal.classList.add("active");
+        }, 10);
+    }
+
+    function closeModal(modal) {
+        modal.classList.remove("active");
+        setTimeout(() => {
+            modal.style.display = "none";
+        }, 500); 
+    }
+
     openModalBtn.addEventListener("click", function () {
-        reviewModal.style.display = "block";
+        openModal(reviewModal);
     });
 
     closeReviewModal.addEventListener("click", function () {
-        reviewModal.style.display = "none";
+        closeModal(reviewModal);
     });
 
     closeThankYouModal.addEventListener("click", function () {
-        thankYouModal.style.display = "none";
+        closeModal(thankYouModal);
+    });
+
+    thankYouModal.addEventListener("click", function (event) {
+        if (event.target === thankYouModal) {
+            closeModal(thankYouModal);
+        }
     });
 
     reviewForm.addEventListener("submit", async function (event) {
@@ -31,9 +51,18 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             if (response.ok) {
-                reviewModal.style.display = "none";
-                thankYouModal.style.display = "block";
+
+                setTimeout(() => {
+                    openModal(thankYouModal);
+                }, 300);
+
+                setTimeout(() => {
+                    closeModal(reviewModal);
+                }, 1000);
+
                 reviewForm.reset();
+
+                setTimeout(() => closeModal(thankYouModal), 4000);
             } else {
                 console.error("Помилка надсилання відгуку");
             }

@@ -1,6 +1,9 @@
 /* ====================== GET IN TOUCH ====================== */
 .booking-modal {
-    display: none;
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -8,18 +11,15 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(rgba(191, 168, 146, 0.3), rgba(191, 168, 146, 0.3)),
-            url('/img/home/what6.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
+    url('/img/home/what6.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     justify-content: center;
     align-items: center;
-    opacity: 0;
-    transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
 }
 
 .booking-modal.show {
-    display: flex;
     opacity: 1;
     visibility: visible;
 }
@@ -32,7 +32,7 @@
     cursor: pointer;
     color: #333;
 }
-.get-in-container {
+.booking-get-in-container {
     margin-right: auto;
     margin-left: auto;
     padding: 20px 0;
@@ -41,7 +41,9 @@
     border-radius: 10px;
     transition: opacity 1s ease-in-out, transform 1s ease-in-out;
 }
-
+.booking-modal.show .booking-get-in-container{
+    transform: scale(1);
+}
 .contact-title {
     text-align: center;
     margin-bottom: var(--padding-medium);
@@ -167,7 +169,7 @@ textarea:-moz-autofill {
         padding: var(--padding-small) 0 38px 0;
     }
 
-    .get-in-container {
+    .booking-get-in-container {
         padding: 20px 0 25px 0;
         max-width: 620px;
     }

@@ -6,6 +6,8 @@
 
 .price-item {
     display: flex;
+    flex-direction: column;
+    text-align: var(--text-align-center);
     justify-content: space-between;
     align-items: center;
     margin-bottom: 40px;
@@ -17,7 +19,8 @@
 
 .price-info {
     flex: 1;
-    padding-right: 20px;
+    padding-right: 0;
+    margin-bottom: 20px;
 }
 
 .price-title {
@@ -57,7 +60,7 @@
 }
 
 .price-swiper {
-    width: 340px;
+    width: 100%;
     height: 450px;
     overflow: hidden;
     border-radius: 10px;
@@ -74,16 +77,52 @@
     object-position: center;
     border-radius: 10px;
 }
+/*====================PRICE-PORTFOLIO-TAB==============================*/
+@media (min-width: 768px) {
 
-/* Media Queries */
-@media (max-width: 1024px) {
-    .price-item {
-        flex-direction: column;
-        text-align: var(--text-align-center);
-    }
+        .price-item {
+            margin-bottom: 50px;
+            padding:25px;
+            flex-direction: row;
+        }
+    
+        .price-info {
+            padding-right:25px;
+            font-size: var(--font-medium);
+        }
+    
+        .price-title {
+            font-size: var(--font-large);
+        }
+        .price-list li {
+            margin-bottom: 10px;
+        }
+        .mini-session {
+            margin: 25px 0 15px 0;
+        }
+    
+        .price-button {
+            padding: var(--padding-small) var(--padding-large);
+            font-size: var(--font-medium);
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        .price-swiper {
+            width: 50%;
+            height: 450px;
+        }
+    
+}
 
-    .price-info {
-        padding-right: 0;
-        margin-bottom: 20px;
-    }
+/*====================PRICE-PORTFOLIO-DESC==============================*/
+@media (min-width: 1024px) {
+            .price-item {
+                width: 90%;
+                margin-left:  auto;
+                margin-right: auto;
+                }
+            .price-swiper {
+                    width: 45%;
+                    height: 500px;
+                }
 }
