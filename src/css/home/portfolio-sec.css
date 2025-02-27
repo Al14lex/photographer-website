@@ -22,7 +22,6 @@
     overflow: hidden;
     border-radius: 8px;
     opacity: 0;
-        /* Початково приховані */
         transform: translateY(100px);
         transition: opacity 2s ease, transform 2s ease;
 }
@@ -56,9 +55,6 @@
 .portfolio-img.color {
     filter: grayscale(0%);
 }
-/* .portfolio-item.visible .portfolio-img {
-filter: grayscale(0%);
-} */
 
 .portfolio-link {
     display: flex;

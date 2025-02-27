@@ -1,11 +1,11 @@
 import Swiper from 'swiper';
 import 'swiper/css';
-import { Pagination } from 'swiper/modules';
+import { Pagination, Mousewheel } from 'swiper/modules';
 import 'swiper/css/pagination';
 
 
 const swiper = new Swiper('.swiper', {
-  modules: [Pagination],
+  modules: [Pagination, Mousewheel],
     direction: 'horizontal',
     pagination: {
         el: '.swiper-pagination',
@@ -13,6 +13,9 @@ const swiper = new Swiper('.swiper', {
         dynamicBullets: true,
     },
     loop: true,
+    mousewheel: {
+        invert: true, 
+    },
 
      // Default parameters
     slidesPerView: 1,

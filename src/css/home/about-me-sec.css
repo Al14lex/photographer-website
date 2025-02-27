@@ -193,10 +193,7 @@
         .about-container {
         gap: 35px;
         }
-        /* .about-container h2 {
-            font-size: 30px;
-        }
-     */
+
         .about-content {
             max-width: 970px;
             display: flex;

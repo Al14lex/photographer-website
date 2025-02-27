@@ -1,4 +1,4 @@
-// Перевіряємо, чи ми знаходимося на сторінці адміна перед виконанням коду
+
 if (document.getElementById("reviewList") && document.getElementById("approvedReviewList")) {
     console.log("✅ Це сторінка адміна, виконуємо код...");
 

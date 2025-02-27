@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
     const wrapper = document.querySelector(".image-wrapper");
     const images = document.querySelectorAll(".image-wrapper img");
@@ -9,19 +8,22 @@ document.addEventListener("DOMContentLoaded", () => {
         wrapper.appendChild(clone);
     }
 
+    images.forEach(img => {
+        if (!img.complete) {
+            img.loading = "eager"; 
+            img.fetchPriority = "high"; 
+            img.src = img.src; 
+        }
+    });
+
     let observer = new IntersectionObserver(
         (entries) => {
             entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    wrapper.style.animationPlayState = "running"; 
-                } else {
-                    wrapper.style.animationPlayState = "paused"; 
-                }
+                wrapper.style.animationPlayState = "running"; 
             });
         },
         { threshold: 0 }
     );
 
     observer.observe(wrapper);
-
 });

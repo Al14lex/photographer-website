@@ -1,6 +1,9 @@
 /*================== modal-thanks ====================*/
 .modal-thanks {
-    display: none;
+    display: flex;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
     position: fixed;
     z-index: 1001;
     left: 0;
@@ -14,13 +17,9 @@
     background-repeat: no-repeat;
     justify-content: center;
     align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
 }
 
 .modal-thanks.active {
-    display: flex;
     opacity: 1;
     visibility: visible;
 }
@@ -28,7 +27,7 @@
 .modal-thanks-content {
     position: relative;
     top: -10%;
-    background-color: rgb(199, 175, 152);
+    background-color:rgb(199, 175, 152);
     padding: 20px 30px;
     color: #322d29;
     text-align: center;
@@ -36,14 +35,12 @@
     width: 80%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     font-size: 1.2rem;
-    transform: translateY(-30px);
-    opacity: 0;
-    transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+    transform: scale(0.8);
+        transition: transform 0.5s ease;
 }
 
 .modal-thanks.active .modal-thanks-content {
-    transform: translateY(0);
-    opacity: 1;
+    transform: scale(1);
 }
 
 /*================== modal-thanks TAB ====================*/

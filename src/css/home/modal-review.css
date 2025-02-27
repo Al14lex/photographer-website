@@ -1,5 +1,8 @@
 .modal-review {
-    display: none;
+    display: flex;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -14,11 +17,14 @@
     justify-content: center;
     align-items: center;
 }
-
+.modal-review.active {
+    opacity: 1;
+    visibility: visible;
+}
 .modal-review-content {
     position: relative;
-        top: 10%;
-        background-color: rgba(191, 168, 146, 0.7);
+        top: -10%;
+        background-color:rgba(191, 168, 146, 0.597);
         padding: 30px 30px;
         color: #322d29;
         font-size: 18px;
@@ -26,6 +32,11 @@
         border-radius: 10px;
         width: 90%;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transform: scale(0.8);
+            transition: transform 0.5s ease;
+}
+.modal-review.active .modal-review-content {
+    transform: scale(1);
 }
 .review-contact-title{
     margin-bottom: var(--padding-large);
@@ -136,19 +147,8 @@ textarea:-moz-autofill {
         font-size: var(--font-small);
         transition: background-color 250ms linear, color 250ms linear;
 }
-.small-modal-review{
-    display: none;
-        position: fixed;
-        z-index: 5;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.4);
-        opacity: 0;
-        transition: opacity 0.5s ease-in-out;
-        align-items: center;
-        justify-content: center;
+.small-modal{
+        background-color:rgb(199, 175, 152);
 }
 /*===================MODAL REVIEW TAB=====================*/
 @media (min-width: 768px){
