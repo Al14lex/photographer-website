@@ -3,6 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "type": "commonjs",
+  "exports": {
+    "./vite.config": {
+      "import": "./vite.config.mjs"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -22,7 +27,7 @@
     "vite-plugin-full-reload": "^1.0.5",
     "vite-plugin-html-inject": "^1.0.1"
   },
-  "main": "vite.config.mjs",
+  "main": "server.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
