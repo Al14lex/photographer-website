@@ -12,8 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         entry.target.querySelector(".portfolio-img").classList.add("color");
                     }, 800);
                 } else {
-                    entry.target.classList.remove("visible");
+                    setTimeout(() => {
+                        entry.target.classList.remove("visible");
                     entry.target.querySelector(".portfolio-img").classList.remove("color");
+                    }, 800);
+                    // entry.target.classList.remove("visible");
+                    // entry.target.querySelector(".portfolio-img").classList.remove("color");
                 }
             });
         },
