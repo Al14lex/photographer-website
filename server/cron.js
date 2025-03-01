@@ -2,12 +2,13 @@ const cron = require('node-cron');
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
 
-// CRON завдання для видалення фото старших за 3 місяці
-cron.schedule('*/1 * * * *',  async () => {
+cron.schedule('0 3 * * *', async () => {
+// cron.schedule('*/1 * * * *',  async () => {
+    console.log('CRON task is running');
     const now = new Date();
     const threeMonthsAgo = new Date(now.setMonth(now.getMonth() - 3));
+    // const oneMinuteAgo = new Date(new Date().getTime() - 1 * 60000);
 
-    // Перевірка всіх об'єктів у бакеті
     const params = {
         Bucket: process.env.AWS_BUCKET_NAME,
     };
@@ -17,7 +18,7 @@ cron.schedule('*/1 * * * *',  async () => {
         data.Contents.forEach((object) => {
             const lastModified = new Date(object.LastModified);
             if (lastModified < threeMonthsAgo) {
-                // Якщо файл старший ніж 3 місяці, видаляємо його
+            // if (lastModified < oneMinuteAgo) {
                 const deleteParams = {
                     Bucket: process.env.AWS_BUCKET_NAME,
                     Key: object.Key,
