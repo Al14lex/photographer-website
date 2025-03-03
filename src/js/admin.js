@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const galleryPreview = document.getElementById("galleryPreview");
 
     if (clientForm) {
-        console.log("✅ Елементи для клієнтів знайдено, додаємо обробники...");
         setupClientForm();
     }
 
@@ -17,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let heroFile = null;
         let galleryFiles = [];
 
-        // 📌 Показує прев’ю головного фото
         heroImageInput.addEventListener("change", function () {
             heroPreview.innerHTML = "";
             if (this.files.length > 0) {
@@ -30,23 +28,20 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        // 📌 Додаємо нові фото до галереї, не втрачаючи попередні
         galleryInput.addEventListener("change", function () {
             const newFiles = Array.from(this.files);
-            galleryFiles = [...galleryFiles, ...newFiles]; // Об'єднуємо масиви
+            galleryFiles = [...galleryFiles, ...newFiles]; 
 
-            updateFileInput(); // Оновлюємо input файлів
-            renderGalleryPreview(); // Перемальовуємо прев’ю
+            updateFileInput(); 
+            renderGalleryPreview(); 
         });
 
-        // 📌 Оновлення input після змін у масиві файлів
         function updateFileInput() {
             const dataTransfer = new DataTransfer();
             galleryFiles.forEach(file => dataTransfer.items.add(file));
             galleryInput.files = dataTransfer.files;
         }
 
-        // 📌 Оновлення відображення галереї
         function renderGalleryPreview() {
             galleryPreview.innerHTML = "";
             galleryFiles.forEach((file, index) => {
@@ -69,7 +64,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
-        // 📌 Відправлення форми клієнта
         clientForm.addEventListener("submit", async function (event) {
             event.preventDefault(); 
 
@@ -82,7 +76,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             try {
-                // 📌 Завантажуємо фото на сервер
                 const formData = new FormData();
                 formData.append("heroImage", heroFile);
                 galleryFiles.forEach(file => formData.append("gallery", file));
@@ -95,7 +88,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (!uploadResponse.ok) throw new Error("Помилка завантаження фото");
                 const uploadData = await uploadResponse.json();
 
-                // 📌 Відправляємо дані клієнта в базу
                 const clientData = {
                     title,
                     heroImage: uploadData.heroImageUrl, 
@@ -103,7 +95,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     pinCode,
                 };
 
-                console.log("DEBUG: Дані перед відправкою в бекенд:", clientData);
                 const createClientResponse = await fetch("http://localhost:5000/api/clients", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -116,13 +107,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     clientForm.reset();
                     heroPreview.innerHTML = "";
                     galleryPreview.innerHTML = "";
-                    galleryFiles = []; // Очищаємо масив файлів
+                    galleryFiles = [];
                 } else {
                     alert("Помилка: " + result.message);
                 }
             } catch (error) {
-                console.error("❌ Помилка:", error);
-                alert("Сталася помилка при створенні клієнта.");
+                console.error(error);
+                alert("An error occurred while creating a client");
             }
         });
     }
@@ -130,12 +121,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 //=================================== REVIEWS ==============================
+
+if (document.getElementById("reviewList") && document.getElementById("approvedReviewList")) {
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const reviewList = document.getElementById("reviewList");
+        const approvedList = document.getElementById("approvedReviewList");
+
+        if (!reviewList || !approvedList) {
+            console.error("❌ Error: reviewList or approvedReviewList not found!");
+            return;
+        }
+
+        console.log("✅ Elements found, loading reviews...");
+        loadReviews();
+    });
+
     async function loadReviews() {
+        const reviewList = document.getElementById("reviewList");
+        const approvedList = document.getElementById("approvedReviewList");
+
+        if (!reviewList || !approvedList) {
+            console.error("❌ Error: reviewList or approvedReviewList not found!");
+            return;
+        }
+
         reviewList.innerHTML = "";
         approvedList.innerHTML = "";
 
         try {
-            const response = await fetch("http://localhost:5001/reviews");
+            const response = await fetch("http://localhost:5000/reviews");
             const reviews = await response.json();
 
             if (reviews.length === 0) {
@@ -170,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         } catch (error) {
-            console.error("❌ Помилка завантаження відгуків:", error);
+            console.error("❌ Loading reviews error:", error);
             reviewList.innerHTML = `<p class="error-message">Failed to load reviews.</p>`;
             approvedList.innerHTML = `<p class="error-message">Failed to load reviews.</p>`;
         }
@@ -178,34 +194,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.approveReview = async function (id) {
         try {
-            await fetch(`http://localhost:5001/reviews/${id}`, {
+            await fetch(`http://localhost:5000/reviews/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ status: "approved" })
             });
             loadReviews();
         } catch (error) {
-            console.error("❌ Помилка схвалення відгуку:", error);
+            console.error("❌ Review approval error:", error);
         }
     };
 
     window.rejectReview = async function (id) {
         try {
-            await fetch(`http://localhost:5001/reviews/${id}`, {
+            await fetch(`http://localhost:5000/reviews/${id}`, {
                 method: "DELETE"
             });
             loadReviews();
         } catch (error) {
-            console.error("❌ Помилка видалення відгуку:", error);
+            console.error("❌ Review delete error:", error);
         }
     };
-        window.deleteReview = async function (id) {
+
+    window.deleteReview = async function (id) {
         try {
-            await fetch(`http://localhost:5001/reviews/${id}`, {
+            await fetch(`http://localhost:5000/reviews/${id}`, {
                 method: "DELETE"
             });
             loadReviews();
         } catch (error) {
-            console.error("❌ Помилка видалення відгуку:", error);
+            console.error("❌ Review delete error:", error);
         }
     };
+} else {
+    console.log("It is not admin page, admin.js not implemented.");
+}

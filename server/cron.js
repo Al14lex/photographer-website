@@ -19,23 +19,23 @@ const s3 = new AWS.S3Client({
   },
 });
 
-//  cron.schedule('0 3 * * *', async () => {
-    cron.schedule('*/1 * * * *', async () => {
+ cron.schedule('0 3 * * *', async () => {
+    // cron.schedule('*/1 * * * *', async () => {
 
     console.log('🔄 CRON: Перевірка та видалення старих клієнтів...');
 
-    // const now = new Date();
-    // const threeMonthsAgo = new Date();
-    // threeMonthsAgo.setMonth(now.getMonth() - 3);
+    const now = new Date();
+    const threeMonthsAgo = new Date();
+    threeMonthsAgo.setMonth(now.getMonth() - 3);
         
-        const now = new Date();
-        const oneMinuteAgo = new Date(now.getTime() - 1 * 60 * 1000); // 1 хвилина тому
+        // const now = new Date();
+        // const oneMinuteAgo = new Date(now.getTime() - 1 * 60 * 1000); // 1 хвилина тому
 
 
     try {
         // Отримуємо всіх клієнтів, у яких `createdAt` більше 3 місяців
-        // const oldClients = await Client.find({ createdAt: { $lt: threeMonthsAgo } });
-        const oldClients = await Client.find({ createdAt: { $lt: oneMinuteAgo } });
+        const oldClients = await Client.find({ createdAt: { $lt: threeMonthsAgo } });
+        // const oldClients = await Client.find({ createdAt: { $lt: oneMinuteAgo } });
 
 
         for (const client of oldClients) {
