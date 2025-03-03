@@ -14,6 +14,10 @@ const app = express(); // ✅ Ініціалізуємо app ПЕРШИМ
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173", 
+    methods: ["GET", "POST"]
+}));
 app.use(express.json());
 
 // 📌 Підключення до MongoDB
@@ -50,19 +54,24 @@ const upload = multer({
 });
 
 // 📌 Оновлений API для завантаження фото (підтримує multiple)
-app.post('/upload', upload.array('photos', 10), (req, res) => {
-  if (!req.files || req.files.length === 0) {
+app.post('/upload', upload.fields([
+  { name: 'heroImage', maxCount: 1 },
+  { name: 'gallery', maxCount: 10 }
+]), (req, res) => {
+  if (!req.files || (!req.files.heroImage && !req.files.gallery)) {
     return res.status(400).json({ message: 'Файли не завантажені!' });
   }
 
-  // Формуємо масив URL завантажених фото
-  const fileUrls = req.files.map(file => file.location);
+  const heroImageUrl = req.files.heroImage ? req.files.heroImage[0].location : null;
+  const galleryUrls = req.files.gallery ? req.files.gallery.map(file => file.location) : [];
 
   res.json({
     message: 'Файли успішно завантажені!',
-    fileUrls,
+    heroImageUrl,
+    galleryUrls
   });
 });
+
 
 // 📌 Корінь серверу для перевірки роботи
 app.get('/', (req, res) => {
@@ -70,28 +79,22 @@ app.get('/', (req, res) => {
 });
 
 // 📌 Ендпоінт для створення нового клієнта
-app.post('/api/clients', upload.fields([
-  { name: 'heroImage', maxCount: 1 },
-  { name: 'gallery', maxCount: 10 },
-]), async (req, res) => {
+app.post('/api/clients', async (req, res) => {
+  console.log("DEBUG: req.body", req.body);
+
   try {
-    const { title, pinCode } = req.body;
-    if (!title || !req.files.heroImage || !req.files.gallery || !pinCode) {
-      return res.status(400).json({ message: 'Будь ласка, заповніть усі поля та завантажте фото.' });
+    const { title, heroImage, gallery, pinCode } = req.body;
+
+    if (!title || !heroImage || !gallery || !pinCode) {
+      return res.status(400).json({ message: 'Будь ласка, заповніть усі поля.' });
     }
 
-    // Отримуємо URL завантажених фото
-    const heroImageUrl = req.files.heroImage[0].location;
-    const galleryUrls = req.files.gallery.map(file => file.location);
-
-    // Перевіряємо, чи клієнт вже існує
     const existingClient = await Client.findOne({ title });
     if (existingClient) {
       return res.status(400).json({ message: 'Клієнт з таким ім’ям вже існує.' });
     }
 
-    // Створюємо нового клієнта
-    const newClient = new Client({ title, heroImage: heroImageUrl, gallery: galleryUrls, pinCode });
+    const newClient = new Client({ title, heroImage, gallery, pinCode });
     await newClient.save();
 
     res.status(201).json({
