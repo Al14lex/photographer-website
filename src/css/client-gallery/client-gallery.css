@@ -1,0 +1,127 @@
+/* ================= CLIENT GALLERY PAGE ================= */
+
+.client-gallery-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--padding-medium);
+    text-align: var(--text-align-center);
+    background-color: var(--color-bg-body);
+    border-radius: 10px;
+    box-shadow: var(--box-shadow-large);
+}
+
+/* HERO SECTION */
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--padding-large);
+}
+
+.hero-title {
+    font-size: var(--font-large);
+    font-family: var(--font-secondary);
+    color: var(--color-text-primary);
+    margin-bottom: var(--padding-small);
+}
+
+.hero-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow-small);
+}
+
+/* PIN SECTION */
+.pin-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--padding-small);
+    padding: var(--padding-medium);
+}
+
+.pin-input {
+    width: 250px;
+    padding: var(--padding-small);
+    font-size: var(--font-medium);
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    background-color: var(--color-bg-hover);
+    box-shadow: var(--box-shadow-small);
+}
+
+.pin-button {
+    width: 200px;
+    font-size: var(--font-medium);
+}
+
+/* GALLERY SECTION */
+.gallery-section {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--padding-large);
+}
+
+.gallery-title {
+    font-size: var(--font-large);
+    font-family: var(--font-secondary);
+    color: var(--color-text-primary);
+    margin-bottom: var(--padding-medium);
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--padding-small);
+    justify-content: center;
+    max-width: 900px;
+}
+
+.gallery-item {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow-small);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+/* DOWNLOAD BUTTON */
+.download-button {
+    font-size: var(--font-medium);
+    margin-top: var(--padding-medium);
+    width: 220px;
+}
+
+/* RESPONSIVE DESIGN */
+@media (min-width: 768px) {
+    .pin-input {
+        width: 300px;
+        font-size: var(--font-large);
+    }
+
+    .pin-button {
+        width: 220px;
+        font-size: var(--font-large);
+    }
+
+    .gallery-container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .gallery-item {
+        max-width: 300px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .gallery-container {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ephesis&family=Playfair+Display+SC&family=Raleway:wght@500&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Client Gallery</title>
+    <!-- favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="/favicon/favicon-96x96.png"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <meta name="apple-mobile-web-app-title" content="Photographer.at" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/client-gallery/client-gallery.css" />
+  </head>
+  <body>
+    <div id="hero">
+      <h1 id="client-name"></h1>
+      <img id="hero-image" src="" alt="Hero Image" />
+    </div>
+
+    <div id="pin-section">
+      <h2>Enter your PIN code to access the gallery</h2>
+      <input type="password" id="pin-code" placeholder="Enter PIN" />
+      <button onclick="checkPin()">Verify</button>
+      <p id="pin-error" style="color: red"></p>
+    </div>
+
+    <div id="gallery-section" style="display: none">
+      <h2>Gallery</h2>
+      <div id="gallery"></div>
+      <button onclick="downloadAll()">Download All Photos</button>
+    </div>
+
+    <script src="/js/client-gallery.js" defer></script>
+  </body>
+</html>
