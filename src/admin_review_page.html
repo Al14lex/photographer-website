@@ -28,9 +28,34 @@
       <div class="admin-container container">
         <h2 class="admin-title">Pending Reviews</h2>
         <div id="reviewList"></div>
-
         <h2 class="admin-title">Approved Reviews</h2>
         <div id="approvedReviewList"></div>
+        <div class="new-client">
+          <h2 class="admin-title">Створити нового клієнта</h2>
+          <form id="clientForm">
+            <label for="title">Ім'я клієнта:</label>
+            <input type="text" id="title" required />
+
+            <label>Головне фото:</label>
+            <input type="file" id="heroImage" accept="image/*" required />
+            <div id="heroPreview"></div>
+
+            <label>Галерея фото:</label>
+            <input
+              type="file"
+              id="gallery"
+              accept="image/*"
+              multiple
+              required
+            />
+            <div id="galleryPreview"></div>
+
+            <label for="pinCode">PIN-код:</label>
+            <input type="password" id="pinCode" required />
+
+            <button type="submit">Створити клієнта</button>
+          </form>
+        </div>
       </div>
     </section>
 

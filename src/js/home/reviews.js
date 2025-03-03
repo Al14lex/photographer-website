@@ -1,7 +1,7 @@
 
 async function loadApprovedReviews() {
     try {
-        const response = await fetch("http://localhost:5000/reviews/approved");
+        const response = await fetch("http://localhost:5001/reviews/approved");
         const reviews = await response.json();
 
         

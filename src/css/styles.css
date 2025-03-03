@@ -39,6 +39,9 @@
 @import './price/modal-book.css';
 @import './price/modal-thanks.css';
 
+/* CLIENT GALLERY Page Sections */
+@import './client-gallery/client-gallery.css';
+
 /*=========== BASIC =============*/
 :root {
     /* Fonts */
