@@ -17,10 +17,11 @@ export default defineConfig(async ({ command }) => {
     publicDir: '../public', 
     build: {
       sourcemap: true,
-      outDir: '../dist', // 🔹 Можливо, треба змінити на просто 'dist'
-      emptyOutDir: true, // ✅ Додаємо, щоб очищати `dist` перед збіркою
+      outDir: '../dist', 
+      emptyOutDir: true, 
       rollupOptions: {
         input: await glob('./src/**/*.html'),
+        clientGallery: './src/client-gallery.html',
         output: {
           manualChunks(id) {
             if (id.includes('node_modules')) {

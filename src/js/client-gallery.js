@@ -1,14 +1,18 @@
 const apiBaseUrl = "http://localhost:5000/api/clients"; 
-
-const clientTitle = decodeURIComponent(window.location.pathname.split("/").pop().replace(".html", ""));
+const clientTitle = decodeURIComponent(window.location.pathname.split("/").slice(-1)[0]);
 const heroSection = document.getElementById("hero");
 const pinSection = document.getElementById("pin-section");
 const gallerySection = document.getElementById("gallery-section");
 const pinError = document.getElementById("pin-error");
+window.checkPin = checkPin;
+window.downloadAll = downloadAll;
+
 
 // 📌 Fetch client data
 async function fetchClientData() {
     try {
+        console.log(`🔍 API запит: ${apiBaseUrl}/${clientTitle}/auth`);
+
         const response = await fetch(`${apiBaseUrl}/${clientTitle}`);
         if (!response.ok) throw new Error("Client not found");
 
@@ -36,6 +40,8 @@ async function checkPin() {
     }
 
     try {
+        console.log(`🔍 API запит: ${apiBaseUrl}/${clientTitle}/auth`);
+console.log(`🔍 clientTitle у JS:`, clientTitle);
         const response = await fetch(`${apiBaseUrl}/${clientTitle}/auth`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -76,14 +82,31 @@ function renderGallery() {
 }
 
 // 📌 Download all photos
+// function downloadAll() {
+//     window.clientGallery.forEach(photoUrl => {
+//         const link = document.createElement("a");
+//         link.href = photoUrl;
+//         link.download = photoUrl.split("/").pop();
+//         link.click();
+//     });
+// }
 function downloadAll() {
+    if (!window.clientGallery || window.clientGallery.length === 0) {
+        alert("Немає фото для завантаження!");
+        return;
+    }
+
     window.clientGallery.forEach(photoUrl => {
         const link = document.createElement("a");
         link.href = photoUrl;
         link.download = photoUrl.split("/").pop();
+        document.body.appendChild(link);
         link.click();
+        document.body.removeChild(link);
     });
+
+    alert("Завантаження розпочато!");
 }
 
-// 📌 Fetch client data on page load
+
 fetchClientData();

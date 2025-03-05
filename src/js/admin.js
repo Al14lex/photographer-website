@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
     console.log("✅ Admin page loaded");
 
@@ -7,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const galleryInput = document.getElementById("gallery");
     const heroPreview = document.getElementById("heroPreview");
     const galleryPreview = document.getElementById("galleryPreview");
+    const copyUrlBtn = document.getElementById("copyUrlBtn");
 
     if (clientForm) {
         setupClientForm();
@@ -16,10 +16,11 @@ document.addEventListener("DOMContentLoaded", function () {
         let heroFile = null;
         let galleryFiles = [];
 
+        // Обробка вибору головного фото
         heroImageInput.addEventListener("change", function () {
             heroPreview.innerHTML = "";
             if (this.files.length > 0) {
-                heroFile = this.files[0]; 
+                heroFile = this.files[0];
                 const img = document.createElement("img");
                 img.src = URL.createObjectURL(heroFile);
                 img.style.maxWidth = "150px";
@@ -28,12 +29,13 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
+        // Обробка вибору галереї фото
         galleryInput.addEventListener("change", function () {
             const newFiles = Array.from(this.files);
-            galleryFiles = [...galleryFiles, ...newFiles]; 
+            galleryFiles = [...galleryFiles, ...newFiles];
 
-            updateFileInput(); 
-            renderGalleryPreview(); 
+            updateFileInput();
+            renderGalleryPreview();
         });
 
         function updateFileInput() {
@@ -64,8 +66,9 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
+        // Обробка відправки форми
         clientForm.addEventListener("submit", async function (event) {
-            event.preventDefault(); 
+            event.preventDefault();
 
             const title = document.getElementById("title").value.trim();
             const pinCode = document.getElementById("pinCode").value.trim();
@@ -90,8 +93,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const clientData = {
                     title,
-                    heroImage: uploadData.heroImageUrl, 
-                    gallery: uploadData.galleryUrls, 
+                    heroImage: uploadData.heroImageUrl,
+                    gallery: uploadData.galleryUrls,
                     pinCode,
                 };
 
@@ -102,9 +105,28 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
 
                 const result = await createClientResponse.json();
+                console.log("📌 Отриманий URL клієнта:", result.clientUrl);
+
                 if (createClientResponse.ok) {
                     alert("Клієнт успішно створений!");
-                    clientForm.reset();
+
+                    setTimeout(() => {
+                        const clientUrlInput = document.getElementById("clientUrl");
+                        if (clientUrlInput) {
+                            clientUrlInput.value = result.clientUrl;
+                            console.log("📌 Вставлено в інпут:", clientUrlInput.value);
+                        } else {
+                            console.error("❌ Поле clientUrl не знайдено в DOM!");
+                        }
+                    }, 100);
+
+                    copyUrlBtn.style.display = "block";
+
+                    setTimeout(() => {
+                        clientForm.reset();
+                        document.getElementById("clientUrl").value = result.clientUrl; 
+                    }, 500);
+
                     heroPreview.innerHTML = "";
                     galleryPreview.innerHTML = "";
                     galleryFiles = [];
@@ -112,8 +134,20 @@ document.addEventListener("DOMContentLoaded", function () {
                     alert("Помилка: " + result.message);
                 }
             } catch (error) {
-                console.error(error);
-                alert("An error occurred while creating a client");
+                console.error("❌ Помилка створення клієнта:", error);
+                alert("Сталася помилка при створенні клієнта");
+            }
+        });
+
+        copyUrlBtn.addEventListener("click", function () {
+            try {
+                const clientUrlInput = document.getElementById("clientUrl");
+                clientUrlInput.select();
+                navigator.clipboard.writeText(clientUrlInput.value)
+                    .then(() => alert("Посилання скопійовано!"))
+                    .catch(err => console.error("❌ Помилка копіювання:", err));
+            } catch (err) {
+                console.error("❌ Помилка копіювання:", err);
             }
         });
     }
