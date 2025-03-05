@@ -21,7 +21,7 @@ export default defineConfig(async ({ command }) => {
       emptyOutDir: true, 
       rollupOptions: {
         input: await glob('./src/**/*.html'),
-        clientGallery: './src/client-gallery.html',
+        // clientGallery: './src/client-gallery.html',
         output: {
           manualChunks(id) {
             if (id.includes('node_modules')) {
