@@ -53,7 +53,16 @@ const storage = multerS3({
 
 const upload = multer({ storage });
 
-// 📌 Ендпоінти для клієнтів
+
+// 📌 Віддавати сторінку клієнта (статичний маршрут)
+app.get("/gallery/:title", (req, res) => {
+    res.sendFile(path.join(__dirname, "../src", "client-gallery.html"));
+});
+
+// 📌 Дозволити серверу віддавати статичні файли (JS, CSS)
+app.use(express.static(path.join(__dirname, "../src")));
+
+// 📌 Завантаження фото
 app.post('/upload', upload.fields([
     { name: 'heroImage', maxCount: 1 },
     { name: 'gallery', maxCount: 10 }
@@ -68,21 +77,81 @@ app.post('/upload', upload.fields([
     res.json({ heroImageUrl, galleryUrls });
 });
 
+// 📌 Створення нового клієнта
 app.post('/api/clients', async (req, res) => {
     try {
         const { title, heroImage, gallery, pinCode } = req.body;
         if (!title || !heroImage || !gallery || !pinCode) {
             return res.status(400).json({ message: 'Будь ласка, заповніть усі поля.' });
         }
+
+            const existingClient = await Client.findOne({ title });
+    if (existingClient) {
+      return res.status(400).json({ message: 'Клієнт з таким ім’ям вже існує.' });
+    }
+
         const newClient = new Client({ title, heroImage, gallery, pinCode });
         await newClient.save();
-        res.status(201).json({ message: 'Клієнтська галерея створена!' });
+
+        // 📌 Формуємо правильний URL для клієнта через бекенд
+        const clientUrl = `http://localhost:5000/gallery/${encodeURIComponent(title)}`;
+
+        res.status(201).json({ 
+            message: 'Клієнтська галерея створена!', 
+            clientUrl 
+        });
     } catch (error) {
+        console.error("❌ Помилка створення клієнта:", error);
         res.status(500).json({ message: 'Помилка сервера' });
     }
 });
 
-// 📌 Ендпоінти для відгуків
+// 📌 Отримання даних клієнта
+app.get("/api/clients/:clientTitle", async (req, res) => {
+    try {
+        const clientTitle = req.params.clientTitle;
+        const client = await Client.findOne({ title: clientTitle });
+
+        if (client) {
+            res.json(client);
+        } else {
+            res.status(404).json({ error: "Клієнта не знайдено" });
+        }
+    } catch (error) {
+        console.error("❌ Помилка отримання клієнта:", error);
+        res.status(500).json({ message: 'Помилка сервера' });
+    }
+});
+// 📌 Ендпоінт для перевірки PIN-коду
+app.post('/api/clients/:clientTitle/auth', async (req, res) => {
+    try {
+        const { clientTitle } = req.params;
+        const { pinCode } = req.body;
+        if (!pinCode) {
+            return res.status(400).json({ message: 'Будь ласка, введіть PIN-код.' });
+        }
+        console.log(`🔍 Отримано запит на авторизацію для: ${clientTitle}`);
+        const client = await Client.findOne({ title: clientTitle });
+        if (!client) {
+            return res.status(404).json({ message: 'Клієнта не знайдено' });
+        }
+        if (client.pinCode !== pinCode) {
+            return res.status(403).json({ message: 'Невірний PIN-код.' });
+        }
+        res.json({ message: 'Доступ дозволено!' });
+    } catch (error) {
+        console.error("❌ Помилка авторизації клієнта:", error);
+        res.status(500).json({ message: 'Помилка сервера' });
+    }
+});
+
+// 📌 Ендпоінт для завантаження `client-gallery.html`
+app.get("/gallery/:clientTitle", (req, res) => {
+    res.sendFile(path.join(__dirname, "../src/client-gallery.html"));
+});
+app.use(express.static(path.join(__dirname, "../src")));
+
+//=============================================Reviews====================
 app.get("/reviews", async (req, res) => {
     try {
         const reviews = await Review.find();
