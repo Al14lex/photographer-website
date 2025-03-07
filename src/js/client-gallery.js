@@ -41,7 +41,6 @@ async function checkPin() {
 
     try {
         console.log(`🔍 API запит: ${apiBaseUrl}/${clientTitle}/auth`);
-console.log(`🔍 clientTitle у JS:`, clientTitle);
         const response = await fetch(`${apiBaseUrl}/${clientTitle}/auth`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -54,7 +53,7 @@ console.log(`🔍 clientTitle у JS:`, clientTitle);
             gallerySection.style.display = "block";
             renderGallery();
         } else {
-            pinError.textContent = result.message;
+            pinError.textContent = "Wrong PIN code";
         }
     } catch (error) {
         console.error(error);
@@ -75,21 +74,10 @@ function renderGallery() {
         const img = document.createElement("img");
         img.src = photoUrl;
         img.alt = "Client photo";
-        img.style.width = "200px";
-        img.style.margin = "5px";
         gallery.appendChild(img);
     });
 }
 
-// 📌 Download all photos
-// function downloadAll() {
-//     window.clientGallery.forEach(photoUrl => {
-//         const link = document.createElement("a");
-//         link.href = photoUrl;
-//         link.download = photoUrl.split("/").pop();
-//         link.click();
-//     });
-// }
 function downloadAll() {
     if (!window.clientGallery || window.clientGallery.length === 0) {
         alert("Немає фото для завантаження!");
