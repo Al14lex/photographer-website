@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let heroFile = null;
         let galleryFiles = [];
 
-        // Обробка вибору головного фото
         heroImageInput.addEventListener("change", function () {
             heroPreview.innerHTML = "";
             if (this.files.length > 0) {
@@ -29,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        // Обробка вибору галереї фото
         galleryInput.addEventListener("change", function () {
             const newFiles = Array.from(this.files);
             galleryFiles = [...galleryFiles, ...newFiles];
@@ -51,10 +49,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 img.src = URL.createObjectURL(file);
                 img.style.maxWidth = "100px";
                 img.style.margin = "5px";
+                img.style.borderRadius= "8px"
 
                 const removeBtn = document.createElement("button");
-                removeBtn.textContent = "❌";
-                removeBtn.style.marginLeft = "5px";
+                removeBtn.textContent = "x";
+                removeBtn.style.padding = "7px"
+                removeBtn.style.lineHeight = "0.5"
+                removeBtn.style.margin = "0 5px 0 0";
+                removeBtn.style.color = "red";
                 removeBtn.onclick = function () {
                     galleryFiles.splice(index, 1);
                     updateFileInput();
@@ -65,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 galleryPreview.appendChild(removeBtn);
             });
         }
+
 
         // Обробка відправки форми
         clientForm.addEventListener("submit", async function (event) {
