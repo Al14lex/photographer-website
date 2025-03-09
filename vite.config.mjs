@@ -15,10 +15,20 @@ export default defineConfig({
   publicDir: 'public',
   build: {
     sourcemap: true,
-    outDir: '../dist',
+    outDir: '/dist',
     emptyOutDir: true,
     rollupOptions: {
-     input: './src/index.html',
+     input: {
+        main: './src/index.html',
+        home: './src/home-page.html',
+        individual: './src/individual-page.html',
+        family: './src/family-page.html',
+        children: './src/children-page.html',
+        newborn: './src/newborn-page.html',
+        price: './src/price-page.html',
+        admin: './src/admin_review_page.html',
+        client:'./src/client-gallery.html'
+      },
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
