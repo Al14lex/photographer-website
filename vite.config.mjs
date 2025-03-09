@@ -11,7 +11,7 @@ export default defineConfig({
     _global: {},
   },
   root: 'src', 
-  publicDir: 'public',
+  publicDir: '../public',
   base: "./",
   build: {
     sourcemap: true,
