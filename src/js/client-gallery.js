@@ -70,11 +70,35 @@ function renderGallery() {
         return;
     }
 
+    // window.clientGallery.forEach(photoUrl => {
+    //     const img = document.createElement("img");
+    //     img.className = 'Lazy-client'
+    //     img.src = photoUrl;
+    //     img.alt = "Client photo";
+    //     gallery.appendChild(img);
+    // });
     window.clientGallery.forEach(photoUrl => {
         const img = document.createElement("img");
-        img.src = photoUrl;
+        img.className = 'lazy-client fade-in'; // Додаємо класи для анімації
+        img.dataset.src = photoUrl; // Використовуємо data-src для лейзі-лоадінгу
         img.alt = "Client photo";
         gallery.appendChild(img);
+    });
+      // **Intersection Observer для лейзі-лоадінгу**
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src; // Завантажуємо зображення
+                img.classList.add("visible"); // Додаємо клас для анімації
+                observer.unobserve(img); // Відключаємо спостереження після завантаження
+            }
+        });
+    }, { rootMargin: "0px 0px 50px 0px", threshold: 0.2 });
+
+    // Додаємо всі фото в обсервер
+    document.querySelectorAll(".lazy-client").forEach(img => {
+        observer.observe(img);
     });
 }
 
@@ -92,9 +116,30 @@ function downloadAll() {
         link.click();
         document.body.removeChild(link);
     });
-
+    
+    showReviewModal();
     alert("Завантаження розпочато!");
+
+    
 }
+
+function showReviewModal() {
+    const modal = document.getElementById("reviewModal");
+    if (modal) {
+        modal.style.display = "block";
+    }
+}
+
+// Функція для закриття модального вікна
+function closeReviewModal() {
+    const modal = document.getElementById("reviewModal");
+    if (modal) {
+        modal.style.display = "none";
+    }
+}
+
+// Додаємо обробник подій для кнопки закриття
+document.getElementById("closeReviewModal").addEventListener("click", closeReviewModal);
 
 
 fetchClientData();

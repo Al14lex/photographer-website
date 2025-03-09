@@ -33,6 +33,13 @@
     <link rel="stylesheet" href="/css/client-gallery/client-gallery.css" />
   </head>
   <body>
+    <header class="header" id="header">
+      <div class="header-client-container container">
+        <h1>Welcome to your photo gallery</h1>
+        <a href="home-page.html">VISIT THE WEBSITE</a>
+      </div>
+    </header>
+
     <div id="hero" class="hero-client-gallery">
       <h1 id="client-name" class="hero-title-client-gallery"></h1>
       <img
@@ -55,9 +62,12 @@
       class="client-photo-gallery"
       style="display: none"
     >
-      <h2>Welcome to your photo gallery</h2>
+      <!-- <h2>Welcome to your photo gallery</h2> -->
       <div id="gallery"></div>
-      <button onclick="downloadAll()" class="client-gallery-btn">
+      <button
+        onclick="downloadAll()"
+        class="client-gallery-btn openReviewModal"
+      >
         Download All Photos
       </button>
     </div>
@@ -99,13 +109,52 @@
           </div>
         </div>
         <p class="footer-links">
-          <a href="../../privacy-policy.html">Privacy Policy</a>
+          <a href="/privacy-policy.html">Privacy Policy</a>
           |
-          <a href="../../terms-of-use.html">Terms of Use</a>
+          <a href="/terms-of-use.html">Terms of Use</a>
         </p>
       </div>
     </footer>
 
+    <div id="reviewModal" class="modal-review">
+      <div class="modal-review-content get-in-container">
+        <span class="close" id="closeReviewModal">&times;</span>
+        <h2 class="review-contact-title">Leave Your Review</h2>
+        <form id="reviewForm" class="review-contact-form">
+          <div class="review-form-group">
+            <input
+              type="text"
+              id="reviewName"
+              class="review-form-input"
+              placeholder="Your Name"
+              required
+            />
+          </div>
+          <div class="review-form-group">
+            <textarea
+              id="reviewText"
+              class="review-form-textarea"
+              placeholder="Your Review"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="review-form-btn">Send</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="thankYouReviewModal" class="modal-review">
+      <div class="modal-review-content small-modal get-in-container">
+        <span class="close" id="closeThankYouReviewModal">&times;</span>
+        <h2 class="contact-title">Thank You!</h2>
+        <p>Your review has been submitted and will be published soon.</p>
+      </div>
+    </div>
+
+    <!-- <load ="/partials/home/review-modal.html" /> -->
+    <script type="module" src="/js/header.js"></script>
+    <script type="module" src="/js/home/modal-review.js"></script>
+    <script type="module" src="/js/home/reviews.js"></script>
     <script type="module" src="/js/client-gallery.js" defer></script>
   </body>
 </html>
