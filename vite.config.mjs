@@ -18,7 +18,7 @@ export default defineConfig({
     outDir: '../dist',
     emptyOutDir: true,
     rollupOptions: {
-      input: './index.html',
+     input: './src/index.html',
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
