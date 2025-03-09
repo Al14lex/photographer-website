@@ -16,14 +16,15 @@ app.use(express.json());
 // app.use(express.static('src'));
 // Віддаємо статичні файли з `src/`
 app.use(express.static(path.join(__dirname, "../src")));
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../src/index.html"));
+});
 
 // Додаємо окремі маршрути для конкретних директорій
 app.use('/img', express.static(path.join(__dirname, '../src/img')));
 app.use('/favicon', express.static(path.join(__dirname, '../src/favicon')));
 app.use('/css', express.static(path.join(__dirname, '../src/css')));
 app.use('/js', express.static(path.join(__dirname, '../src/js')));
-
-
 
 // 📌 Підключення до MongoDB
 mongoose.connect(process.env.MONGO_URI)
