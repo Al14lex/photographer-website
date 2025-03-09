@@ -12,10 +12,10 @@ export default defineConfig({
     _global: {},
   },
   root: 'src', 
-  publicDir: false,
+  publicDir: 'public',
   build: {
     sourcemap: true,
-    outDir: '../dist',
+    outDir: 'dist',
     emptyOutDir: true,
     rollupOptions: {
      input: './src/index.html',
