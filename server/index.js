@@ -13,7 +13,16 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public'));
+// app.use(express.static('src'));
+// Віддаємо статичні файли з `src/`
+app.use(express.static(path.join(__dirname, "../src")));
+
+// Додаємо окремі маршрути для конкретних директорій
+app.use('/img', express.static(path.join(__dirname, '../src/img')));
+app.use('/favicon', express.static(path.join(__dirname, '../src/favicon')));
+app.use('/css', express.static(path.join(__dirname, '../src/css')));
+app.use('/js', express.static(path.join(__dirname, '../src/js')));
+
 
 
 // 📌 Підключення до MongoDB
@@ -61,8 +70,6 @@ app.get("/gallery/:title", (req, res) => {
     res.sendFile(path.join(__dirname, "../src", "client-gallery.html"));
 });
 
-// 📌 Дозволити серверу віддавати статичні файли (JS, CSS)
-app.use(express.static(path.join(__dirname, "../src")));
 
 // 📌 Завантаження фото
 app.post('/upload', upload.fields([
@@ -151,7 +158,6 @@ app.post('/api/clients/:clientTitle/auth', async (req, res) => {
 app.get("/gallery/:clientTitle", (req, res) => {
     res.sendFile(path.join(__dirname, "../src/client-gallery.html"));
 });
-app.use(express.static(path.join(__dirname, "../src")));
 
 //=============================================Reviews====================
 app.get("/reviews", async (req, res) => {
