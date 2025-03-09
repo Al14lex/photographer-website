@@ -1,16 +1,5 @@
 {
-  "rewrites": [
-    { "source": "/home", "destination": "/home-page.html" },
-    { "source": "/individual", "destination": "/individual-page.html" },
-    { "source": "/family", "destination": "/family-page.html" },
-    { "source": "/children", "destination": "/children-page.html" },
-    { "source": "/newborn", "destination": "/newborn-page.html" },
-    { "source": "/price", "destination": "/price-page.html" },
-    { "source": "/admin", "destination": "/admin_review_page.html" },
-    { "source": "/client", "destination": "/client-gallery.html" }
-  ],
-  "redirects": [
-    { "source": "/price", "destination": "/price-page.html", "statusCode": 301 }
+  "routes": [
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
-

@@ -12,6 +12,7 @@ export default defineConfig({
   },
   root: 'src', 
   publicDir: 'public',
+  base: "./",
   build: {
     sourcemap: true,
     outDir: '../dist',
