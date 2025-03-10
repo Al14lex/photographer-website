@@ -13,7 +13,6 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
-// app.use(express.static('src'));
 app.use(express.static(path.join(__dirname, "../src")));
 
 
