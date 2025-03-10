@@ -42,7 +42,7 @@ import path from "path";
 
 export default defineConfig({
   root: "src", // Коренева директорія фронтенду
-  publicDir: "src", // Доступ до статичних файлів
+  publicDir: "public", // Доступ до статичних файлів
   build: {
     outDir: "../dist", // Деплойна директорія
     emptyOutDir: true, // Очищення перед білдом
