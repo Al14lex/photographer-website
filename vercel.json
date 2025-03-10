@@ -1,8 +1,6 @@
 {
-  "outputDirectory": "dist",
-  "routes": [
-    { "src": "/(.*)", "dest": "/$1" }
-  ],
+  "builds": [{ "src": "dist/", "use": "@vercel/static" }],
+  "routes": [{ "src": "/(.*)", "dest": "/$1" }],
   "cleanUrls": true,
   "trailingSlash": false
 }
