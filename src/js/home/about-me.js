@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const aboutSection = document.querySelector('.about-container');
     if (!aboutSection) {
-        console.error('Секція .about-container не знайдена.');
+        console.error('Section .about-container not found.');
         return;
     }
 
