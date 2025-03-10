@@ -1,0 +1,86 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Review Moderation</title>
+    <!-- favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="/assets/favicon-96x96-byVtGsj2.png"
+    />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon-BghXuItn.svg" />
+    <link rel="shortcut icon" href="/assets/favicon-DmYQO7Z8.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/apple-touch-icon-eUdDboxE.png"
+    />
+    <meta name="apple-mobile-web-app-title" content="Photographer.at" />
+
+    <script type="module" crossorigin src="/assets/modulepreload-polyfill-B5Qt9EMX.js"></script>
+    <script type="module" crossorigin src="/assets/admin-B9xDPP_l.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/styles-BdC9jSSS.css">
+  </head>
+  <body>
+    <section class="admin">
+      <a href="./index.html" class="admin-btn-home">Home</a>
+      <div class="admin-container container">
+        <h2 class="admin-title">Pending Reviews</h2>
+        <div id="reviewList"></div>
+        <h2 class="admin-title">Approved Reviews</h2>
+        <div id="approvedReviewList"></div>
+        <!----------------------new client ------------------------------>
+        <div class="new-client">
+          <h2 class="admin-title">Create a new client</h2>
+          <form id="clientForm">
+            <label for="title">Name:</label>
+            <input type="text" id="title" required />
+
+            <label>Main photo:</label>
+            <input type="file" id="heroImage" accept="image/*" required />
+            <div id="heroPreview"></div>
+
+            <label>Gallery:</label>
+            <input
+              type="file"
+              id="gallery"
+              accept="image/*"
+              multiple
+              required
+            />
+            <div id="galleryPreview"></div>
+
+            <label for="pinCode">PIN:</label>
+            <input type="password" id="pinCode" required />
+
+            <button type="submit">Create</button>
+            <label for="clientUrl">Link for client:</label>
+            <input type="text" id="clientUrl" readonly />
+            <button type="button" id="copyUrlBtn" style="display: none">
+              Copy link
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const adminPassword = "Taranenko1421";
+
+        let enteredPassword = localStorage.getItem("adminAccess");
+        if (enteredPassword !== adminPassword) {
+          let userInput = prompt("Enter admin password:");
+          if (userInput === adminPassword) {
+            localStorage.setItem("adminAccess", adminPassword);
+          } else {
+            alert("Access denied!");
+            window.location.href = "./index.html";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
