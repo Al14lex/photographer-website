@@ -20,6 +20,16 @@ async function fetchClientData() {
         document.getElementById("client-name").textContent = data.title;
         document.getElementById("hero-image").src = data.heroImage;
 
+        const heroImageUrl = data.heroImage; 
+        const modal = document.getElementById("reviewModal");
+        const thankYouModal = document.getElementById("thankYouReviewModal");
+        
+        if (heroImageUrl) {
+            const fullImageUrl = heroImageUrl.startsWith('http') ? heroImageUrl : `https://client-photos-storage.s3.eu-north-1.amazonaws.com/photos/${heroImageUrl}`;
+            modal.style.backgroundImage = `linear-gradient(rgba(191, 168, 146, 0.3), rgba(191, 168, 146, 0.3)), url('${fullImageUrl}')`;
+            thankYouModal.style.backgroundImage = `linear-gradient(rgba(191, 168, 146, 0.3), rgba(191, 168, 146, 0.3)), url('${fullImageUrl}')`;
+        }
+
         if (data.gallery.length > 0) {
             window.clientGallery = data.gallery;
         } else {
@@ -69,34 +79,25 @@ function renderGallery() {
         gallery.innerHTML = "<p>No photos available</p>";
         return;
     }
-
-    // window.clientGallery.forEach(photoUrl => {
-    //     const img = document.createElement("img");
-    //     img.className = 'Lazy-client'
-    //     img.src = photoUrl;
-    //     img.alt = "Client photo";
-    //     gallery.appendChild(img);
-    // });
     window.clientGallery.forEach(photoUrl => {
         const img = document.createElement("img");
-        img.className = 'lazy-client fade-in'; // Додаємо класи для анімації
-        img.dataset.src = photoUrl; // Використовуємо data-src для лейзі-лоадінгу
+        img.className = 'lazy-client fade-in'; 
+        img.dataset.src = photoUrl;
         img.alt = "Client photo";
         gallery.appendChild(img);
     });
-      // **Intersection Observer для лейзі-лоадінгу**
+  
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
-                img.src = img.dataset.src; // Завантажуємо зображення
-                img.classList.add("visible"); // Додаємо клас для анімації
-                observer.unobserve(img); // Відключаємо спостереження після завантаження
+                img.src = img.dataset.src; 
+                img.classList.add("visible"); 
+                observer.unobserve(img); 
             }
         });
     }, { rootMargin: "0px 0px 50px 0px", threshold: 0.2 });
 
-    // Додаємо всі фото в обсервер
     document.querySelectorAll(".lazy-client").forEach(img => {
         observer.observe(img);
     });
