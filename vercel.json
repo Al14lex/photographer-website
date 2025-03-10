@@ -1,8 +1,8 @@
 {
-  "outputDirectory": "dist",
-  "routes": [
-    { "src": "/(.*)", "dest": "/$1" }
-  ],
-  "cleanUrls": true,
-  "trailingSlash": false
+  "rewrites": [
+    {
+      "source": "/partials/home.html",
+      "destination": "/partials/home.html"
+    }
+  ]
 }
