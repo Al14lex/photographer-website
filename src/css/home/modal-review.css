@@ -1,8 +1,8 @@
 .modal-review {
     display: flex;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -11,9 +11,9 @@
     height: 100%;
     background: linear-gradient(rgba(191, 168, 146, 0.3), rgba(191, 168, 146, 0.3)),
             url('/img/home/what6.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     justify-content: center;
     align-items: center;
 }
