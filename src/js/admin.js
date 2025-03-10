@@ -68,8 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
-
-        // Обробка відправки форми
         clientForm.addEventListener("submit", async function (event) {
             event.preventDefault();
 
@@ -77,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const pinCode = document.getElementById("pinCode").value.trim();
 
             if (!title || !heroFile || galleryFiles.length === 0 || !pinCode) {
-                alert("Будь ласка, заповніть усі поля!");
+                alert("Please fill in all fields!");
                 return;
             }
 
@@ -91,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     body: formData,
                 });
 
-                if (!uploadResponse.ok) throw new Error("Помилка завантаження фото");
+                if (!uploadResponse.ok) throw new Error("Error uploading photos");
                 const uploadData = await uploadResponse.json();
 
                 const clientData = {
@@ -108,18 +106,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
 
                 const result = await createClientResponse.json();
-                console.log("📌 Отриманий URL клієнта:", result.clientUrl);
+                console.log("Received client URL:", result.clientUrl);
 
                 if (createClientResponse.ok) {
-                    alert("Клієнт успішно створений!");
+                    alert("Client successfully created!");
 
                     setTimeout(() => {
                         const clientUrlInput = document.getElementById("clientUrl");
                         if (clientUrlInput) {
                             clientUrlInput.value = result.clientUrl;
-                            console.log("📌 Вставлено в інпут:", clientUrlInput.value);
                         } else {
-                            console.error("❌ Поле clientUrl не знайдено в DOM!");
+                            console.error("clientUrl field not found in DOM!");
                         }
                     }, 100);
 
@@ -137,8 +134,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     alert("Помилка: " + result.message);
                 }
             } catch (error) {
-                console.error("❌ Помилка створення клієнта:", error);
-                alert("Сталася помилка при створенні клієнта");
+                console.error("Error creating client:", error);
+                alert("An error occurred while creating the client");
             }
         });
 
@@ -147,10 +144,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 const clientUrlInput = document.getElementById("clientUrl");
                 clientUrlInput.select();
                 navigator.clipboard.writeText(clientUrlInput.value)
-                    .then(() => alert("Посилання скопійовано!"))
-                    .catch(err => console.error("❌ Помилка копіювання:", err));
+                    .then(() => alert("Link copied!"))
+                    .catch(err => console.error("Error copying:", err));
             } catch (err) {
-                console.error("❌ Помилка копіювання:", err);
+                console.error("Error copying:", err);
             }
         });
     }

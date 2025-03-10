@@ -4,13 +4,13 @@ const mongoose = require("mongoose");
 const Client = require("./models/Client");
 require("dotenv").config();
 
-// Підключення до MongoDB (якщо не підключено в index.js)
+// MongoDB connection (if not connected in index.js)
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ CRON: Підключено до MongoDB"))
-  .catch((err) => console.error("❌ CRON: Помилка підключення до MongoDB:", err));
+  .then(() => console.log("✅ CRON: Connected to MongoDB"))
+  .catch((err) => console.error("❌ CRON: MongoDB connection error:", err));
 
-// Налаштування AWS S3
+// AWS S3 configuration
 const s3 = new AWS.S3Client({
   region: process.env.AWS_REGION,
   credentials: {
@@ -22,7 +22,7 @@ const s3 = new AWS.S3Client({
  cron.schedule('0 3 * * *', async () => {
     // cron.schedule('*/1 * * * *', async () => {
 
-    console.log('🔄 CRON: Перевірка та видалення старих клієнтів...');
+    console.log('🔄 CRON: Checking and removing old clients...');
 
     const now = new Date();
     const threeMonthsAgo = new Date();
@@ -33,34 +33,30 @@ const s3 = new AWS.S3Client({
 
 
     try {
-        // Отримуємо всіх клієнтів, у яких `createdAt` більше 3 місяців
         const oldClients = await Client.find({ createdAt: { $lt: threeMonthsAgo } });
         // const oldClients = await Client.find({ createdAt: { $lt: oneMinuteAgo } });
 
-
         for (const client of oldClients) {
-            // Видаляємо всі фото клієнта з S3
             for (const photoUrl of client.gallery) {
-                const key = photoUrl.split('.com/')[1]; // Отримуємо ключ файлу S3
+                const key = photoUrl.split('.com/')[1]; 
                 const deleteParams = { Bucket: process.env.AWS_BUCKET_NAME, Key: key };
 
                 try {
                     await s3.send(new AWS.DeleteObjectCommand(deleteParams));
-                    console.log(`🗑 Видалено фото: ${photoUrl}`);
+                    console.log(`🗑 Deleted photo: ${photoUrl}`);
                 } catch (s3Error) {
-                    console.error(`❌ Помилка видалення фото з S3: ${photoUrl}`, s3Error);
+                    console.error(`❌ Error deleting photo from S3: ${photoUrl}`, s3Error);
                 }
             }
 
-            // Після видалення фото – видаляємо клієнта з бази
             await Client.deleteOne({ _id: client._id });
-            console.log(`🗑 Видалено клієнта: ${client.title}`);
+            console.log(`🗑 Deleted client: ${client.title}`);
         }
 
-        console.log('✅ CRON: Очищення завершено.');
+        console.log('✅ CRON: Cleanup completed.');
     } catch (error) {
-        console.error('❌ CRON: Помилка при видаленні старих клієнтів:', error);
+        console.error('❌ CRON: Error while deleting old clients:', error);
     }
 });
 
-console.log('✅ CRON: Запущено. Видалення старих фото кожен день о 03:00 ночі.');
+console.log('✅ CRON: Started. Deleting old photos every day at 03:00 AM.');

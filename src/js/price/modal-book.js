@@ -63,14 +63,12 @@ document.addEventListener("DOMContentLoaded", function () {
         closeModal(modalBook);
     });
 
-    // 🔹 Закриття вікна бронювання при кліку поза ним
     window.addEventListener("click", function (event) {
         if (event.target === modalBook) {
             closeModal(modalBook);
         }
     });
 
-    // 🔹 Обробка форми бронювання
     bookingForm.addEventListener("submit", async function (event) {
         event.preventDefault();
 
@@ -80,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const message = document.getElementById("message").value;
 
         console.log("📩 Form submitted!");
-        console.log("Shooting Type:", selectedShootingType); // 🔹 Виводимо вибрану сесію
+        console.log("Shooting Type:", selectedShootingType); 
         console.log("User Name:", userName);
         console.log("User Email:", userEmail);
         console.log("User Phone:", userPhone);
@@ -88,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         try {
             const response = await emailjs.send("service_i8bcmth", "template_hkl0yzr", {
-                shooting_type: selectedShootingType, // 🔹 Додаємо вибрану сесію в повідомлення
+                shooting_type: selectedShootingType,
                 user_name: userName,
                 user_email: userEmail,
                 user_phone: userPhone,
@@ -99,21 +97,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (response.status === 200) {
                 bookingForm.reset();
-                resetFieldStyles(); // Скидаємо стилі полів після відправки
+                resetFieldStyles(); 
                 showModalThankYou();
 
                 setTimeout(() => {
                     closeModal(modalBook);
                 }, 800);
             } else {
-                throw new Error("❌ Failed to send email. Please try again later.");
+                throw new Error(" Failed to send email. Please try again later.");
             }
         } catch (error) {
-            console.error("❌ Error:", error);
+            console.error(" Error:", error);
         }
     });
 
-    // 🔹 Скидання стилів полів після відправки форми
+
     function resetFieldStyles() {
         inputs.forEach((input) => {
             input.classList.remove("filled");
@@ -122,37 +120,33 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 🔹 Функція показу модального вікна подяки
+
     function showModalThankYou() {
         if (modalThanks) {
-            console.log("✅ Показуємо модальне вікно подяки");
 
             modalThanks.style.display = "flex";
             setTimeout(() => {
                 modalThanks.classList.add("active");
             }, 50);
 
-            // Автоматичне закриття через 4 секунди
             setTimeout(() => {
                 closeModalThankYou();
             }, 4000);
         } else {
-            console.error("❌ Помилка: modalThanks не знайдено");
+            console.error("Error: modalThanks not found");
         }
     }
 
-    // 🔹 Функція закриття модального вікна подяки
     function closeModalThankYou() {
         if (modalThanks) {
             modalThanks.classList.remove("active");
 
             setTimeout(() => {
-                modalThanks.style.display = "none"; // Приховуємо після анімації
-            }, 600); // Відповідає transition 0.6s у CSS
+                modalThanks.style.display = "none"; 
+            }, 600); 
         }
     }
 
-    // 🔹 Закриття модального вікна подяки при кліку поза ним
     if (modalThanks) {
         modalThanks.addEventListener("click", function (event) {
             if (event.target === modalThanks) {

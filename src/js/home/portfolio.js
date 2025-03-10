@@ -16,8 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         entry.target.classList.remove("visible");
                     entry.target.querySelector(".portfolio-img").classList.remove("color");
                     }, 800);
-                    // entry.target.classList.remove("visible");
-                    // entry.target.querySelector(".portfolio-img").classList.remove("color");
                 }
             });
         },

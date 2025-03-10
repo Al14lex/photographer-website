@@ -102,12 +102,28 @@ function renderGallery() {
         observer.observe(img);
     });
 }
+function showReviewModal() {
+    const modal = document.getElementById("reviewModal");
+    if (modal) {
+        modal.style.display = "block";
+    }
+}
+
+function closeReviewModal() {
+    const modal = document.getElementById("reviewModal");
+    if (modal) {
+        modal.style.display = "none";
+    }
+}
+
+document.getElementById("closeReviewModal").addEventListener("click", closeReviewModal);
 
 function downloadAll() {
     if (!window.clientGallery || window.clientGallery.length === 0) {
-        alert("Немає фото для завантаження!");
+        alert("No photo to download!");
         return;
     }
+    showReviewModal();
 
     window.clientGallery.forEach(photoUrl => {
         const link = document.createElement("a");
@@ -118,29 +134,12 @@ function downloadAll() {
         document.body.removeChild(link);
     });
     
-    showReviewModal();
-    alert("Завантаження розпочато!");
+    
+    alert("Downloading started!");
 
     
 }
 
-function showReviewModal() {
-    const modal = document.getElementById("reviewModal");
-    if (modal) {
-        modal.style.display = "block";
-    }
-}
-
-// Функція для закриття модального вікна
-function closeReviewModal() {
-    const modal = document.getElementById("reviewModal");
-    if (modal) {
-        modal.style.display = "none";
-    }
-}
-
-// Додаємо обробник подій для кнопки закриття
-document.getElementById("closeReviewModal").addEventListener("click", closeReviewModal);
 
 
 fetchClientData();

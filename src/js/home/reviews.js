@@ -13,7 +13,7 @@ async function loadApprovedReviews() {
 
         swiperWrapper.innerHTML = ""; 
         if (reviews.length === 0) {
-            swiperWrapper.innerHTML = `<p class="no-reviews">Немає схвалених відгуків.</p>`;
+            swiperWrapper.innerHTML = `<p class="no-reviews">No approved reviews</p>`;
             return;
         }
 
@@ -34,7 +34,7 @@ async function loadApprovedReviews() {
         }
 
     } catch (error) {
-        console.error("❌ Помилка завантаження схвалених відгуків:", error);
+        console.error("Error download approved reviews", error);
     }
 }
 

@@ -15,30 +15,27 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../src")));
 
-
-// Додаємо окремі маршрути для конкретних директорій
 app.use('/img', express.static(path.join(__dirname, '../src/img')));
 app.use('/favicon', express.static(path.join(__dirname, '../src/favicon')));
 app.use('/css', express.static(path.join(__dirname, '../src/css')));
 app.use('/js', express.static(path.join(__dirname, '../src/js')));
 
-// Підключення до MongoDB
+// Connecting to MongoDB
 mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("✅ Підключено до MongoDB"))
-    .catch(err => console.error("❌ Помилка підключення:", err));
+    .then(() => console.log("✅ Connected to MongoDB"))
+    .catch(err => console.error("❌ Connection error:", err));
 
-// Модель для відгуків
+// Review model
 const reviewSchema = new mongoose.Schema({
     name: String,
     message: String,
     status: { type: String, default: "pending" }
 });
 const Review = mongoose.model("Review", reviewSchema);
-
-//  Модель для клієнтів
+// Client model
 const Client = require("./models/Client");
 
-//  Налаштування AWS S3
+// AWS S3 Configuration
 const s3 = new S3Client({
     region: process.env.AWS_REGION,
     credentials: {
@@ -61,19 +58,18 @@ const storage = multerS3({
 
 const upload = multer({ storage });
 
-//  Віддавати сторінку клієнта (статичний маршрут)
+// Serve the client page (static route)
 app.get("/gallery/:title", (req, res) => {
     res.sendFile(path.join(__dirname, "../src", "client-gallery.html"));
 });
 
-
-//  Завантаження фото
+// Photo upload
 app.post('/upload', upload.fields([
     { name: 'heroImage', maxCount: 1 },
     { name: 'gallery', maxCount: 10 }
 ]), (req, res) => {
     if (!req.files || (!req.files.heroImage && !req.files.gallery)) {
-        return res.status(400).json({ message: 'Файли не завантажені!' });
+        return res.status(400).json({ message: 'Files not uploaded!' });
     }
 
     const heroImageUrl = req.files.heroImage ? req.files.heroImage[0].location : null;
@@ -82,36 +78,34 @@ app.post('/upload', upload.fields([
     res.json({ heroImageUrl, galleryUrls });
 });
 
-//  Створення нового клієнта
+// Create a new client
 app.post('/api/clients', async (req, res) => {
     try {
         const { title, heroImage, gallery, pinCode } = req.body;
         if (!title || !heroImage || !gallery || !pinCode) {
-            return res.status(400).json({ message: 'Будь ласка, заповніть усі поля.' });
+            return res.status(400).json({ message: 'Please fill in all fields.' });
         }
 
             const existingClient = await Client.findOne({ title });
     if (existingClient) {
-      return res.status(400).json({ message: 'Клієнт з таким ім’ям вже існує.' });
+      return res.status(400).json({ message: 'Client with this name already exists.' });
     }
 
         const newClient = new Client({ title, heroImage, gallery, pinCode });
         await newClient.save();
 
-        //  Формуємо правильний URL для клієнта через бекенд
         const clientUrl = `http://localhost:5000/gallery/${encodeURIComponent(title)}`;
 
         res.status(201).json({ 
-            message: 'Клієнтська галерея створена!', 
+            message: 'Client gallery created!', 
             clientUrl 
         });
     } catch (error) {
-        console.error("❌ Помилка створення клієнта:", error);
-        res.status(500).json({ message: 'Помилка сервера' });
+        console.error("❌ Error creating client:", error);
+        res.status(500).json({ message: 'Server error' });
     }
 });
-
-//  Отримання даних клієнта
+// Get client data
 app.get("/api/clients/:clientTitle", async (req, res) => {
     try {
         const clientTitle = req.params.clientTitle;
@@ -120,37 +114,36 @@ app.get("/api/clients/:clientTitle", async (req, res) => {
         if (client) {
             res.json(client);
         } else {
-            res.status(404).json({ error: "Клієнта не знайдено" });
+            res.status(404).json({ error: "Client not found" });
         }
     } catch (error) {
-        console.error("❌ Помилка отримання клієнта:", error);
-        res.status(500).json({ message: 'Помилка сервера' });
+        console.error("❌ Error retrieving client:", error);
+        res.status(500).json({ message: 'Server error' });
     }
 });
-//  Ендпоінт для перевірки PIN-коду
+// Endpoint for PIN code verification
 app.post('/api/clients/:clientTitle/auth', async (req, res) => {
     try {
         const { clientTitle } = req.params;
         const { pinCode } = req.body;
         if (!pinCode) {
-            return res.status(400).json({ message: 'Будь ласка, введіть PIN-код.' });
+            return res.status(400).json({ message: 'Please enter the PIN code.' });
         }
-        console.log(`🔍 Отримано запит на авторизацію для: ${clientTitle}`);
+        console.log(`🔍Authorization request received for: ${clientTitle}`);
         const client = await Client.findOne({ title: clientTitle });
         if (!client) {
-            return res.status(404).json({ message: 'Клієнта не знайдено' });
+            return res.status(404).json({ message: 'Client not found' });
         }
         if (client.pinCode !== pinCode) {
-            return res.status(403).json({ message: 'Невірний PIN-код.' });
+            return res.status(403).json({ message: 'Incorrect PIN code.' });
         }
-        res.json({ message: 'Доступ дозволено!' });
+        res.json({ message: 'Access granted!' });
     } catch (error) {
-        console.error("❌ Помилка авторизації клієнта:", error);
-        res.status(500).json({ message: 'Помилка сервера' });
+        console.error("❌Error authorizing client:", error);
+        res.status(500).json({ message: 'Server error' });
     }
 });
-
-//  Ендпоінт для завантаження `client-gallery.html`
+// Endpoint to upload `client-gallery.html`
 app.get("/gallery/:clientTitle", (req, res) => {
     res.sendFile(path.join(__dirname, "../src/client-gallery.html"));
 });
@@ -159,10 +152,10 @@ app.get("/gallery/:clientTitle", (req, res) => {
 app.get("/reviews", async (req, res) => {
     try {
         const reviews = await Review.find();
-        console.log("📤 Відправляю відгуки:", reviews); 
+        console.log("📤 Sending reviews:", reviews); 
         res.json(reviews);
     } catch (error) {
-        res.status(500).json({ message: "Помилка сервера" });
+        res.status(500).json({ message: "Server error" });
     }
 });
 
@@ -171,7 +164,7 @@ app.get("/reviews/approved", async (req, res) => {
         const approvedReviews = await Review.find({ status: "approved" });
         res.json(approvedReviews);
     } catch (error) {
-        res.status(500).json({ message: "Помилка сервера" });
+        res.status(500).json({ message: "Server error"});
     }
 });
 
@@ -181,7 +174,7 @@ app.post("/reviews", async (req, res) => {
         await newReview.save();
         res.status(201).json(newReview);
     } catch (error) {
-        res.status(500).json({ message: "Помилка збереження відгуку" });
+        res.status(500).json({ message: "Error saving review" });
     }
 });
 
@@ -190,20 +183,20 @@ app.put("/reviews/:id", async (req, res) => {
         const updatedReview = await Review.findByIdAndUpdate(req.params.id, { status: "approved" }, { new: true });
         res.json(updatedReview);
     } catch (error) {
-        res.status(500).json({ message: "Помилка оновлення статусу" });
+        res.status(500).json({ message: "Error updating status" });
     }
 });
 
 app.delete("/reviews/:id", async (req, res) => {
     try {
         await Review.findByIdAndDelete(req.params.id);
-        res.json({ message: "Відгук видалено" });
+        res.json({ message: "Review deleted" });
     } catch (error) {
-        res.status(500).json({ message: "Помилка видалення" });
+        res.status(500).json({ message: "Error deleting" });
     }
 });
 
 //  Старт сервера
 app.listen(PORT, () => {
-    console.log(`🚀 Сервер працює на порту ${PORT}`);
+    console.log(`🚀 Server is running on port ${PORT}`);
 });
