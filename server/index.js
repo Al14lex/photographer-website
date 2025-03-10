@@ -14,7 +14,6 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 // app.use(express.static('src'));
-// Віддаємо статичні файли з `src/`
 app.use(express.static(path.join(__dirname, "../src")));
 
 
@@ -24,12 +23,12 @@ app.use('/favicon', express.static(path.join(__dirname, '../src/favicon')));
 app.use('/css', express.static(path.join(__dirname, '../src/css')));
 app.use('/js', express.static(path.join(__dirname, '../src/js')));
 
-// 📌 Підключення до MongoDB
+// Підключення до MongoDB
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("✅ Підключено до MongoDB"))
     .catch(err => console.error("❌ Помилка підключення:", err));
 
-// 📌 Модель для відгуків
+// Модель для відгуків
 const reviewSchema = new mongoose.Schema({
     name: String,
     message: String,
@@ -37,10 +36,10 @@ const reviewSchema = new mongoose.Schema({
 });
 const Review = mongoose.model("Review", reviewSchema);
 
-// 📌 Модель для клієнтів
+//  Модель для клієнтів
 const Client = require("./models/Client");
 
-// 📌 Налаштування AWS S3
+//  Налаштування AWS S3
 const s3 = new S3Client({
     region: process.env.AWS_REGION,
     credentials: {
@@ -63,14 +62,13 @@ const storage = multerS3({
 
 const upload = multer({ storage });
 
-
-// 📌 Віддавати сторінку клієнта (статичний маршрут)
+//  Віддавати сторінку клієнта (статичний маршрут)
 app.get("/gallery/:title", (req, res) => {
     res.sendFile(path.join(__dirname, "../src", "client-gallery.html"));
 });
 
 
-// 📌 Завантаження фото
+//  Завантаження фото
 app.post('/upload', upload.fields([
     { name: 'heroImage', maxCount: 1 },
     { name: 'gallery', maxCount: 10 }
@@ -85,7 +83,7 @@ app.post('/upload', upload.fields([
     res.json({ heroImageUrl, galleryUrls });
 });
 
-// 📌 Створення нового клієнта
+//  Створення нового клієнта
 app.post('/api/clients', async (req, res) => {
     try {
         const { title, heroImage, gallery, pinCode } = req.body;
@@ -101,7 +99,7 @@ app.post('/api/clients', async (req, res) => {
         const newClient = new Client({ title, heroImage, gallery, pinCode });
         await newClient.save();
 
-        // 📌 Формуємо правильний URL для клієнта через бекенд
+        //  Формуємо правильний URL для клієнта через бекенд
         const clientUrl = `http://localhost:5000/gallery/${encodeURIComponent(title)}`;
 
         res.status(201).json({ 
@@ -114,7 +112,7 @@ app.post('/api/clients', async (req, res) => {
     }
 });
 
-// 📌 Отримання даних клієнта
+//  Отримання даних клієнта
 app.get("/api/clients/:clientTitle", async (req, res) => {
     try {
         const clientTitle = req.params.clientTitle;
@@ -130,7 +128,7 @@ app.get("/api/clients/:clientTitle", async (req, res) => {
         res.status(500).json({ message: 'Помилка сервера' });
     }
 });
-// 📌 Ендпоінт для перевірки PIN-коду
+//  Ендпоінт для перевірки PIN-коду
 app.post('/api/clients/:clientTitle/auth', async (req, res) => {
     try {
         const { clientTitle } = req.params;
@@ -153,7 +151,7 @@ app.post('/api/clients/:clientTitle/auth', async (req, res) => {
     }
 });
 
-// 📌 Ендпоінт для завантаження `client-gallery.html`
+//  Ендпоінт для завантаження `client-gallery.html`
 app.get("/gallery/:clientTitle", (req, res) => {
     res.sendFile(path.join(__dirname, "../src/client-gallery.html"));
 });
@@ -162,7 +160,7 @@ app.get("/gallery/:clientTitle", (req, res) => {
 app.get("/reviews", async (req, res) => {
     try {
         const reviews = await Review.find();
-        console.log("📤 Відправляю відгуки:", reviews); // Додаємо лог на бекенді
+        console.log("📤 Відправляю відгуки:", reviews); 
         res.json(reviews);
     } catch (error) {
         res.status(500).json({ message: "Помилка сервера" });
@@ -206,7 +204,7 @@ app.delete("/reviews/:id", async (req, res) => {
     }
 });
 
-// 📌 Старт сервера
+//  Старт сервера
 app.listen(PORT, () => {
     console.log(`🚀 Сервер працює на порту ${PORT}`);
 });
