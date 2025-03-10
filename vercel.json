@@ -1,5 +1,6 @@
 {
   "public": true,
+  "outputDirectory": "dist",
   "routes": [
     { "src": "/(.*)", "dest": "/$1" }
   ],
