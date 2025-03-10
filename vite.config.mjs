@@ -49,6 +49,16 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, "src/index.html"),
+        price: path.resolve(__dirname, "src/price-page.html"),
+        contact: path.resolve(__dirname, "src/contact-page.html"),
+        individual: path.resolve(__dirname, "src/individual-page.html"),
+        family: path.resolve(__dirname, "src/family-page.html"),
+        children: path.resolve(__dirname, "src/children-page.html"),
+        newborn: path.resolve(__dirname, "src/newborn-page.html"),
+        admin: path.resolve(__dirname, "src/admin_review_page.html"),
+        client: path.resolve(__dirname, "src/client-gallery.html"),
+        policy: path.resolve(__dirname, "src/privacy-policy.html"),
+        terms: path.resolve(__dirname, "src/terms-of-use.html"),
       },
     },
   },
