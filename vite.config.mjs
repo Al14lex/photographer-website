@@ -44,7 +44,7 @@ export default defineConfig({
   root: "src", // Коренева директорія фронтенду
   publicDir: "../public", // Доступ до статичних файлів
   build: {
-    outDir: "../public", // Деплойна директорія
+    outDir: "../dist", // Деплойна директорія
     emptyOutDir: true, // Очищення перед білдом
     rollupOptions: {
       input: {
