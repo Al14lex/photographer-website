@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const openModalBtns = document.getElementsByClassName("openReviewModal"); // Оновлений правильний вибір елементів
+    const openModalBtns = document.getElementsByClassName("openReviewModal"); 
     const reviewModal = document.getElementById("reviewModal");
     const closeReviewModal = document.getElementById("closeReviewModal");
     const reviewForm = document.getElementById("reviewForm");
@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // ✅ Додаємо обробник подій до всіх кнопок з класом "openReviewModal"
     Array.from(openModalBtns).forEach(button => {
         button.addEventListener("click", function () {
             openModal(reviewModal);
@@ -77,10 +76,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     setTimeout(() => closeModal(thankYouModal), 4000);
                 } else {
-                    console.error("Помилка надсилання відгуку");
+                    console.error("Error sending review");
                 }
             } catch (error) {
-                console.error("Помилка:", error);
+                console.error("Error:", error);
             }
         });
     }
