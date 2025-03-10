@@ -1,8 +1,5 @@
 {
-  "rewrites": [
-    {
-      "source": "/partials/home.html",
-      "destination": "/partials/home.html"
-    }
+  "routes": [
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }

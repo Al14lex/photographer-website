@@ -44,6 +44,31 @@
     <load ="./partials/home/review-modal.html" />
     <load ="./partials/footer-sec.html" />
     <load ="./partials/home/modal.html" />
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", function (event) {
+            event.preventDefault();
+            const url = this.getAttribute("href");
+            history.pushState(null, "", url);
+            loadPage(url);
+          });
+        });
+
+        function loadPage(url) {
+          fetch(url)
+            .then((response) => response.text())
+            .then((html) => {
+              document.body.innerHTML = html;
+              document.title = url;
+            })
+            .catch(() => {
+              document.body.innerHTML = "<h1>404 Not Found</h1>";
+            });
+        }
+      });
+    </script>
+
     <script type="module" src="./js/home/check-admin.js"></script>
     <script type="module" src="./js/header.js"></script>
     <script type="module" src="./js/mobile-menu.js"></script>
