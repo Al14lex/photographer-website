@@ -1,5 +1,5 @@
 {
-  "public": "dist",
+  "public": true,
   "routes": [
     { "src": "/(.*)", "dest": "/$1" }
   ],
