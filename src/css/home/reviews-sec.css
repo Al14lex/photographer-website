@@ -95,12 +95,23 @@
     line-height: 1.4;
     scrollbar-width: thin;
     margin-bottom: auto;
+    flex-grow: 1;
 }
 .review-text::-webkit-scrollbar {
+    all: unset;
     width: 6px;
 }
 .review-text::-webkit-scrollbar-track {
+    all: unset;
     background: transparent;
+}
+.review-text::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+.review-text::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5);
 }
 .review-form-button {
     background-color: rgba(191, 168, 146, 0.567);
