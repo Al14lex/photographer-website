@@ -1,8 +1,10 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/partials/home.html",
-      "destination": "/partials/home.html"
+      "source": "/partials/:path*",
+      "destination": "/partials/:path*"
     }
   ]
 }
