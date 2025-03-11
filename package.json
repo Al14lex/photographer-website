@@ -23,7 +23,7 @@
     "express": "^4.21.2",
     "mongodb": "^6.13.0",
     "mongoose": "^8.10.1",
-    "swiper": "^11.1.15",
+    "swiper": "^11.2.5",
     "vite-plugin-full-reload": "^1.0.5",
     "vite-plugin-html-inject": "^1.0.1"
   },

@@ -45,8 +45,8 @@
 /*=========== BASIC =============*/
 :root {
     /* Fonts */
-    --font-main: "Cormorant Garamond", serif;
-    --font-secondary: "Playfair Display SC", serif;
+    --font-main: "Cormorant Garamond", serif !important;
+    --font-secondary: "Playfair Display SC", serif !important;
 
     /* Colors */
     --color-text-primary: #2e2a26;
@@ -79,7 +79,9 @@
     /* Alignment */
     --text-align-center: center;
 }
-
+body {
+    text-rendering: optimizeLegibility;
+}
 .text-main {
     font-family: var(--font-main);
 }

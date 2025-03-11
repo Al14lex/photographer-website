@@ -26,8 +26,8 @@
 
 .booking-close {
     position: absolute;
-    top: 10px;
-    right: 20px;
+    top: -22%;
+    right: 0;
     font-size: 40px;
     cursor: pointer;
     color: #333;
@@ -224,6 +224,9 @@ textarea:-moz-autofill {
         font-size: 20px;
         padding: 12px 25px;
     }
+        .booking-close {
+            right: -7%;
+        }
 }
 
 /* ====================== GET IN TOUCH DESC====================== */
@@ -272,5 +275,9 @@ textarea:-moz-autofill {
         font-size: 20px;
         padding: 12px 30px;
     }
+                        .booking-close {
+                            top:-3%;
+                            right: -25%;
+                        }
 
 }
