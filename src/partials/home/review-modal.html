@@ -18,7 +18,9 @@
           class="review-form-textarea"
           placeholder="Your Review"
           required
+          maxlength="200"
         ></textarea>
+        <p id="charCount">0 / 200</p>
       </div>
       <button type="submit" class="review-form-btn">Send</button>
     </form>
@@ -32,3 +34,19 @@
     <p>Your review has been submitted and will be published soon.</p>
   </div>
 </div>
+<script>
+  const reviewText = document.getElementById("reviewText");
+  const charCount = document.getElementById("charCount");
+  const maxLength = 200;
+
+  reviewText.addEventListener("input", () => {
+    let currentLength = reviewText.value.length;
+    charCount.textContent = `${currentLength} / ${maxLength}`;
+
+    if (currentLength > maxLength - 20) {
+      charCount.style.color = "red";
+    } else {
+      charCount.style.color = "black";
+    }
+  });
+</script>
