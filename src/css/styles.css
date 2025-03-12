@@ -87,21 +87,21 @@ body {
     height: 100%;
     overflow-x: hidden;
 }
-/* Hide native scrollbar completely */
-::-webkit-scrollbar {
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
     width: 0;
     height: 0;
 }
 
-/* Hide scrollbar track */
-::-webkit-scrollbar-track {
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
     width: 0;
         height: 0;
     background: transparent;
 }
 
-/* Hide scrollbar thumb */
-::-webkit-scrollbar-thumb {
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
     width: 0;
         height: 0;
     background: transparent;
