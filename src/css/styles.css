@@ -85,7 +85,6 @@ body {
     padding: 0;
     width: 100%;
     height: 100%;
-    overflow-x: hidden;
 }
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
@@ -107,7 +106,7 @@ body::-webkit-scrollbar-thumb {
     background: transparent;
 }
 body {
-    overflow-y: auto;
+    overflow: scroll;
     text-rendering: optimizeLegibility;
 }
 .text-main {

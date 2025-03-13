@@ -1,12 +1,15 @@
+
+document.addEventListener("DOMContentLoaded", () => {
+
 let lastScrollTop = 0;
 const header = document.querySelector('.header');
 
-const heroSection = document.querySelector('[class^="hero"]');
+  const heroSection = document.querySelector('[class^="hero"]');
+ const heroHeight = heroSection ? heroSection.offsetHeight / 2 : 100;
 
 window.addEventListener('scroll', () => {
   const scrollTop = window.scrollY || document.documentElement.scrollTop;
-
-  const heroHeight = heroSection ? heroSection.offsetHeight / 2 : 0;
+  const heroHeight = heroSection ? heroSection.offsetHeight / 2 : 100;
 
   if (scrollTop > lastScrollTop && scrollTop > heroHeight) {
     header?.classList.add('hidden'); 
@@ -15,6 +18,7 @@ window.addEventListener('scroll', () => {
   }
 
   lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+});
 });
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
