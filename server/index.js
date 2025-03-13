@@ -66,7 +66,7 @@ app.get("/gallery/:title", (req, res) => {
 // Photo upload
 app.post('/upload', upload.fields([
     { name: 'heroImage', maxCount: 1 },
-    { name: 'gallery', maxCount: 10 }
+    { name: 'gallery'}
 ]), (req, res) => {
     if (!req.files || (!req.files.heroImage && !req.files.gallery)) {
         return res.status(400).json({ message: 'Files not uploaded!' });
