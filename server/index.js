@@ -94,7 +94,7 @@ app.post('/api/clients', async (req, res) => {
         const newClient = new Client({ title, heroImage, gallery, pinCode });
         await newClient.save();
 
-        const clientUrl = `https://photographer-website.onrender.com/gallery/${encodeURIComponent(title)}`;
+        const clientUrl = `https://aleksandraphoto.com/gallery/${encodeURIComponent(title)}`;
 
         res.status(201).json({ 
             message: 'Client gallery created!', 

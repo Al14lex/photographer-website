@@ -1,4 +1,4 @@
-const apiBaseUrl = "https://photographer-website.onrender.com/api/clients"; 
+const apiBaseUrl = "https://aleksandraphoto.com/api/clients"; 
 const clientTitle = decodeURIComponent(window.location.pathname.split("/").slice(-1)[0]);
 const heroSection = document.getElementById("hero");
 const pinSection = document.getElementById("pin-section");

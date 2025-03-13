@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const message = document.getElementById("reviewText").value;
 
             try {
-                const response = await fetch("https://photographer-website.onrender.com/reviews", {
+                const response = await fetch("https://aleksandraphoto.com/reviews", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ name, message })
