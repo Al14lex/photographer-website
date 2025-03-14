@@ -185,7 +185,7 @@ if (document.getElementById("reviewList") && document.getElementById("approvedRe
         approvedList.innerHTML = "";
 
         try {
-            const response = await fetch("https://aleksandraphoto.com/reviews");
+            const response = await fetch("https://aleksandraphoto.com/api/reviews");
             const reviews = await response.json();
 
             if (reviews.length === 0) {
