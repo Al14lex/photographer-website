@@ -12,7 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: ["https://aleksandraphoto.com", "https://www.aleksandraphoto.com"],
+    origin: ["https://photographer-website.onrender.com", "https://www.aleksandraphoto.com"],
     credentials: true
 }));
 app.use(express.json());
@@ -97,7 +97,7 @@ app.post('/api/clients', async (req, res) => {
         const newClient = new Client({ title, heroImage, gallery, pinCode });
         await newClient.save();
 
-        const clientUrl = `https://aleksandraphoto.com/gallery/${encodeURIComponent(title)}`;
+        const clientUrl = `https://photographer-website.onrender.com/gallery/${encodeURIComponent(title)}`;
 
         res.status(201).json({ 
             message: 'Client gallery created!', 

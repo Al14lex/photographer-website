@@ -1,7 +1,7 @@
 
 async function loadApprovedReviews() {
     try {
-        const response = await fetch("https://aleksandraphoto.com/api/reviews/approved");
+        const response = await fetch("https://photographer-website.onrender.com/reviews/approved");
         const reviews = await response.json();
 
         
