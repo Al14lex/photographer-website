@@ -8,16 +8,13 @@ const multer = require("multer");
 const multerS3 = require("multer-s3");
 const path = require("path");
 
-app.use(cors({
-    origin: "*", // Тимчасово для тестування
-    // origin: ["https://aleksandraphoto.com", "https://www.aleksandraphoto.com"]
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    allowedHeaders: "Content-Type, Authorization",
-    credentials: true
-}));
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.use(cors({
+    origin: ["https://aleksandraphoto.com", "https://www.aleksandraphoto.com"],
+    credentials: true
+}));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../src")));
 
