@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 formData.append("heroImage", heroFile);
                 galleryFiles.forEach(file => formData.append("gallery", file));
 
-                const uploadResponse = await fetch("https://photographer-website.onrender.com/upload", {
+                const uploadResponse = await fetch("https://aleksandraphoto.com/upload", {
                     method: "POST",
                     body: formData,
                 });
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     pinCode,
                 };
 
-                const createClientResponse = await fetch("https://photographer-website.onrender.com/api/clients", {
+                const createClientResponse = await fetch("https://aleksandraphoto.com/api/clients", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(clientData),
@@ -185,7 +185,7 @@ if (document.getElementById("reviewList") && document.getElementById("approvedRe
         approvedList.innerHTML = "";
 
         try {
-            const response = await fetch("https://photographer-website.onrender.com/reviews");
+            const response = await fetch("https://aleksandraphoto.com/reviews");
             const reviews = await response.json();
 
             if (reviews.length === 0) {
@@ -228,7 +228,7 @@ if (document.getElementById("reviewList") && document.getElementById("approvedRe
 
     window.approveReview = async function (id) {
         try {
-            await fetch(`https://photographer-website.onrender.com/reviews/${id}`, {
+            await fetch(`https://aleksandraphoto.com/reviews/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ status: "approved" })
@@ -241,7 +241,7 @@ if (document.getElementById("reviewList") && document.getElementById("approvedRe
 
     window.rejectReview = async function (id) {
         try {
-            await fetch(`https://photographer-website.onrender.com/reviews/${id}`, {
+            await fetch(`https://aleksandraphoto.com/reviews/${id}`, {
                 method: "DELETE"
             });
             loadReviews();
@@ -252,7 +252,7 @@ if (document.getElementById("reviewList") && document.getElementById("approvedRe
 
     window.deleteReview = async function (id) {
         try {
-            await fetch(`https://photographer-website.onrender.com/reviews/${id}`, {
+            await fetch(`https://aleksandraphoto.com/reviews/${id}`, {
                 method: "DELETE"
             });
             loadReviews();
