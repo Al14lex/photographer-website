@@ -10,16 +10,13 @@ const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
 app.use(cors({
     origin: ["https://aleksandraphoto.com", "https://www.aleksandraphoto.com", "http://localhost:5174"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true
 }));
-
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../src")));
-
 app.use('/img', express.static(path.join(__dirname, '../src/img')));
 app.use('/favicon', express.static(path.join(__dirname, '../src/favicon')));
 app.use('/css', express.static(path.join(__dirname, '../src/css')));
