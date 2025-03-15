@@ -2,7 +2,12 @@
 .contact {
     padding: var(--padding-small) 0 30px 0;
 }
-
+.error-message {
+    color: white;
+    font-size: 16px;
+    margin: 0 auto;
+    text-align: center;
+}
 .get-in-container {
     margin-right: auto;
     margin-left: auto;
