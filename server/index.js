@@ -11,7 +11,7 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 5000;
 app.use(cors({
-    origin: ["https://api.aleksandraphoto.com", "https://www.aleksandraphoto.com", "http://localhost:5174"],
+    origin: ["https://aleksandraphoto.com", "https://www.aleksandraphoto.com", "http://localhost:5174", "https://api.aleksandraphoto.com"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true
 }));
