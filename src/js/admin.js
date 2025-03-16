@@ -68,8 +68,17 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
+        const loadingIndicator = document.createElement("div");
+        loadingIndicator.id = "loadingIndicator";
+        loadingIndicator.style.display = "none";
+        loadingIndicator.style.marginBottom = "20px";
+        loadingIndicator.innerHTML = `<p>Uploading... <span class='spinner'></span></p>`;
+        clientForm.appendChild(loadingIndicator);
+
         clientForm.addEventListener("submit", async function (event) {
             event.preventDefault();
+
+            loadingIndicator.style.display = "block";
 
             const title = document.getElementById("title").value.trim();
             const pinCode = document.getElementById("pinCode").value.trim();
@@ -136,6 +145,8 @@ document.addEventListener("DOMContentLoaded", function () {
             } catch (error) {
                 console.error("Error creating client:", error);
                 alert("An error occurred while creating the client");
+            } finally {
+                loadingIndicator.style.display = "none"; // Приховуємо індикатор після завершення
             }
         });
 
