@@ -1,5 +1,5 @@
-// const apiBaseUrl = "https://api.aleksandraphoto.com/api/clients";
-const apiBaseUrl = "http://localhost:5000/api/clients";
+const apiBaseUrl = "https://api.aleksandraphoto.com/api/clients";
+// const apiBaseUrl = "http://localhost:5000/api/clients";
 
 const clientTitle = decodeURIComponent(window.location.pathname.split("/").slice(-1)[0]);
 const heroSection = document.getElementById("hero");
