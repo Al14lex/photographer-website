@@ -10,11 +10,25 @@ const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
 app.use(cors({
-    origin: ["https://aleksandraphoto.com", "https://www.aleksandraphoto.com", "http://localhost:5173", "https://api.aleksandraphoto.com"],
+    origin: ["https://aleksandraphoto.com", "https://www.aleksandraphoto.com", "http://localhost:5173", "http://localhost:5000", "https://api.aleksandraphoto.com"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: ["Content-Type", "Authorization"],
+    exposedHeaders: ["ETag"],
     credentials: true
 }));
+
+
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,HEAD,PUT,PATCH,POST,DELETE");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.header("Access-Control-Expose-Headers", "ETag");
+    next();
+});
+
+
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../src")));
 app.use('/img', express.static(path.join(__dirname, '../src/img')));

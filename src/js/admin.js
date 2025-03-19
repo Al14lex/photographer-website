@@ -1,3 +1,6 @@
+
+import imageCompression from 'browser-image-compression';
+
 document.addEventListener("DOMContentLoaded", function () {
     console.log("✅ Admin page loaded");
 
@@ -7,19 +10,47 @@ document.addEventListener("DOMContentLoaded", function () {
     const heroPreview = document.getElementById("heroPreview");
     const galleryPreview = document.getElementById("galleryPreview");
     const copyUrlBtn = document.getElementById("copyUrlBtn");
+    const clientUrlInput = document.getElementById("clientUrl");
+
+    const progressBar = document.createElement("progress");
+    progressBar.style.width = "100%";
+    progressBar.max = 100;
+    progressBar.value = 0;
+    clientForm.appendChild(progressBar);
 
     if (clientForm) {
         setupClientForm();
+    }
+
+    async function compressImage(file) {
+        const options = {
+            maxSizeMB: 1,
+            maxWidthOrHeight: 4000,
+            useWebWorker: true,
+            initialQuality: 0.95
+        };
+
+        try {
+            const compressedBlob = await imageCompression(file, options);
+            if (compressedBlob.size === 0) {
+                console.error("❌ Compression failed: Blob size is 0");
+                return file;
+            }
+            return new File([compressedBlob], file.name || "compressed.jpg", { type: file.type });
+        } catch (error) {
+            console.error("Image compression error:", error);
+            return file;
+        }
     }
 
     function setupClientForm() {
         let heroFile = null;
         let galleryFiles = [];
 
-        heroImageInput.addEventListener("change", function () {
+        heroImageInput.addEventListener("change", async function () {
             heroPreview.innerHTML = "";
             if (this.files.length > 0) {
-                heroFile = this.files[0];
+                heroFile = await compressImage(this.files[0]);
                 const img = document.createElement("img");
                 img.src = URL.createObjectURL(heroFile);
                 img.style.maxWidth = "150px";
@@ -28,17 +59,23 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        galleryInput.addEventListener("change", function () {
+        galleryInput.addEventListener("change", async function () {
             const newFiles = Array.from(this.files);
-            galleryFiles = [...galleryFiles, ...newFiles];
-
+            const compressedFiles = await Promise.all(newFiles.map(file => compressImage(file)));
+            galleryFiles = [...galleryFiles, ...compressedFiles];
             updateFileInput();
             renderGalleryPreview();
         });
 
         function updateFileInput() {
             const dataTransfer = new DataTransfer();
-            galleryFiles.forEach(file => dataTransfer.items.add(file));
+            galleryFiles.forEach((file, index) => {
+                if (!(file instanceof File)) {
+                    console.warn(`⚠️ Converting Blob to File: ${file.name}`);
+                    file = new File([file], file.name || `compressed_${index}.jpg`, { type: "image/jpeg" });
+                }
+                dataTransfer.items.add(file);
+            });
             galleryInput.files = dataTransfer.files;
         }
 
@@ -49,12 +86,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 img.src = URL.createObjectURL(file);
                 img.style.maxWidth = "100px";
                 img.style.margin = "5px";
-                img.style.borderRadius= "8px"
+                img.style.borderRadius = "8px";
 
                 const removeBtn = document.createElement("button");
                 removeBtn.textContent = "x";
-                removeBtn.style.padding = "7px"
-                removeBtn.style.lineHeight = "0.5"
+                removeBtn.style.padding = "7px";
+                removeBtn.style.lineHeight = "0.5";
                 removeBtn.style.margin = "0 5px 0 0";
                 removeBtn.style.color = "red";
                 removeBtn.onclick = function () {
@@ -68,17 +105,10 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
-        const loadingIndicator = document.createElement("div");
-        loadingIndicator.id = "loadingIndicator";
-        loadingIndicator.style.display = "none";
-        loadingIndicator.style.marginBottom = "20px";
-        loadingIndicator.innerHTML = `<p>Uploading... <span class='spinner'></span></p>`;
-        clientForm.appendChild(loadingIndicator);
-
         clientForm.addEventListener("submit", async function (event) {
             event.preventDefault();
-
-            loadingIndicator.style.display = "block";
+            progressBar.value = 0;
+            progressBar.style.display = "block";
 
             const title = document.getElementById("title").value.trim();
             const pinCode = document.getElementById("pinCode").value.trim();
@@ -89,22 +119,41 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             try {
-                const formData = new FormData();
-                formData.append("heroImage", heroFile);
-                galleryFiles.forEach(file => formData.append("gallery", file));
+                console.log("🟢 Починаємо завантаження...");
+                
+                const uploadPromises = galleryFiles.map(async (file, index) => {
+                    const formData = new FormData();
+                    formData.append("gallery", file);
 
-                const uploadResponse = await fetch("https://api.aleksandraphoto.com/upload", {
-                    method: "POST",
-                    body: formData,
+                    const response = await fetch("https://api.aleksandraphoto.com/upload", {
+                        method: "POST",
+                        body: formData,
+                    });
+
+                    if (!response.ok) throw new Error(`Upload failed for ${file.name}`);
+
+                    const uploadData = await response.json();
+                    progressBar.value += (100 / galleryFiles.length);
+                    return uploadData.galleryUrls[0];
                 });
 
-                if (!uploadResponse.ok) throw new Error("Error uploading photos");
-                const uploadData = await uploadResponse.json();
+                const uploadedGalleryUrls = await Promise.all(uploadPromises);
+
+                const heroFormData = new FormData();
+                heroFormData.append("heroImage", heroFile);
+                const heroResponse = await fetch("https://api.aleksandraphoto.com/upload", {
+                    method: "POST",
+                    body: heroFormData,
+                });
+
+                if (!heroResponse.ok) throw new Error("Hero image upload failed");
+
+                const heroUploadData = await heroResponse.json();
 
                 const clientData = {
                     title,
-                    heroImage: uploadData.heroImageUrl,
-                    gallery: uploadData.galleryUrls,
+                    heroImage: heroUploadData.heroImageUrl,
+                    gallery: uploadedGalleryUrls,
                     pinCode,
                 };
 
@@ -114,52 +163,38 @@ document.addEventListener("DOMContentLoaded", function () {
                     body: JSON.stringify(clientData),
                 });
 
+                if (!createClientResponse.ok) {
+                    console.error("❌ Error response:", await createClientResponse.text());
+                    throw new Error("Client creation failed");
+                }
+
                 const result = await createClientResponse.json();
-                console.log("Received client URL:", result.clientUrl);
+                console.log("✅ Received client URL:", result.clientUrl);
+                clientUrlInput.value = result.clientUrl;
+                copyUrlBtn.style.display = "block";
 
-                if (createClientResponse.ok) {
-                    alert("Client successfully created!");
+                alert("Client successfully created!");
 
-                    setTimeout(() => {
-                        const clientUrlInput = document.getElementById("clientUrl");
-                        if (clientUrlInput) {
-                            clientUrlInput.value = result.clientUrl;
-                        } else {
-                            console.error("clientUrl field not found in DOM!");
-                        }
-                    }, 100);
-
-                    copyUrlBtn.style.display = "block";
-
-                    setTimeout(() => {
-                        clientForm.reset();
-                        document.getElementById("clientUrl").value = result.clientUrl; 
-                    }, 500);
-
+                setTimeout(() => {
+                    progressBar.value = 100;
                     heroPreview.innerHTML = "";
                     galleryPreview.innerHTML = "";
                     galleryFiles = [];
-                } else {
-                    alert("Помилка: " + result.message);
-                }
+                }, 500);
+
             } catch (error) {
-                console.error("Error creating client:", error);
+                console.error("❌ Error:", error);
                 alert("An error occurred while creating the client");
             } finally {
-                loadingIndicator.style.display = "none"; // Приховуємо індикатор після завершення
+                progressBar.style.display = "none";
             }
         });
 
         copyUrlBtn.addEventListener("click", function () {
-            try {
-                const clientUrlInput = document.getElementById("clientUrl");
-                clientUrlInput.select();
-                navigator.clipboard.writeText(clientUrlInput.value)
-                    .then(() => alert("Link copied!"))
-                    .catch(err => console.error("Error copying:", err));
-            } catch (err) {
-                console.error("Error copying:", err);
-            }
+            clientUrlInput.select();
+            navigator.clipboard.writeText(clientUrlInput.value)
+                .then(() => alert("Link copied!"))
+                .catch(err => console.error("Error copying:", err));
         });
     }
 });
