@@ -198,14 +198,14 @@ function renderGallery() {
             console.error(`❌ Помилка завантаження зображення: ${photoUrl}`);
         };
     });
-    //=================
-    // ✅ Додаємо анімацію, коли фото входить у вьюпорт
+
+    
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
-                img.classList.add("visible"); // Додаємо клас анімації
-                observer.unobserve(img); // Вимикаємо спостереження після анімації
+                img.classList.add("visible"); 
+                // observer.unobserve(img); 
             }
         });
     }, { rootMargin: "100px", threshold: 0.2 });
