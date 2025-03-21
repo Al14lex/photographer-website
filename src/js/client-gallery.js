@@ -36,6 +36,32 @@ async function fetchClientData() {
 }
 
 // 📌 Verify PIN before accessing gallery
+// async function checkPin() {
+//     const pinCode = document.getElementById("pin-code").value;
+//     if (!pinCode) {
+//         pinError.textContent = "Please enter the PIN code";
+//         return;
+//     }
+
+//     try {
+//         console.log(`🔍 API запит: ${apiBaseUrl}/${clientTitle}/auth`);
+//         const response = await fetch(`${apiBaseUrl}/${clientTitle}/auth`, {
+//             method: "POST",
+//             headers: { "Content-Type": "application/json" },
+//             body: JSON.stringify({ pinCode })
+//         });
+
+//         const result = await response.json();
+//         if (response.ok) {
+//             pinSection.style.display = "none";
+//             gallerySection.style.display = "block";
+//         } else {
+//             pinError.textContent = "Wrong PIN code";
+//         }
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
 async function checkPin() {
     const pinCode = document.getElementById("pin-code").value;
     if (!pinCode) {
@@ -55,6 +81,17 @@ async function checkPin() {
         if (response.ok) {
             pinSection.style.display = "none";
             gallerySection.style.display = "block";
+
+            // 🔥 **Запускаємо анімацію поступово**
+            document.querySelectorAll(".lazy-client").forEach((img, index) => {
+                setTimeout(() => {
+                    img.style.transition = "opacity 1s ease-out, transform 1s ease-out, filter 1s ease-out";
+                    img.style.visibility = "visible";
+                    img.classList.add("visible");
+                    img.style.opacity = "1";
+                }, index * 100); // Кожне наступне фото затримується на 150ms
+            });
+
         } else {
             pinError.textContent = "Wrong PIN code";
         }
@@ -63,48 +100,115 @@ async function checkPin() {
     }
 }
 
+
+// function renderGallery() {
+//     const gallery = document.getElementById("gallery");
+//     gallery.innerHTML = "";
+
+//     if (!window.clientGallery || window.clientGallery.length === 0) {
+//         gallery.innerHTML = "<p>No photos available</p>";
+//         return;
+//     }
+
+//     window.clientGallery.forEach(photoUrl => {
+//         const img = document.createElement("img");
+//         img.className = "lazy-client";
+//         img.dataset.src = photoUrl;
+//         img.alt = "Client photo";
+//         img.loading = "lazy";
+//         img.style.opacity = "0";
+
+//         gallery.appendChild(img);
+//     });
+
+//     const observer = new IntersectionObserver((entries, observer) => {
+//         entries.forEach(entry => {
+//             if (entry.isIntersecting) {
+//                 const img = entry.target;
+//                 const src = img.dataset.src;
+
+//                 if (src) {
+//                     setTimeout(() => {
+//                         img.src = src;
+//                         img.removeAttribute("data-src");
+
+//                         img.onload = () => {
+//                             img.classList.add("visible");
+//                             img.style.opacity = "1"; 
+//                         };
+//                     }, 300); 
+//                 }
+
+//                 observer.unobserve(img);
+//             }
+//         });
+//     }, { rootMargin: "150px", threshold: 0.1 });
+
+//     document.querySelectorAll(".lazy-client").forEach(img => observer.observe(img));
+// }
 function renderGallery() {
     const gallery = document.getElementById("gallery");
     gallery.innerHTML = "";
 
     if (!window.clientGallery || window.clientGallery.length === 0) {
+        console.error("❌ No images in clientGallery");
         gallery.innerHTML = "<p>No photos available</p>";
         return;
     }
 
-    window.clientGallery.forEach(photoUrl => {
+    window.clientGallery.forEach((photoUrl, index) => {
+        const imgWrapper = document.createElement("div");
+        imgWrapper.className = "client-img-wrapper"; // Новий контейнер для фіксації розміру
+        imgWrapper.style.overflow = "hidden";
+        imgWrapper.style.height = "100%";
+        imgWrapper.style.position = "relative";
+        imgWrapper.style.removeProperty("min-height");
+        imgWrapper.setAttribute("style", "overflow: hidden; height: 100%; position: relative; min-height: 0 !important;");
+
+
+
         const img = document.createElement("img");
         img.className = "lazy-client";
-        img.dataset.src = photoUrl;
         img.alt = "Client photo";
         img.loading = "lazy";
         img.style.opacity = "0";
+        img.style.visibility = "hidden"; 
+        // img.style.transition = "none"; 
+        img.style.width = "100%"; 
+        img.style.display = "block"; 
 
-        gallery.appendChild(img);
+        imgWrapper.appendChild(img);
+        gallery.appendChild(imgWrapper);
+
+        console.log(`📥 Завантажуємо фото: ${photoUrl}`);
+
+        // Завантажуємо зображення в пам’ять перед додаванням у DOM
+        const preloader = new Image();
+        preloader.src = photoUrl;
+
+        preloader.onload = () => {
+            console.log(`✅ Фото завантажене: ${photoUrl}`);
+            img.src = photoUrl;
+            // imgWrapper.style.minHeight = `${preloader.height}px`; 
+            img.style.aspectRatio = `${preloader.width}/${preloader.height}`;
+            img.style.visibility = "visible";
+        };
+
+        preloader.onerror = () => {
+            console.error(`❌ Помилка завантаження зображення: ${photoUrl}`);
+        };
     });
-
+    //=================
+    // ✅ Додаємо анімацію, коли фото входить у вьюпорт
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
-                const src = img.dataset.src;
-
-                if (src) {
-                    setTimeout(() => {
-                        img.src = src;
-                        img.removeAttribute("data-src");
-
-                        img.onload = () => {
-                            img.classList.add("visible");
-                            img.style.opacity = "1"; 
-                        };
-                    }, 300); 
-                }
-
-                observer.unobserve(img);
+                img.classList.add("visible"); // Додаємо клас анімації
+                observer.unobserve(img); // Вимикаємо спостереження після анімації
             }
         });
-    }, { rootMargin: "150px", threshold: 0.1 });
+    }, { rootMargin: "100px", threshold: 0.2 });
 
     document.querySelectorAll(".lazy-client").forEach(img => observer.observe(img));
 }
