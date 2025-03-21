@@ -4,7 +4,17 @@ import imageCompression from 'browser-image-compression';
 document.addEventListener("DOMContentLoaded", function () {
     console.log("✅ Admin page loaded");
 
+    const isAdminPage = document.body.id === 'admin';
+    if (!isAdminPage) {
+        console.log("❌ Not admin page, script won't run.");
+        return;
+    }
+
     const clientForm = document.getElementById("clientForm");
+    if (!clientForm) {
+        console.error("❌ Error: clientForm element not found!");
+        return;
+    }
     const heroImageInput = document.getElementById("heroImage");
     const galleryInput = document.getElementById("gallery");
     const heroPreview = document.getElementById("heroPreview");

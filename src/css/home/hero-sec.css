@@ -30,7 +30,7 @@
     text-align: center;
     background: rgba(191, 168, 146, 0.6);
     padding: 15px;
-    width: 90%;
+    width: 80%;
     border-radius: 10px;
     position: absolute;
     top: 50%;
@@ -82,7 +82,7 @@
     }
 
     .hero-content {
-        min-width: 1000px;
+        width: 900px;
         padding: 30px;
     }
 

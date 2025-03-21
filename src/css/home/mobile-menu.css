@@ -1,10 +1,10 @@
 
-.mobile-menu {
+/* .mobile-menu {
     position: fixed;
     top: 0;
     right: 0;
-    width: 100%;
-    height: 100vh;
+    width: 100vw;
+    height: 100dvh;
     background: linear-gradient(rgba(191, 168, 146, 0.3), rgba(191, 168, 146, 0.3)),
         url('/img/home/mobile-menu.jpg');
     background-size: cover;
@@ -18,8 +18,33 @@
     padding: var(--padding-large);
     transition: transform 0.5s ease-in-out;
     transform: translateX(100%);
+} */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100vw !important;
+    /* Примушуємо займати тільки 100% ширини екрану */
+    max-width: 100vw !important;
+    /* Додаємо max-width на всяк випадок */
+    height: 100dvh;
+    /* Використовуємо dynamic viewport height */
+    background: linear-gradient(rgba(191, 168, 146, 0.3), rgba(191, 168, 146, 0.3)), url(/img/home/mobile-menu.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding: var(--padding-large);
+    transition: transform 0.5s ease-in-out;
+    transform: translateX(100%);
+    overflow: hidden;
+    box-sizing: border-box;
+    /* Враховуємо padding всередині width */
 }
-
 .mobile-menu.open {
     transform: translateX(0);
 }

@@ -109,6 +109,7 @@
 .about-text .line {
     line-height: 1.4;
     text-align: center;
+    margin: 0;
     font-size: var(--font-small);
     transition: opacity 0.6s ease, transform 0.6s ease;
 }

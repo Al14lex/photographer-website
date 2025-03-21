@@ -65,7 +65,7 @@
 /* =================== contact-hero DESK ======================== */
 @media (min-width: 1024px) {
     .contact-hero-content {
-        max-width: 1000px;
+        width: 890px;
         padding: 30px;
     }
 

@@ -7,7 +7,7 @@
     margin-right: auto;
     margin-left: auto;
     padding: 10px 0 40px 0;
-    width: 90%;
+    width: 92%;
     background: linear-gradient(to bottom, rgba(191, 168, 146, 0.567) 80%, rgba(255, 255, 255, 0) 100%);
     border-radius: 10px;
 }
@@ -132,7 +132,6 @@ textarea:-moz-autofill {
 @media (min-width: 768px) {
     .contact-get-in-container {
         padding: 20px 0 45px 0;
-        max-width: 664px;
     }
 
     .contact-title {
@@ -190,7 +189,7 @@ textarea:-moz-autofill {
 /* ====================== GET IN TOUCH DESC====================== */
 @media (min-width: 1024px) {
     .contact-get-in-container {
-            max-width: 894px;
+            width: 945px;
         }
 
     .contact-title {

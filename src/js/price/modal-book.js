@@ -166,9 +166,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let selectedShootingType = ""; 
 
+    // 🟢 Додаємо перевірку тільки після фокусу та вводу
     inputs.forEach((input) => {
+        input.addEventListener("focus", function () {
+            this.dataset.touched = "true"; // Позначаємо, що поле активне
+        });
+
         input.addEventListener("input", function () {
-            validateSingleField(input);
+            if (this.dataset.touched === "true") {
+                validateSingleField(input);
+            }
         });
     });
 
@@ -191,7 +198,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const priceItem = this.closest(".price-item");
             selectedShootingType = priceItem.querySelector(".price-title").textContent; 
             shootingTypeElement.textContent = selectedShootingType; 
-
             openModal(modalBook);
         });
     });
@@ -271,7 +277,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function closeModalThankYou() {
         if (modalThanks) {
             modalThanks.classList.remove("active");
-
             setTimeout(() => {
                 modalThanks.style.display = "none"; 
             }, 600); 
@@ -285,7 +290,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
-
 
     function validateBookingForm() {
         let isValid = true;
@@ -321,7 +325,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return true;
     }
 
-
     function showError(input, message) {
         const errorMessage = document.createElement("div");
         errorMessage.classList.add("error-message");
@@ -333,7 +336,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".error-message").forEach(error => error.remove());
     }
 
-
     function isValidEmail(email) {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);
@@ -344,4 +346,3 @@ document.addEventListener("DOMContentLoaded", function () {
         return re.test(phone);
     }
 });
-
