@@ -68,6 +68,9 @@ const storage = multerS3({
         cb(null, { fieldName: file.fieldname });
     },
     key: (req, file, cb) => {
+        const safeName = file.originalname
+    .replace(/\s+/g, "_")
+    .replace(/[^\w\-.]/gi, "")
         cb(null, `photos/${Date.now()}_${file.originalname}`);
     },
 });
