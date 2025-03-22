@@ -23,17 +23,17 @@
 }
 .modal-review-content {
     position: relative;
-        top: -10%;
-        background-color:rgba(191, 168, 146, 0.597);
-        padding: 30px 30px;
-        color: #322d29;
-        font-size: 18px;
-        text-align: center;
-        border-radius: 10px;
-        width: 70%;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        transform: scale(0.8);
-            transition: transform 0.5s ease;
+    /* top: -10%; */
+    background-color:rgba(191, 168, 146, 0.597);
+    padding: 30px 30px;
+    color: #322d29;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 10px;
+    width: 70%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(0.8);
+    transition: transform 0.5s ease;
 }
 .modal-review.active .modal-review-content {
     transform: scale(1);

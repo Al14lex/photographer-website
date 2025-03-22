@@ -154,10 +154,31 @@ app.post('/api/clients/:clientTitle/auth', async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+
 // Endpoint to upload `client-gallery.html`
 app.get("/gallery/:clientTitle", (req, res) => {
     res.sendFile(path.join(__dirname, "../src/client-gallery.html"));
 });
+
+async function downloadPhoto(url, retries = 3) {
+    try {
+        const response = await axios.get(url, {
+            responseType: "stream",
+            timeout: 10000,
+        });
+
+        return response.data; 
+    } catch (error) {
+        console.error("❌ Помилка завантаження фото:", error.message);
+
+        if (error.code === "ECONNRESET" && retries > 0) {
+            console.log(`🔄 Повторний запит... (${3 - retries + 1})`);
+            return downloadPhoto(url, retries - 1);
+        }
+
+        throw error;
+    }
+}
 
 app.get("/api/download-zip/:clientTitle", async (req, res) => {
     const { clientTitle } = req.params;
@@ -178,10 +199,15 @@ app.get("/api/download-zip/:clientTitle", async (req, res) => {
 
         for (let i = 0; i < client.gallery.length; i++) {
             const photoUrl = client.gallery[i];
-            const response = await axios.get(photoUrl, { responseType: "stream" });
 
-            const filename = `photo_${i + 1}.jpg`;
-            archive.append(response.data, { name: filename });
+         try {
+                const response = await downloadPhoto(photoUrl);
+                const filename = `photo_${i + 1}.jpg`;
+                archive.append(response, { name: filename });
+            } catch (error) {
+                console.error(`❌ Помилка завантаження фото ${photoUrl}:`, error.message);
+            }
+        
         }
 
         archive.finalize();
