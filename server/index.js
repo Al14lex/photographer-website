@@ -155,7 +155,6 @@ app.post('/api/clients/:clientTitle/auth', async (req, res) => {
     }
 });
 
-// Endpoint to upload `client-gallery.html`
 app.get("/gallery/:clientTitle", (req, res) => {
     res.sendFile(path.join(__dirname, "../src/client-gallery.html"));
 });
