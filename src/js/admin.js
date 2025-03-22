@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
             galleryFiles.forEach((file, index) => {
                 const img = document.createElement("img");
                 img.src = URL.createObjectURL(file);
-                img.style.maxWidth = "100px";
+                img.style.maxWidth = "70px";
                 img.style.margin = "5px";
                 img.style.borderRadius = "8px";
 

@@ -173,7 +173,6 @@ function renderGallery() {
         img.loading = "lazy";
         img.style.opacity = "0";
         img.style.visibility = "hidden"; 
-        // img.style.transition = "none"; 
         img.style.width = "100%"; 
         img.style.display = "block"; 
 
@@ -182,14 +181,12 @@ function renderGallery() {
 
         console.log(`📥 Завантажуємо фото: ${photoUrl}`);
 
-        // Завантажуємо зображення в пам’ять перед додаванням у DOM
         const preloader = new Image();
         preloader.src = photoUrl;
 
         preloader.onload = () => {
             console.log(`✅ Фото завантажене: ${photoUrl}`);
             img.src = photoUrl;
-            // imgWrapper.style.minHeight = `${preloader.height}px`; 
             img.style.aspectRatio = `${preloader.width}/${preloader.height}`;
             img.style.visibility = "visible";
         };
@@ -205,7 +202,6 @@ function renderGallery() {
             if (entry.isIntersecting) {
                 const img = entry.target;
                 img.classList.add("visible"); 
-                // observer.unobserve(img); 
             }
         });
     }, { rootMargin: "100px", threshold: 0.2 });
@@ -213,40 +209,106 @@ function renderGallery() {
     document.querySelectorAll(".lazy-client").forEach(img => observer.observe(img));
 }
 
-async function downloadAll() {
-    if (!window.clientGallery || window.clientGallery.length === 0) {
-        alert("No photos to download!");
-        return;
-    }
+// async function downloadAll() {
+//     if (!window.clientGallery || window.clientGallery.length === 0) {
+//         alert("No photos to download!");
+//         return;
+//     }
 
-    alert("Downloading started! Press Ok to continue and dont close the window until all photos are downloaded.");
+//     alert("Downloading started! Press Ok to continue and dont close the window until all photos are downloaded.");
 
-    for (let index = 0; index < window.clientGallery.length; index++) {
-        const photoUrl = window.clientGallery[index];
-        const link = document.createElement("a");
-        link.href = photoUrl;
-        link.download = `photo_${index + 1}.jpg`;
+//     for (let index = 0; index < window.clientGallery.length; index++) {
+//         const photoUrl = window.clientGallery[index];
+//         const link = document.createElement("a");
+//         link.href = photoUrl;
+//         link.download = `photo_${index + 1}.jpg`;
 
-        try {
-            const response = await fetch(photoUrl);
-            if (!response.ok) throw new Error("Failed to fetch image");
+//         try {
+//             const response = await fetch(photoUrl);
+//             if (!response.ok) throw new Error("Failed to fetch image");
             
-            const blob = await response.blob();
-            const objectUrl = URL.createObjectURL(blob);
-            link.href = objectUrl;
+//             const blob = await response.blob();
+//             const objectUrl = URL.createObjectURL(blob);
+//             link.href = objectUrl;
 
+//             document.body.appendChild(link);
+//             link.click();
+//             document.body.removeChild(link);
+
+//             await new Promise(resolve => setTimeout(resolve, 500));  
+//         } catch (error) {
+//             console.error(`❌ Error downloading ${photoUrl}:`, error);
+//             alert(`Error downloading photo ${index + 1}`);
+//         }
+//     }
+
+//     alert("✅ All photos downloaded!");
+// }
+async function downloadAll() {
+    alert("Downloading started! Press Ok to continue and dont close the window until all photos are downloaded.");
+    const progressBar = document.getElementById("download-progress-bar");
+    
+    // Показуємо одразу
+    progressBar.style.display = "block";
+    progressBar.style.backgroundColor = "#f5f5f5";
+    progressBar.style.width = "10%"; // стартова "візуалізація"
+
+    // Імітація початкового завантаження (плавно збільшуємо, поки не прийде реальний прогрес)
+    let fakeProgress = 10;
+    const fakeProgressInterval = setInterval(() => {
+        if (fakeProgress < 60) {
+            fakeProgress += 1;
+            progressBar.style.width = `${fakeProgress}%`;
+        }
+    }, 200);
+
+    const xhr = new XMLHttpRequest();
+    const zipUrl = `https://api.aleksandraphoto.com/api/download-zip/${clientTitle}`;
+    // const zipUrl = `http://localhost:5000/api/download-zip/${clientTitle}`;
+
+    xhr.open("GET", zipUrl, true);
+    xhr.responseType = "blob";
+
+    xhr.onprogress = function (event) {
+        clearInterval(fakeProgressInterval); // зупиняємо фейковий приріст
+        if (event.lengthComputable) {
+            const percent = (event.loaded / event.total) * 100;
+            progressBar.style.width = `${percent}%`;
+        }
+    };
+
+    xhr.onload = function () {
+        clearInterval(fakeProgressInterval);
+        if (xhr.status === 200) {
+            const blob = new Blob([xhr.response], { type: "application/zip" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = `${clientTitle}.zip`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
 
-            await new Promise(resolve => setTimeout(resolve, 500));  
-        } catch (error) {
-            console.error(`❌ Error downloading ${photoUrl}:`, error);
-            alert(`Error downloading photo ${index + 1}`);
+            progressBar.style.width = "100%";
+            setTimeout(() => {
+                progressBar.style.display = "none";
+                progressBar.style.width = "0%";
+            }, 2000);
+            alert("✅ All photos downloaded!");
+        } else {
+            progressBar.style.backgroundColor = "red";
+            alert("❌ Failed to download ZIP.");
         }
-    }
+    };
 
-    alert("✅ All photos downloaded!");
+    xhr.onerror = function () {
+        clearInterval(fakeProgressInterval);
+        progressBar.style.backgroundColor = "red";
+        alert("❌ Error during ZIP download.");
+    };
+
+    xhr.send();
 }
+
+
 
 fetchClientData();

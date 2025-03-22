@@ -71,9 +71,7 @@
         Download All Photos
       </button>
     </div>
-    <!-- <div id="download-bar-container">
-      <div id="download-bar"></div>
-    </div> -->
+
     <footer class="footer">
       <div class="container">
         <div class="footer-content">
@@ -157,5 +155,19 @@
     <script type="module" src="/js/home/modal-review.js"></script>
     <script type="module" src="/js/home/reviews.js"></script>
     <script type="module" src="/js/client-gallery.js" defer></script>
+    <!-- Fixed Progress Bar -->
+    <div
+      id="download-progress-bar"
+      style="
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        height: 7px;
+        width: 0%;
+        background-color: #f5f5f5cf;
+        z-index: 99999;
+        transition: width 0.2s ease;
+      "
+    ></div>
   </body>
 </html>

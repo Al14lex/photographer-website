@@ -7,6 +7,8 @@ const { S3Client } = require("@aws-sdk/client-s3");
 const multer = require("multer");
 const multerS3 = require("multer-s3");
 const path = require("path");
+const axios = require("axios");
+const archiver = require("archiver");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -18,16 +20,6 @@ app.use(cors({
     exposedHeaders: ["ETag"],
     credentials: true
 }));
-
-
-// app.use((req, res, next) => {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Methods", "GET,HEAD,PUT,PATCH,POST,DELETE");
-//     res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-//     res.header("Access-Control-Expose-Headers", "ETag");
-//     next();
-// });
-
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../src")));
@@ -71,7 +63,7 @@ const storage = multerS3({
         const safeName = file.originalname
     .replace(/\s+/g, "_")
     .replace(/[^\w\-.]/gi, "")
-        cb(null, `photos/${Date.now()}_${file.originalname}`);
+        cb(null, `photos/${Date.now()}_${safeName}`);
     },
 });
 
@@ -167,6 +159,37 @@ app.get("/gallery/:clientTitle", (req, res) => {
     res.sendFile(path.join(__dirname, "../src/client-gallery.html"));
 });
 
+app.get("/api/download-zip/:clientTitle", async (req, res) => {
+    const { clientTitle } = req.params;
+
+    try {
+        const client = await Client.findOne({ title: clientTitle });
+        if (!client || !client.gallery || client.gallery.length === 0) {
+            return res.status(404).json({ message: "Gallery not found" });
+        }
+
+        res.set({
+            "Content-Type": "application/zip",
+            "Content-Disposition": `attachment; filename="${clientTitle}.zip"`
+        });
+
+        const archive = archiver("zip", { zlib: { level: 9 } });
+        archive.pipe(res);
+
+        for (let i = 0; i < client.gallery.length; i++) {
+            const photoUrl = client.gallery[i];
+            const response = await axios.get(photoUrl, { responseType: "stream" });
+
+            const filename = `photo_${i + 1}.jpg`;
+            archive.append(response.data, { name: filename });
+        }
+
+        archive.finalize();
+    } catch (err) {
+        console.error("❌ ZIP error:", err);
+        res.status(500).json({ message: "Error creating zip file" });
+    }
+});
 //=============================================Reviews====================
 app.get("/reviews", async (req, res) => {
     try {
