@@ -8,45 +8,29 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeThankYouModal = document.getElementById("closeThankYouReviewModal");
     const heroImage = document.getElementById("hero-image"); 
 
-    // function openModal(modal) {
-    //     if (modal) {
-    //         modal.style.display = "flex";
-    //         setTimeout(() => {
-    //             modal.classList.add("active");
-    //         }, 10);
-
-    //         if (heroImage && heroImage.src) {
-    //             modal.style.backgroundImage = `url(${heroImage.src})`;
-    //             modal.style.backgroundSize = "cover";
-    //             modal.style.backgroundPosition = "center";
-    //             modal.style.backgroundRepeat = "no-repeat";
-    //         }
-    //     }
-    // }
 function openModal(modal) {
     if (!modal) return;
 
     modal.style.display = "flex";
 
     if (heroImage && heroImage.src) {
-        // Створюємо тимчасове зображення
+
         const tempImg = new Image();
         tempImg.src = heroImage.src;
 
-        // Коли зображення повністю завантажилось — додаємо фон і клас .active
         tempImg.onload = () => {
             modal.style.backgroundImage = `url(${heroImage.src})`;
             modal.style.backgroundSize = "cover";
             modal.style.backgroundPosition = "center";
             modal.style.backgroundRepeat = "no-repeat";
 
-            // Додай клас після повного завантаження фону
+        
             setTimeout(() => {
                 modal.classList.add("active");
             }, 10);
         };
     } else {
-        // fallback — якщо heroImage відсутнє
+        
         setTimeout(() => {
             modal.classList.add("active");
         }, 10);
