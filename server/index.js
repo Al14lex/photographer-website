@@ -28,7 +28,6 @@ app.use('/favicon', express.static(path.join(__dirname, '../src/favicon')));
 app.use('/css', express.static(path.join(__dirname, '../src/css')));
 app.use('/js', express.static(path.join(__dirname, '../src/js')));
 
-// Connecting to MongoDB
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("✅ Connected to MongoDB"))
     .catch(err => console.error("❌ Connection error:", err));
