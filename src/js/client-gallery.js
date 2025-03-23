@@ -153,8 +153,8 @@ async function downloadAll() {
     }, 200);
 
     try {
-        // const zipUrl = `https://api.aleksandraphoto.com/api/download-zip/${clientTitle}`;
-        const zipUrl = `http://localhost:5000/api/download-zip/${clientTitle}`;
+        const zipUrl = `https://api.aleksandraphoto.com/api/download-zip/${clientTitle}`;
+        // const zipUrl = `http://localhost:5000/api/download-zip/${clientTitle}`;
         const response = await fetch(zipUrl);
 
         if (!response.ok) {

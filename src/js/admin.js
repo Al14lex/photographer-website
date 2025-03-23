@@ -311,7 +311,7 @@ if (document.getElementById("reviewList") && document.getElementById("approvedRe
             await fetch(`https://api.aleksandraphoto.com/reviews/${id}`, {
                 method: "DELETE"
             });
-            loadReviews();
+            // loadReviews();
         } catch (error) {
             console.error("❌ Review delete error:", error);
         }
