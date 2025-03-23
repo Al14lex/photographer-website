@@ -32,7 +32,6 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("✅ Connected to MongoDB"))
     .catch(err => console.error("❌ Connection error:", err));
 
-// Review model
 const reviewSchema = new mongoose.Schema({
     name: String,
     message: String,
