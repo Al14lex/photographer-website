@@ -50,9 +50,6 @@
         alt="Hero Image"
       />
     </div>
-    <div id="loading" style="text-align: center; padding: 2rem">
-      Loading gallery...
-    </div>
 
     <!-- PIN MODAL OVERLAY -->
     <div id="pin-section" class="pin-modal-overlay">
@@ -60,7 +57,10 @@
         <h2>Enter your PIN code to access the gallery</h2>
         <input type="password" id="pin-code" placeholder="Enter PIN" />
         <button onclick="checkPin()">Verify</button>
-        <p id="pin-error" style="color: #fff; font-size: 18px"></p>
+        <p
+          id="pin-error"
+          style="color: #fff; font-size: 18px; margin-bottom: 0"
+        ></p>
       </div>
     </div>
 
@@ -73,9 +73,7 @@
         Download All Photos
       </button>
     </div>
-    <p style="margin: 0 auto; padding: 0 20px 30px 20px; text-align: center">
-      Access to your personal page is stored for 3 months
-    </p>
+
     <footer class="footer">
       <div class="container">
         <div class="footer-content">
@@ -159,6 +157,7 @@
     <script type="module" src="/js/home/modal-review.js"></script>
     <script type="module" src="/js/home/reviews.js"></script>
     <script type="module" src="/js/client-gallery.js" defer></script>
+    <!-- Fixed Progress Bar -->
     <div
       id="download-progress-bar"
       style="

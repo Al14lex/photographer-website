@@ -6,7 +6,6 @@ const heroSection = document.getElementById("hero");
 const pinSection = document.getElementById("pin-section");
 const gallerySection = document.getElementById("gallery-section");
 const pinError = document.getElementById("pin-error");
-document.getElementById("loading").style.display = "block";
 
 window.checkPin = checkPin;
 window.downloadAll = downloadAll;
@@ -67,89 +66,79 @@ async function fetchClientData() {
   }
 }
 
-function observeVisibleImages() {
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      const img = entry.target;
-      if (entry.isIntersecting) {
-        img.classList.add("visible");
-        obs.unobserve(img); 
-      }
-    });
-  }, {
-    rootMargin: "100px",
-    threshold: 0.1,
-  });
-
-  document.querySelectorAll(".lazy-client").forEach(img => {
-    observer.observe(img);
-  });
-}
-
-
-async function checkPin() {
+function checkPin() {
   const pinCode = document.getElementById("pin-code").value;
+
   if (!pinCode) {
     pinError.textContent = "Please enter the PIN code";
     return;
   }
 
-  try {
-    const response = await fetch(`${apiBaseUrl}/${clientTitle}/auth`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ pinCode })
+  fetch(`${apiBaseUrl}/${clientTitle}/auth`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ pinCode })
+  })
+    .then((response) => {
+      if (!response.ok) {
+        if (response.status === 403) {
+          pinError.textContent = "Wrong PIN code";
+        }
+        return;
+      }
+
+      pinSection.classList.add("fade-out");
+      setTimeout(() => {
+        pinSection.style.display = "none";
+        observeVisibleImages(); 
+      }, 500);
+    })
+    .catch((error) => {
+      console.error(error);
+      pinError.textContent = "Network error. Try again later.";
     });
-
-   if (response.ok) {
-  pinSection.classList.add("fade-out");
-
-  setTimeout(() => {
-    pinSection.style.display = "none";
-
-    observeVisibleImages();
-  }, 500);
 }
-  } catch (error) {
-    console.error(error);
-  }
-}
-function makeImagesVisible() {
-  const images = document.querySelectorAll(".lazy-client");
-  images.forEach((img, index) => {
-    setTimeout(() => {
-      img.classList.add("visible");
-    }, index * 100); 
+
+function observeVisibleImages() {
+  const images = document.querySelectorAll(".gallery-photo");
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    rootMargin: "100px",
+    threshold: 0.3
   });
+
+  images.forEach(img => observer.observe(img));
 }
+
 
 function renderGallery() {
-    const gallery = document.getElementById("gallery");
-    gallery.innerHTML = "";
+  const gallery = document.getElementById("gallery");
+  gallery.innerHTML = "";
 
-    if (!window.clientGallery || window.clientGallery.length === 0) {
-        gallery.innerHTML = "<p>No photos available</p>";
-        return;
-    }
+  if (!window.clientGallery || window.clientGallery.length === 0) {
+    gallery.innerHTML = "<p>No photos available</p>";
+    return;
+  }
 
-    window.clientGallery.forEach((photoUrl) => {
-        const imgWrapper = document.createElement("div");
-        imgWrapper.className = "client-img-wrapper";
+  window.clientGallery.forEach((photoUrl) => {
+    const imgWrapper = document.createElement("div");
+    imgWrapper.className = "client-img-wrapper";
 
-        const img = document.createElement("img");
-        img.className = "lazy-client"; 
-        img.alt = "Client photo";
-        img.loading = "lazy";
-        img.src = photoUrl;
+    const img = document.createElement("img");
+    img.className = "gallery-photo"; 
+    img.alt = "Client photo";
+    img.src = photoUrl;
 
-        imgWrapper.appendChild(img);
-        gallery.appendChild(imgWrapper);
-    });
-  document.getElementById("loading").style.display = "none";
+    imgWrapper.appendChild(img);
+    gallery.appendChild(imgWrapper);
+  });
 }
-setTimeout(() => {
-  makeImagesVisible(); // Примусово показати картинки
-}, 1000);
 
 async function downloadAll() {
     alert("Downloading started! Press Ok to continue and don't close the window until all photos are downloaded.");
