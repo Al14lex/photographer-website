@@ -1,5 +1,5 @@
-// const apiBaseUrl = "https://api.aleksandraphoto.com/api/clients";
-const apiBaseUrl = "http://localhost:5000/api/clients";
+const apiBaseUrl = "https://api.aleksandraphoto.com/api/clients";
+// const apiBaseUrl = "http://localhost:5000/api/clients";
 
 const clientTitle = decodeURIComponent(window.location.pathname.split("/").slice(-1)[0]);
 const heroSection = document.getElementById("hero");
@@ -157,8 +157,8 @@ async function downloadAll() {
     }, 200);
 
     try {
-        // const zipUrl = `https://api.aleksandraphoto.com/api/download-zip/${clientTitle}`;
-        const zipUrl = `http://localhost:5000/api/download-zip/${clientTitle}`;
+        const zipUrl = `https://api.aleksandraphoto.com/api/download-zip/${clientTitle}`;
+        // const zipUrl = `http://localhost:5000/api/download-zip/${clientTitle}`;
         const response = await fetch(zipUrl);
 
         if (!response.ok) {
