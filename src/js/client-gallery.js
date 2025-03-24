@@ -7,6 +7,12 @@ const pinSection = document.getElementById("pin-section");
 const gallerySection = document.getElementById("gallery-section");
 const pinError = document.getElementById("pin-error");
 
+// const clientTitle = decodeURIComponent(window.location.pathname.split("/").slice(-1)[0]);
+// const heroSection = document.getElementById("hero");
+// const pinSection = document.getElementById("pin-section");
+// const gallerySection = document.getElementById("gallery-section");
+// const pinError = document.getElementById("pin-error");
+
 window.checkPin = checkPin;
 window.downloadAll = downloadAll;
 
