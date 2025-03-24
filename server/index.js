@@ -67,11 +67,6 @@ const storage = multerS3({
 
 const upload = multer({ storage });
 
-// Serve the client page (static route)
-app.get("/gallery/:title", (req, res) => {
-    res.sendFile(path.join(__dirname, "../src", "client-gallery.html"));
-});
-
 // Photo upload
 app.post('/upload', upload.fields([
     { name: 'heroImage', maxCount: 1 },

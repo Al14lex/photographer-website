@@ -1,11 +1,12 @@
-const apiBaseUrl = "https://api.aleksandraphoto.com/api/clients";
-// const apiBaseUrl = "http://localhost:5000/api/clients";
+// const apiBaseUrl = "https://api.aleksandraphoto.com/api/clients";
+const apiBaseUrl = "http://localhost:5000/api/clients";
 
 const clientTitle = decodeURIComponent(window.location.pathname.split("/").slice(-1)[0]);
 const heroSection = document.getElementById("hero");
 const pinSection = document.getElementById("pin-section");
 const gallerySection = document.getElementById("gallery-section");
 const pinError = document.getElementById("pin-error");
+document.getElementById("loading").style.display = "block";
 
 window.checkPin = checkPin;
 window.downloadAll = downloadAll;
@@ -13,10 +14,14 @@ window.downloadAll = downloadAll;
 // 📌 Fetch client data
 async function fetchClientData() {
     try {
-        const response = await fetch(`${apiBaseUrl}/${clientTitle}`);
+        const response = await fetch(`${apiBaseUrl}/${clientTitle}`, {
+    cache: "no-store"
+});
         if (!response.ok) throw new Error("Client not found");
 
-        const data = await response.json();
+      const data = await response.json();
+      console.log("📦 Client data received:", data);
+
         document.getElementById("client-name").textContent = data.title;
         const heroImage = document.getElementById("hero-image");
         heroImage.src = data.heroImage;
@@ -51,9 +56,15 @@ async function fetchClientData() {
         }
 
     } catch (error) {
-        console.error(error);
-        heroSection.innerHTML = "<h1>Client not found</h1>";
-    }
+    console.error("❌ Fetch client data error:", error);
+    heroSection.innerHTML = "<h1>Client not found</h1>";
+    document.body.innerHTML = `
+      <div style="padding: 2rem; font-family: sans-serif; text-align: center;">
+        <h1>Oops... Something went wrong 😞</h1>
+        <p>We couldn't load the gallery right now. Please try again later.</p>
+      </div>
+    `;
+  }
 }
 
 function observeVisibleImages() {
@@ -134,7 +145,11 @@ function renderGallery() {
         imgWrapper.appendChild(img);
         gallery.appendChild(imgWrapper);
     });
+  document.getElementById("loading").style.display = "none";
 }
+setTimeout(() => {
+  makeImagesVisible(); // Примусово показати картинки
+}, 1000);
 
 async function downloadAll() {
     alert("Downloading started! Press Ok to continue and don't close the window until all photos are downloaded.");
@@ -153,8 +168,8 @@ async function downloadAll() {
     }, 200);
 
     try {
-        const zipUrl = `https://api.aleksandraphoto.com/api/download-zip/${clientTitle}`;
-        // const zipUrl = `http://localhost:5000/api/download-zip/${clientTitle}`;
+        // const zipUrl = `https://api.aleksandraphoto.com/api/download-zip/${clientTitle}`;
+        const zipUrl = `http://localhost:5000/api/download-zip/${clientTitle}`;
         const response = await fetch(zipUrl);
 
         if (!response.ok) {
