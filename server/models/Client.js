@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
+const slugify = require("slugify");
 
 const clientSchema = new mongoose.Schema({
-  title: { type: String, required: true, unique: true }, // Ім'я клієнта (і частина URL)
-  heroImage: { type: String, required: true }, // URL фото для hero
-  gallery: [{ type: String, required: true }], // Масив URL-адрес фото
-  pinCode: { type: String, required: true }, // Пін-код для доступу
-  createdAt: { type: Date, default: Date.now }, // Дата створення (для автоочищення)
+  title: { type: String, required: true, unique: true },
+  slug: { type: String, required: true, unique: true }, 
+  heroImage: { type: String, required: true },
+  gallery: [{ type: String, required: true }],
+  pinCode: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now },
 });
 
-// Створюємо модель на основі схеми
-const Client = mongoose.model("Client", clientSchema);
-
+const Client = mongoose.models.Client || mongoose.model("Client", clientSchema);
 module.exports = Client;
