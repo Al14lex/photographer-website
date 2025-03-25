@@ -124,8 +124,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const formData = new FormData();
         formData.append("gallery", file);
 
-        //   const res = await fetch("https://api.aleksandraphoto.com/upload", {
-          const res = await fetch("http://localhost:5000/upload", {
+          const res = await fetch("https://api.aleksandraphoto.com/upload", {
+        //   const res = await fetch("http://localhost:5000/upload", {
           method: "POST",
           body: formData,
         });
@@ -140,8 +140,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const heroFormData = new FormData();
       heroFormData.append("heroImage", heroFile);
-        // const heroRes = await fetch("https://api.aleksandraphoto.com/upload", {
-          const heroRes = await fetch("http://localhost:5000/upload", {
+        const heroRes = await fetch("https://api.aleksandraphoto.com/upload", {
+        //   const heroRes = await fetch("http://localhost:5000/upload", {
         method: "POST",
         body: heroFormData,
       });
@@ -150,8 +150,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const { heroImageUrl } = await heroRes.json();
 
       const clientData = { title,  slug, heroImage: heroImageUrl, gallery: galleryUrls, pinCode };
-        // const createRes = await fetch("https://api.aleksandraphoto.com/api/clients", {
-          const createRes = await fetch("http://localhost:5000/api/clients", {
+        const createRes = await fetch("https://api.aleksandraphoto.com/api/clients", {
+        //   const createRes = await fetch("http://localhost:5000/api/clients", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(clientData),
@@ -163,8 +163,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const result = await createRes.json();
-        //   const clientUrl = `https://api.aleksandraphoto.com/gallery/${slug}`;
-      const clientUrl = `http://localhost:5000/gallery/${slug}`;
+          const clientUrl = `https://api.aleksandraphoto.com/gallery/${slug}`;
+    //   const clientUrl = `http://localhost:5000/gallery/${slug}`;
         
       clientUrlInput.value = clientUrl;
       copyUrlBtn.style.display = "block";

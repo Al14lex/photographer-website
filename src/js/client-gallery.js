@@ -1,5 +1,5 @@
-// const apiBaseUrl = "https://api.aleksandraphoto.com/api/clients";
-const apiBaseUrl = "http://localhost:5000/api/clients";
+const apiBaseUrl = "https://api.aleksandraphoto.com/api/clients";
+// const apiBaseUrl = "http://localhost:5000/api/clients";
 
 const clientSlug = decodeURIComponent(window.location.pathname.split("/").slice(-1)[0]).toLowerCase();
 const heroSection = document.getElementById("hero");
@@ -152,8 +152,8 @@ async function downloadAll() {
   }, 200);
 
   try {
-    // const zipUrl = `https://api.aleksandraphoto.com/api/download-zip/${clientSlug}`;
-    const zipUrl = `http://localhost:5000/api/download-zip/${clientSlug}`;
+    const zipUrl = `https://api.aleksandraphoto.com/api/download-zip/${clientSlug}`;
+    // const zipUrl = `http://localhost:5000/api/download-zip/${clientSlug}`;
     const response = await fetch(zipUrl);
 
     if (!response.ok) throw new Error("❌ Failed to download ZIP.");

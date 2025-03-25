@@ -96,7 +96,7 @@ app.post('/api/clients', async (req, res) => {
             return res.status(400).json({ message: 'Please fill in all fields.' });
         }
 
-        const safeSlug = slug.toLowerCase(); // перестраховка
+        const safeSlug = slug.toLowerCase(); 
 
         const existingClient = await Client.findOne({ slug: safeSlug });
         if (existingClient) {
