@@ -166,6 +166,10 @@
     <script type="module" src="/js/home/modal-review.js"></script>
     <script type="module" src="/js/home/reviews.js"></script>
     <script type="module" src="/js/client-gallery.js" defer></script>
+    <div id="in-app-warning">
+      📥 To download your photos, please open this page in your browser.<br />
+      Tap the three dots <b>•••</b> and choose <b>"Open in Browser"</b>.
+    </div>
     <!-- Fixed Progress Bar -->
     <div
       id="download-progress-bar"
@@ -180,5 +184,24 @@
         transition: width 0.2s ease;
       "
     ></div>
+    <script>
+      const ua = navigator.userAgent.toLowerCase();
+      const isInAppBrowser =
+        ua.includes("instagram") ||
+        ua.includes("fbav") ||
+        ua.includes("fban") ||
+        ua.includes("messenger") ||
+        ua.includes("line") ||
+        ua.includes("linkedin") ||
+        ua.includes("tiktok") ||
+        ua.includes("telegram");
+
+      if (isInAppBrowser) {
+        const banner = document.getElementById("in-app-warning");
+        if (banner) {
+          banner.style.display = "block";
+        }
+      }
+    </script>
   </body>
 </html>
