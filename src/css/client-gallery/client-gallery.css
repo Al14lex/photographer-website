@@ -167,14 +167,14 @@ background-color: var(--color-bg-hover);
     display: block;
 }
  .client-photo-gallery {
-     padding: 30px 15px;
+     padding: 40px 15px;
      text-align: center;
  }
 
 #gallery {
     column-count: 2;
     column-gap: 12px;
-    padding: 20px 0 30px 0;
+    padding: 0 0 30px 0;
     width: 100%;
 }
 
@@ -314,7 +314,7 @@ background-color: var(--color-bg-hover);
 #gallery {
     column-count: 3;
     column-gap: 20px;
-    padding: 30px 0 40px 0;
+    padding: 0 0 40px 0;
 }
 
 .client-img-wrapper {
@@ -355,7 +355,7 @@ background-color: var(--color-bg-hover);
 #gallery {
     column-count: 4;
     column-gap: 20px;
-    padding: 30px 0 50px 0;
+    padding: 0 0 50px 0;
 }
 
 .client-img-wrapper {
