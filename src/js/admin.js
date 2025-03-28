@@ -210,6 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
       item.style.border = "2px solid #ccc";
       item.style.width = "90%";
       item.style.display = "flex";
+      item.style.gap = "10px";
       item.style.flexDirection = "row";
       item.style.alignItems = "center";
       item.style.justifyContent = "space-around";

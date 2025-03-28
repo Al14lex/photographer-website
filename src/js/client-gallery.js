@@ -284,7 +284,7 @@ async function downloadAll() {
   }, 200);
 
   try {
-    const zipUrl = `${apiBaseUrl}/api/download-zip/${clientSlug}`;
+    const zipUrl = `https://api.aleksandraphoto.com/api/download-zip/${clientSlug}`;
     // const zipUrl = `http://localhost:5000/api/download-zip/${clientSlug}`;
 
 
