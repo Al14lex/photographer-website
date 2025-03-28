@@ -1,5 +1,5 @@
-// const apiBaseUrl = "https://api.aleksandraphoto.com/api/clients";
-const apiBaseUrl = "http://localhost:5000/api/clients";
+const apiBaseUrl = "https://api.aleksandraphoto.com/api/clients";
+// const apiBaseUrl = "http://localhost:5000/api/clients";
 // const apiBaseUrl = `http://${window.location.hostname}:5000/api/clients`;
 
 
@@ -284,8 +284,8 @@ async function downloadAll() {
   }, 200);
 
   try {
-    // const zipUrl = `${apiBaseUrl}/api/download-zip/${clientSlug}`;
-    const zipUrl = `http://localhost:5000/api/download-zip/${clientSlug}`;
+    const zipUrl = `${apiBaseUrl}/api/download-zip/${clientSlug}`;
+    // const zipUrl = `http://localhost:5000/api/download-zip/${clientSlug}`;
 
 
     setTimeout(() => {
