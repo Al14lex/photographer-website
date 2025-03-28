@@ -179,8 +179,10 @@ background-color: var(--color-bg-hover);
 }
 
  .client-img-wrapper {
-     break-inside: avoid;
-     margin-bottom: 12px;
+    display: inline-block;
+        width: 100%;
+        vertical-align: top;
+        margin-bottom: 12px;
  }
 .gallery-photo {
     display: block;
@@ -188,7 +190,6 @@ background-color: var(--color-bg-hover);
     border-radius: 8px;
     object-fit: cover;
     break-inside: avoid;
-    /* margin-bottom: 10px; */
     opacity: 0;
     transform: translateY(40px);
     filter: blur(8px);
