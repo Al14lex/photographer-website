@@ -182,25 +182,35 @@ function enableModalView() {
 
   document.querySelectorAll(".gallery-photo").forEach((img) => {
     img.addEventListener("click", () => {
-      modal.style.display = "flex";
       modalImg.src = img.src;
+      modal.classList.add("show");
+      modal.classList.remove("hide");
     });
   });
 
-  closeBtn.onclick = () => (modal.style.display = "none");
+  const closeModal = () => {
+    modal.classList.add("hide");
+    modal.classList.remove("show");
+    setTimeout(() => {
+      modalImg.src = ""; 
+    }, 400); 
+  };
+
+  closeBtn.onclick = closeModal;
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      modal.style.display = "none";
+      closeModal();
     }
   });
 
   modal.onclick = (e) => {
     if (e.target === modal) {
-      modal.style.display = "none";
+      closeModal();
     }
   };
 }
+
 
 // async function downloadAll() {
 //   alert("Downloading started! Press Ok to continue and don't close the window until all photos are downloaded.");
