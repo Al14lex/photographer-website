@@ -8,7 +8,7 @@ const clientSchema = new mongoose.Schema({
   gallery: [{ type: String, required: true }],
   pinCode: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
-});
+}, { timestamps: true });
 
 const Client = mongoose.models.Client || mongoose.model("Client", clientSchema);
 module.exports = Client;

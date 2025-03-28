@@ -188,6 +188,33 @@ app.get("/api/download-zip/:slug", async (req, res) => {
         res.status(500).json({ message: "Error creating zip file" });
     }
 });
+app.get("/api/clients-list", async (req, res) => {
+  try {
+    const clients = await Client.find().sort({ createdAt: -1 });
+    const now = new Date();
+
+    // Видаляємо старі (більше 90 днів)
+    const expiredClients = clients.filter(client => {
+      const ageInMs = now - client.createdAt;
+      return ageInMs > 90 * 24 * 60 * 60 * 1000;
+    });
+
+    if (expiredClients.length > 0) {
+      const idsToDelete = expiredClients.map(c => c._id);
+      await Client.deleteMany({ _id: { $in: idsToDelete } });
+    }
+
+    const activeClients = clients.filter(client => {
+      const ageInMs = now - client.createdAt;
+      return ageInMs <= 90 * 24 * 60 * 60 * 1000;
+    });
+
+    res.json(activeClients);
+  } catch (error) {
+    console.error("❌ Error loading clients list:", error);
+    res.status(500).json({ message: "Error loading clients" });
+  }
+});
 
 // ===================== REVIEWS =====================
 app.get("/reviews", async (req, res) => {

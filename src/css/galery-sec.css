@@ -9,26 +9,6 @@
     width: 100%;
 
 }
-/* 
-.lazy {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    opacity: 0;
-    filter: grayscale(100%);
-    transform: translateY(30px);
-    transition: opacity 1s ease-out, filter 3s ease-out, transform 1s ease-out;
-    object-fit: cover;
-    break-inside: avoid;
-    margin-bottom: 10px;
-}
-
-.lazy.loaded {
-    opacity: 1;
-    filter: grayscale(0%);
-    transform: translateY(0);
-} */
 
  .lazy {
      display: block;

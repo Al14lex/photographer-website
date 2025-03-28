@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const isAdminPage = document.body.id === "admin";
   if (!isAdminPage) return;
 
+  const baseUrl = "https://api.aleksandraphoto.com";
+  // const baseUrl = "http://localhost:5000";
   const clientForm = document.getElementById("clientForm");
   const heroImageInput = document.getElementById("heroImage");
   const galleryInput = document.getElementById("gallery");
@@ -124,8 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const formData = new FormData();
         formData.append("gallery", file);
 
-          const res = await fetch("https://api.aleksandraphoto.com/upload", {
-        //   const res = await fetch("http://localhost:5000/upload", {
+          const res = await fetch(`${baseUrl}/upload`, {
           method: "POST",
           body: formData,
         });
@@ -140,8 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const heroFormData = new FormData();
       heroFormData.append("heroImage", heroFile);
-        const heroRes = await fetch("https://api.aleksandraphoto.com/upload", {
-        //   const heroRes = await fetch("http://localhost:5000/upload", {
+        const heroRes = await fetch(`${baseUrl}/upload`, {
         method: "POST",
         body: heroFormData,
       });
@@ -150,8 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const { heroImageUrl } = await heroRes.json();
 
       const clientData = { title,  slug, heroImage: heroImageUrl, gallery: galleryUrls, pinCode };
-        const createRes = await fetch("https://api.aleksandraphoto.com/api/clients", {
-        //   const createRes = await fetch("http://localhost:5000/api/clients", {
+        const createRes = await fetch(`${baseUrl}/api/clients`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(clientData),
@@ -163,8 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const result = await createRes.json();
-          const clientUrl = `https://api.aleksandraphoto.com/gallery/${slug}`;
-    //   const clientUrl = `http://localhost:5000/gallery/${slug}`;
+          const clientUrl = `${baseUrl}/gallery/${slug}`;
         
       clientUrlInput.value = clientUrl;
       copyUrlBtn.style.display = "block";
@@ -192,6 +190,60 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch((err) => console.error("Error copying:", err));
        clientForm.reset()
   });
+
+  async function loadClientLinks() {
+  const listContainer = document.getElementById("clientList");
+  if (!listContainer) return;
+
+  try {
+    const response = await fetch(`${baseUrl}/api/clients-list`);
+    const clients = await response.json();
+
+    if (!clients.length) {
+      listContainer.innerHTML = "<p>No clients yet.</p>";
+      return;
+    }
+
+    clients.forEach(client => {
+      const item = document.createElement("div");
+      item.style.padding = "10px";
+      item.style.border = "2px solid #ccc";
+      item.style.width = "90%";
+      item.style.display = "flex";
+      item.style.flexDirection = "row";
+      item.style.alignItems = "center";
+      item.style.justifyContent = "space-around";
+      item.style.borderRadius = "8px";
+
+      const createdDate = new Date(client.createdAt).toLocaleDateString();
+
+      item.innerHTML = `
+        <strong>${createdDate}</strong> |
+        <span>${client.title}</span> |
+        <a href="${baseUrl}/gallery/${client.slug}" target="_blank">Open</a>
+        <button data-url="${baseUrl}/gallery/${client.slug}" class="copy-link">Copy</button>
+      `;
+
+      listContainer.appendChild(item);
+    });
+
+    // Enable "Copy" buttons
+    document.querySelectorAll(".copy-link").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const url = btn.getAttribute("data-url");
+        navigator.clipboard.writeText(url).then(() => {
+          alert("Link copied!");
+        });
+      });
+    });
+  } catch (error) {
+    console.error("❌ Error loading clients:", error);
+    listContainer.innerHTML = "<p>Error loading clients.</p>";
+  }
+}
+
+loadClientLinks();
+
 });
 
 
@@ -227,7 +279,7 @@ if (document.getElementById("reviewList") && document.getElementById("approvedRe
         approvedList.innerHTML = "";
 
         try {
-            const response = await fetch("https://api.aleksandraphoto.com/reviews");
+            const response = await fetch(`${baseUrl}/reviews`);
             const reviews = await response.json();
 
             if (reviews.length === 0) {
@@ -270,7 +322,7 @@ if (document.getElementById("reviewList") && document.getElementById("approvedRe
 
     window.approveReview = async function (id) {
         try {
-            await fetch(`https://api.aleksandraphoto.com/reviews/${id}`, {
+            await fetch(`${baseUrl}/reviews/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ status: "approved" })
@@ -283,7 +335,7 @@ if (document.getElementById("reviewList") && document.getElementById("approvedRe
 
     window.rejectReview = async function (id) {
         try {
-            await fetch(`https://api.aleksandraphoto.com/reviews/${id}`, {
+            await fetch(`${baseUrl}/reviews/${id}`, {
                 method: "DELETE"
             });
             loadReviews();
@@ -294,10 +346,9 @@ if (document.getElementById("reviewList") && document.getElementById("approvedRe
 
     window.deleteReview = async function (id) {
         try {
-            await fetch(`https://api.aleksandraphoto.com/reviews/${id}`, {
+            await fetch(`${baseUrl}/reviews/${id}`, {
                 method: "DELETE"
             });
-            // loadReviews();
         } catch (error) {
             console.error("❌ Review delete error:", error);
         }

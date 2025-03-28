@@ -79,7 +79,11 @@
           margin: 0 auto;
         "
       >
-        Access to your personal page is valid for 3 months
+        Access to your personal page is valid for<br />
+        <span
+          id="expirationTimer"
+          style="font-weight: bold; font-size: 20px"
+        ></span>
       </p>
     </div>
 
@@ -184,6 +188,10 @@
         transition: width 0.2s ease;
       "
     ></div>
+    <div id="photoModal" class="photo-modal" style="display: none">
+      <span class="close-modal">&times;</span>
+      <img class="modal-content-photo" id="modalImage" alt="Full photo" />
+    </div>
     <script>
       const ua = navigator.userAgent.toLowerCase();
       const isInAppBrowser =

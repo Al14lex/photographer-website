@@ -1,5 +1,5 @@
-const apiBaseUrl = "https://api.aleksandraphoto.com/api/clients";
-// const apiBaseUrl = "http://localhost:5000/api/clients";
+// const apiBaseUrl = "https://api.aleksandraphoto.com/api/clients";
+const apiBaseUrl = "http://localhost:5000/api/clients";
 // const apiBaseUrl = `http://${window.location.hostname}:5000/api/clients`;
 
 
@@ -25,6 +25,42 @@ async function fetchClientData() {
     const data = await response.json();
     console.log("📦 Client data received:", data);
 
+  const createdAt = new Date(data.createdAt);
+const expirationDate = new Date(createdAt);
+expirationDate.setMonth(createdAt.getMonth() + 3); 
+
+function updateExpirationTimer() {
+  const now = new Date();
+  const diff = expirationDate - now;
+
+  if (diff <= 0) {
+    document.getElementById("expirationTimer").innerText = "Expired";
+    return;
+  }
+
+  const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+  let display = "";
+
+  if (totalDays >= 60) {
+  display = "3 months";
+} else if (totalDays >= 30) {
+  const months = Math.floor(totalDays / 30);
+  const days = totalDays % 30;
+  display = `${months} month${months === 1 ? "" : "s"}${days > 0 ? ` ${days} day${days === 1 ? "" : "s"}` : ""}`;
+} else if (totalDays >= 15) {
+  const days = totalDays % 30;
+  display = `1 month ${days} day${days === 1 ? "" : "s"}`;
+} else {
+  display = `${totalDays} day${totalDays === 1 ? "" : "s"}`;
+}
+
+  document.getElementById("expirationTimer").innerText = display;
+}
+
+updateExpirationTimer();
+    setInterval(updateExpirationTimer, 3600000); 
+    
     document.getElementById("client-name").textContent = data.title;
     const heroImage = document.getElementById("hero-image");
     heroImage.src = data.heroImage;
@@ -61,6 +97,7 @@ async function fetchClientData() {
       </div>
     `;
   }
+ 
 }
 
 function checkPin() {
@@ -135,10 +172,103 @@ function renderGallery() {
     imgWrapper.appendChild(img);
     gallery.appendChild(imgWrapper);
   });
+enableModalView();
 }
 
+function enableModalView() {
+  const modal = document.getElementById("photoModal");
+  const modalImg = document.getElementById("modalImage");
+  const closeBtn = document.querySelector(".close-modal");
+
+  document.querySelectorAll(".gallery-photo").forEach((img) => {
+    img.addEventListener("click", () => {
+      modal.style.display = "flex";
+      modalImg.src = img.src;
+    });
+  });
+
+  closeBtn.onclick = () => (modal.style.display = "none");
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      modal.style.display = "none";
+    }
+  });
+
+  modal.onclick = (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  };
+}
+
+// async function downloadAll() {
+//   alert("Downloading started! Press Ok to continue and don't close the window until all photos are downloaded.");
+
+//   const progressBar = document.getElementById("download-progress-bar");
+//   progressBar.style.display = "block";
+//   progressBar.style.backgroundColor = "#f5f5f5";
+//   progressBar.style.width = "10%";
+
+//   let fakeProgress = 10;
+//   const fakeProgressInterval = setInterval(() => {
+//     if (fakeProgress < 60) {
+//       fakeProgress += 1;
+//       progressBar.style.width = `${fakeProgress}%`;
+//     }
+//   }, 200);
+
+//   try {
+//     const zipUrl = `https://api.aleksandraphoto.com/api/download-zip/${clientSlug}`;
+//     // const zipUrl = `http://localhost:5000/api/download-zip/${clientSlug}`;
+//     // const zipUrl = `http://${window.location.hostname}:5000/api/download-zip/${clientSlug}`;
+
+//     const response = await fetch(zipUrl);
+
+//     if (!response.ok) throw new Error("❌ Failed to download ZIP.");
+
+//     const reader = response.body.getReader();
+//     const contentLength = +response.headers.get("Content-Length") || 0;
+//     let receivedLength = 0;
+//     const chunks = [];
+
+//     while (true) {
+//       const { done, value } = await reader.read();
+//       if (done) break;
+
+//       chunks.push(value);
+//       receivedLength += value.length;
+
+//       if (contentLength) {
+//         const percent = (receivedLength / contentLength) * 100;
+//         progressBar.style.width = `${Math.min(percent, 100)}%`;
+//       }
+//     }
+
+//     clearInterval(fakeProgressInterval);
+//     progressBar.style.width = "100%";
+
+//     const blob = new Blob(chunks, { type: "application/zip" });
+//     const link = document.createElement("a");
+//     link.href = URL.createObjectURL(blob);
+//     link.download = `${clientSlug}.zip`;
+//     document.body.appendChild(link);
+//     link.click();
+//     document.body.removeChild(link);
+
+//     setTimeout(() => {
+//       progressBar.style.display = "none";
+//       progressBar.style.width = "0%";
+//       alert("✅ All photos downloaded!");
+//     }, 2000);
+//   } catch (error) {
+//     clearInterval(fakeProgressInterval);
+//     progressBar.style.backgroundColor = "red";
+//     alert(error.message);
+//   }
+// }
 async function downloadAll() {
-  alert("Downloading started! Press Ok to continue and don't close the window until all photos are downloaded.");
+  alert("📥 Downloading started! Don’t close the page until all photos are downloaded.");
 
   const progressBar = document.getElementById("download-progress-bar");
   progressBar.style.display = "block";
@@ -154,52 +284,25 @@ async function downloadAll() {
   }, 200);
 
   try {
-    const zipUrl = `https://api.aleksandraphoto.com/api/download-zip/${clientSlug}`;
-    // const zipUrl = `http://localhost:5000/api/download-zip/${clientSlug}`;
-    // const zipUrl = `http://${window.location.hostname}:5000/api/download-zip/${clientSlug}`;
+    // const zipUrl = `${apiBaseUrl}/api/download-zip/${clientSlug}`;
+    const zipUrl = `http://localhost:5000/api/download-zip/${clientSlug}`;
 
-    const response = await fetch(zipUrl);
 
-    if (!response.ok) throw new Error("❌ Failed to download ZIP.");
-
-    const reader = response.body.getReader();
-    const contentLength = +response.headers.get("Content-Length") || 0;
-    let receivedLength = 0;
-    const chunks = [];
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-
-      chunks.push(value);
-      receivedLength += value.length;
-
-      if (contentLength) {
-        const percent = (receivedLength / contentLength) * 100;
-        progressBar.style.width = `${Math.min(percent, 100)}%`;
-      }
-    }
-
-    clearInterval(fakeProgressInterval);
-    progressBar.style.width = "100%";
-
-    const blob = new Blob(chunks, { type: "application/zip" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = `${clientSlug}.zip`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    setTimeout(() => {
+      clearInterval(fakeProgressInterval);
+      progressBar.style.width = "100%";
+      window.location.href = zipUrl;
+    }, 1500);
 
     setTimeout(() => {
       progressBar.style.display = "none";
       progressBar.style.width = "0%";
       alert("✅ All photos downloaded!");
-    }, 2000);
+    }, 6000); 
   } catch (error) {
     clearInterval(fakeProgressInterval);
     progressBar.style.backgroundColor = "red";
-    alert(error.message);
+    alert("❌ Error downloading photos. Try again later.");
   }
 }
 
