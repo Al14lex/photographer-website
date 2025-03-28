@@ -279,7 +279,7 @@ if (document.getElementById("reviewList") && document.getElementById("approvedRe
         approvedList.innerHTML = "";
 
         try {
-            const response = await fetch(`${baseUrl}/reviews`);
+            const response = await fetch("https://api.aleksandraphoto.com/reviews");
             const reviews = await response.json();
 
             if (reviews.length === 0) {
@@ -322,7 +322,7 @@ if (document.getElementById("reviewList") && document.getElementById("approvedRe
 
     window.approveReview = async function (id) {
         try {
-            await fetch(`${baseUrl}/reviews/${id}`, {
+            await fetch(`https://api.aleksandraphoto.com/reviews/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ status: "approved" })
@@ -335,7 +335,7 @@ if (document.getElementById("reviewList") && document.getElementById("approvedRe
 
     window.rejectReview = async function (id) {
         try {
-            await fetch(`${baseUrl}/reviews/${id}`, {
+            await fetch(`https://api.aleksandraphoto.com/reviews/${id}`, {
                 method: "DELETE"
             });
             loadReviews();
@@ -346,7 +346,7 @@ if (document.getElementById("reviewList") && document.getElementById("approvedRe
 
     window.deleteReview = async function (id) {
         try {
-            await fetch(`${baseUrl}/reviews/${id}`, {
+            await fetch(`https://api.aleksandraphoto.com/reviews/${id}`, {
                 method: "DELETE"
             });
         } catch (error) {
