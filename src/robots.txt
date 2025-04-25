@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.aleksandraphoto.com/sitemap.xml
