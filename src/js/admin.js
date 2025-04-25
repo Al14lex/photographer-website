@@ -211,18 +211,17 @@ document.addEventListener("DOMContentLoaded", () => {
       item.style.width = "90%";
       item.style.display = "flex";
       item.style.gap = "10px";
-      item.style.flexDirection = "row";
+      item.style.flexDirection = "column";
       item.style.alignItems = "center";
-      item.style.justifyContent = "space-around";
       item.style.borderRadius = "8px";
 
       const createdDate = new Date(client.createdAt).toLocaleDateString();
 
       item.innerHTML = `
-        <strong>${createdDate}</strong> |
-        <span>${client.title}</span> |
-        <a href="${baseUrl}/gallery/${client.slug}" target="_blank">Open</a>
-        <button data-url="${baseUrl}/gallery/${client.slug}" class="copy-link">Copy</button>
+        <strong>${createdDate}</strong>
+        <span>${client.title}</span>
+        <button data-url="${baseUrl}/gallery/${client.slug}" class="copy-link">Copy link</button>
+        <span><strong>PIN:</strong> <code>${client.pinCode}</code></span>
       `;
 
       listContainer.appendChild(item);
@@ -237,6 +236,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       });
     });
+
+    document.querySelectorAll(".copy-pin").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const pin = btn.getAttribute("data-pin");
+        navigator.clipboard.writeText(pin).then(() => alert("PIN copied!"));
+      });
+    });
+
   } catch (error) {
     console.error("❌ Error loading clients:", error);
     listContainer.innerHTML = "<p>Error loading clients.</p>";
