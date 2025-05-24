@@ -26,7 +26,7 @@ window.addEventListener('load', () => {
                 },
             },
         });
- }, 600);
+ }, 1000);
 });
 
 // import Swiper from 'swiper/bundle'; 
