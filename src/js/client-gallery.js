@@ -124,9 +124,10 @@ function checkPin() {
 
       pinSection.classList.add("fade-out");
       setTimeout(() => {
-        pinSection.style.display = "none";
-        observeVisibleImages();
-      }, 600);
+    pinSection.style.display = "none";
+    observeVisibleImages();
+}, 600);
+
       document.body.classList.remove("no-scroll");
     })
     .catch((error) => {
@@ -173,8 +174,11 @@ function renderGallery() {
     imgWrapper.appendChild(img);
     gallery.appendChild(imgWrapper);
   });
-enableModalView();
+
+  // ✅ Після того як фото додані до DOM — викликаємо enableModalView
+  enableModalView();
 }
+
 
 // function enableModalView() {
 //   const modal = document.getElementById("photoModal");
@@ -219,74 +223,51 @@ function enableModalView() {
   const closeBtn = document.querySelector(".close-modal");
   const galleryPhotos = document.querySelectorAll(".gallery-photo");
 
-  // 🧹 Очистити слайдер перед кожним відкриттям
-  sliderTrack.innerHTML = "";
-
-  // 🧱 Створити всі слайди
-  window.clientGallery.forEach((url) => {
-    const slide = document.createElement("div");
-    slide.className = "slider-image";
-    const image = document.createElement("img");
-    image.src = url;
-    image.alt = "Full photo";
-    slide.appendChild(image);
-    sliderTrack.appendChild(slide);
-  });
-
-  // 🖱 Обробка кліків по галереї
-  galleryPhotos.forEach((img, index) => {
-    img.addEventListener("click", () => {
-      currentIndex = index;
-      modal.classList.remove("hide");
-      modal.classList.add("show");
-      sliderTrack.style.transform = `translateX(-${currentIndex * 100}vw)`;
+  // 🧹 Побудувати слайдер один раз при відкритті
+  function buildSlides() {
+    sliderTrack.innerHTML = "";
+    window.clientGallery.forEach((url) => {
+      const slide = document.createElement("div");
+      slide.className = "slider-image";
+      const image = document.createElement("img");
+      image.src = url;
+      slide.appendChild(image);
+      sliderTrack.appendChild(slide);
     });
-  });
+  }
 
-  // 🔄 Перехід на інше фото
-  function swipeTo(index) {
-    if (index < 0 || index >= window.clientGallery.length) return;
+  function openModal(index) {
     currentIndex = index;
+    buildSlides();
+    modal.classList.add("show");
+    modal.classList.remove("hide");
     sliderTrack.style.transform = `translateX(-${currentIndex * 100}vw)`;
   }
 
-  // ❌ Закриття
-  const closeModal = () => {
+  function closeModal() {
     modal.classList.remove("show");
     modal.classList.add("hide");
-    setTimeout(() => {
-      sliderTrack.innerHTML = "";
-    }, 300);
-  };
+  }
+
+  galleryPhotos.forEach((img, index) => {
+    img.onclick = () => openModal(index);
+  });
 
   closeBtn.onclick = closeModal;
+  modal.onclick = (e) => { if (e.target === modal) closeModal(); };
 
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeModal();
-    if (e.key === "ArrowLeft") swipeTo(currentIndex - 1);
-    if (e.key === "ArrowRight") swipeTo(currentIndex + 1);
-  });
-
-  modal.onclick = (e) => {
-    if (e.target === modal) closeModal();
-  };
-
-  // 📱 Swipe touch
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  sliderTrack.addEventListener("touchstart", (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  });
-
-  sliderTrack.addEventListener("touchend", (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    const diff = touchEndX - touchStartX;
+  // Swipe
+  let startX = 0;
+  sliderTrack.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+  sliderTrack.addEventListener("touchend", e => {
+    const diff = e.changedTouches[0].clientX - startX;
     if (Math.abs(diff) < 50) return;
-    if (diff < 0) swipeTo(currentIndex + 1);
-    else swipeTo(currentIndex - 1);
+    if (diff < 0 && currentIndex < window.clientGallery.length - 1) currentIndex++;
+    if (diff > 0 && currentIndex > 0) currentIndex--;
+    sliderTrack.style.transform = `translateX(-${currentIndex * 100}vw)`;
   });
 }
+
 
 
 async function downloadAll() {
