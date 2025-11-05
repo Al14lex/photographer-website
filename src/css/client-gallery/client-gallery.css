@@ -218,7 +218,7 @@ background-color: var(--color-bg-hover);
             background-color: var(--color-bg-hover);
             color: #fefefe;
         }
-                .photo-modal {
+                /* .photo-modal {
                     position: fixed;
                     z-index: 9999;
                     left: 0;
@@ -267,8 +267,44 @@ background-color: var(--color-bg-hover);
         
                 .close-modal:hover {
                     color: #bbb;
-                }
+                } */
+.photo-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
 
+.photo-modal.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.glide__slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-modal {
+    position: absolute;
+    top: 2vh;
+    right: 2vw;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    z-index: 10001;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
  /*================== CLIEN GALLERY TAB ==========*/
  @media (min-width: 768px) {
     .pin-modal-content {
@@ -384,34 +420,3 @@ background-color: var(--color-bg-hover);
  .modal-content-photo.fade {
      opacity: 0;
  }
-.slider-track {
-    display: flex;
-    height: 100%;
-    will-change: transform;
-    transition: transform 0.35s ease;
-    /* плавний перехід між слайдами */
-    overflow: hidden;
-}
-
-.slider-image {
-    flex: 0 0 100vw;
-    /* КОЖЕН слайд рівно шириною в екран */
-    height: 100vh;
-    /* по висоті — весь екран модалки */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.slider-image img {
-    width: 100vw;
-    /* фото на повну ширину екрана */
-    height: auto;
-    /* зберігаємо пропорції */
-    /* Якщо боїшся “занадто високих” вертикальних фото — додай обмеження: */
-    max-height: 100vh;
-    /* щоб нічого не вилазило за межі по висоті */
-    object-fit: contain;
-    border-radius: 10px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-}

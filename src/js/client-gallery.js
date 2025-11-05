@@ -230,14 +230,22 @@ function enableModalView() {
   const glideSlides = document.getElementById("glideSlides");
   let glideInstance = null;
 
-  function openModal(startIndex) {
-    glideSlides.innerHTML = "";
+  function clearSlides(){
+    while (glideSlides.firstChild) glideSlides.removeChild(glideSlides.firstChild);
+  }
 
-    // Додаємо слайди
+  function openModal(startIndex) {
+    // 1) коректно зруйнувати попередній інстанс
+    if (glideInstance) {
+      try { glideInstance.destroy(); } catch(e) { /* no-op */ }
+      glideInstance = null;
+    }
+
+    // 2) очистити та побудувати слайди
+    clearSlides();
     window.clientGallery.forEach((url) => {
       const li = document.createElement("li");
       li.className = "glide__slide";
-
       const img = document.createElement("img");
       img.src = url;
       img.style.maxWidth = "100vw";
@@ -245,47 +253,45 @@ function enableModalView() {
       img.style.objectFit = "contain";
       img.style.margin = "0 auto";
       img.style.display = "block";
-
       li.appendChild(img);
       glideSlides.appendChild(li);
     });
 
+    // 3) показати модалку і змонтувати Glide
     modal.classList.add("show");
     document.body.classList.add("no-scroll");
 
-    // ініціалізуємо Glide
-    if (glideInstance) glideInstance.destroy();
-
-    glideInstance = new Glide('.glide', {
-      type: 'carousel',
-      startAt: startIndex,
+    glideInstance = new Glide(".glide", {
+      type: "carousel",      // якщо не треба безкінечний цикл, заміни на "slider"
       perView: 1,
-      animationDuration: 400,
+      startAt: startIndex,
+      animationDuration: 400
     });
-
     glideInstance.mount();
   }
 
   function closeModal() {
     modal.classList.remove("show");
     document.body.classList.remove("no-scroll");
-    if (glideInstance) glideInstance.destroy();
+    if (glideInstance) {
+      try { glideInstance.destroy(); } catch(e) { /* no-op */ }
+      glideInstance = null;
+    }
+    // не обов’язково, але звільнить пам’ять
+    clearSlides();
   }
 
-  // Клік на фото для відкриття
+  // відкриття по кліку на прев’ю
   galleryPhotos.forEach((img, index) => {
     img.onclick = () => openModal(index);
   });
 
-  // Закриття
+  // закриття
   closeBtn.onclick = closeModal;
   modal.onclick = (e) => { if (e.target === modal) closeModal(); };
-
-  // Escape
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeModal();
-  });
+  window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 }
+
 
 
 
