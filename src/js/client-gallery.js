@@ -225,72 +225,54 @@ let currentIndex = 0;
 
 function enableModalView() {
   const modal = document.getElementById("photoModal");
-  const sliderTrack = document.getElementById("sliderTrack");
   const closeBtn = document.querySelector(".close-modal");
   const galleryPhotos = document.querySelectorAll(".gallery-photo");
-  let currentIndex = 0;
+  const glideSlides = document.getElementById("glideSlides");
+  let glideInstance = null;
 
-  function buildSlides() {
-    sliderTrack.innerHTML = "";
+  function openModal(startIndex) {
+    glideSlides.innerHTML = "";
 
+    // Додаємо слайди
     window.clientGallery.forEach((url) => {
-      const slide = document.createElement("div");
-      slide.className = "slider-image";
+      const li = document.createElement("li");
+      li.className = "glide__slide";
 
-      const image = document.createElement("img");
-      image.src = url;
+      const img = document.createElement("img");
+      img.src = url;
+      img.style.maxWidth = "100vw";
+      img.style.maxHeight = "100vh";
+      img.style.objectFit = "contain";
+      img.style.margin = "0 auto";
+      img.style.display = "block";
 
-      // 🧼 Гарантовано НЕ додаємо gallery-photo!
-      // і явно скидаємо можливі стилі
-      image.className = "";
-      image.style.opacity = "1";
-      image.style.visibility = "visible";
-      image.style.filter = "none";
-      image.style.transform = "none";
-      image.style.display = "block";
-
-      slide.appendChild(image);
-      sliderTrack.appendChild(slide);
+      li.appendChild(img);
+      glideSlides.appendChild(li);
     });
 
-    // 🔧 оновлюємо ширину слайдера
-    sliderTrack.style.width = `${window.clientGallery.length * 100}vw`;
-  }
-
-  function openModal(index) {
-    currentIndex = index;
-    buildSlides();
     modal.classList.add("show");
-    modal.classList.remove("hide");
     document.body.classList.add("no-scroll");
-    sliderTrack.style.transform = `translateX(-${currentIndex * 100}vw)`;
+
+    // ініціалізуємо Glide
+    if (glideInstance) glideInstance.destroy();
+
+    glideInstance = new Glide('.glide', {
+      type: 'carousel',
+      startAt: startIndex,
+      perView: 1,
+      animationDuration: 400,
+    });
+
+    glideInstance.mount();
   }
 
   function closeModal() {
     modal.classList.remove("show");
-    modal.classList.add("hide");
     document.body.classList.remove("no-scroll");
+    if (glideInstance) glideInstance.destroy();
   }
 
-  function goTo(i) {
-    currentIndex = i;
-    sliderTrack.style.transform = `translateX(-${currentIndex * 100}vw)`;
-  }
-
-  // Стрілки клавіатури
-  window.addEventListener("keydown", (e) => {
-    if (!modal.classList.contains("show")) return;
-    if (e.key === "ArrowRight" && currentIndex < window.clientGallery.length - 1) goTo(currentIndex + 1);
-    if (e.key === "ArrowLeft" && currentIndex > 0) goTo(currentIndex - 1);
-    if (e.key === "Escape") closeModal();
-  });
-
-  // Ресайз
-  window.addEventListener("resize", () => {
-    if (modal.classList.contains("show")) goTo(currentIndex);
-  });
-
-  // Клік по фото
+  // Клік на фото для відкриття
   galleryPhotos.forEach((img, index) => {
     img.onclick = () => openModal(index);
   });
@@ -299,24 +281,12 @@ function enableModalView() {
   closeBtn.onclick = closeModal;
   modal.onclick = (e) => { if (e.target === modal) closeModal(); };
 
-  // Swipe
-  let startX = 0;
-  sliderTrack.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-  });
-
-  sliderTrack.addEventListener("touchmove", (e) => {
-    e.preventDefault(); // блокує прокрутку сторінки під модалкою
-  }, { passive: false });
-
-  sliderTrack.addEventListener("touchend", (e) => {
-    const diff = e.changedTouches[0].clientX - startX;
-    if (Math.abs(diff) < 50) return;
-    if (diff < 0 && currentIndex < window.clientGallery.length - 1) currentIndex++;
-    if (diff > 0 && currentIndex > 0) currentIndex--;
-    goTo(currentIndex);
+  // Escape
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
   });
 }
+
 
 
 

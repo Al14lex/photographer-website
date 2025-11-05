@@ -187,10 +187,16 @@
         transition: width 0.2s ease;
       "
     ></div>
-    <div id="photoModal" class="photo-modal hide">
-      <span class="close-modal">&times;</span>
-      <div class="slider-track" id="sliderTrack"></div>
+
+    <div id="photoModal" class="photo-modal">
+      <span class="close-modal">×</span>
+      <div class="glide">
+        <div class="glide__track" data-glide-el="track">
+          <ul class="glide__slides" id="glideSlides"></ul>
+        </div>
+      </div>
     </div>
+
     <script>
       const ua = navigator.userAgent.toLowerCase();
       const isInAppBrowser =
@@ -210,5 +216,13 @@
         }
       }
     </script>
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.6.0/dist/css/glide.core.min.css"
+    />
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.6.0/dist/glide.min.js"></script>
   </body>
 </html>
