@@ -217,76 +217,84 @@ let currentIndex = 0;
 
 function enableModalView() {
   const modal = document.getElementById("photoModal");
-  const modalImg = document.getElementById("modalImage");
+  const sliderTrack = document.getElementById("sliderTrack");
   const closeBtn = document.querySelector(".close-modal");
 
   const galleryPhotos = document.querySelectorAll(".gallery-photo");
 
+  // Відкриття модального вікна з потрібною позицією
   galleryPhotos.forEach((img, index) => {
     img.addEventListener("click", () => {
       currentIndex = index;
-      modalImg.src = img.src;
-      modal.classList.add("show");
+      renderSliderImages();
       modal.classList.remove("hide");
+      modal.classList.add("show");
+      sliderTrack.style.transform = `translateX(-${currentIndex * 100}vw)`;
     });
   });
 
- function showPhotoAt(index) {
-  if (index < 0 || index >= window.clientGallery.length) return;
-  modalImg.classList.add("fade");
-  setTimeout(() => {
-    currentIndex = index;
-    modalImg.src = window.clientGallery[currentIndex];
-    modalImg.classList.remove("fade");
-  }, 150);
-}
-
+  function renderSliderImages() {
+    sliderTrack.innerHTML = "";
+    window.clientGallery.forEach((url) => {
+      const slide = document.createElement("div");
+      slide.className = "slider-image";
+      const image = document.createElement("img");
+      image.src = url;
+      image.alt = "Full photo";
+      slide.appendChild(image);
+      sliderTrack.appendChild(slide);
+    });
+  }
 
   const closeModal = () => {
-    modal.classList.add("hide");
     modal.classList.remove("show");
+    modal.classList.add("hide");
     setTimeout(() => {
-      modalImg.src = "";
+      sliderTrack.innerHTML = ""; // очистити DOM
     }, 400);
   };
 
   closeBtn.onclick = closeModal;
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeModal();
-    if (e.key === "ArrowLeft") showPhotoAt(currentIndex - 1);
-    if (e.key === "ArrowRight") showPhotoAt(currentIndex + 1);
+    if (e.key === "ArrowLeft") swipeTo(currentIndex - 1);
+    if (e.key === "ArrowRight") swipeTo(currentIndex + 1);
   });
 
   modal.onclick = (e) => {
     if (e.target === modal) closeModal();
   };
 
-  // === Swipe support for mobile ===
+  // Свайп логіка
   let touchStartX = 0;
   let touchEndX = 0;
 
-  modalImg.addEventListener("touchstart", (e) => {
+  sliderTrack.addEventListener("touchstart", (e) => {
     touchStartX = e.changedTouches[0].screenX;
   });
 
-  modalImg.addEventListener("touchend", (e) => {
+  sliderTrack.addEventListener("touchend", (e) => {
     touchEndX = e.changedTouches[0].screenX;
-    handleSwipeGesture();
+    handleSwipe();
   });
 
-  function handleSwipeGesture() {
-    const swipeThreshold = 50; // pixels
+  function handleSwipe() {
+    const diff = touchEndX - touchStartX;
+    if (Math.abs(diff) < 50) return;
 
-    if (touchEndX < touchStartX - swipeThreshold) {
-      // swipe left
-      showPhotoAt(currentIndex + 1);
-    } else if (touchEndX > touchStartX + swipeThreshold) {
-      // swipe right
-      showPhotoAt(currentIndex - 1);
+    if (diff < 0) {
+      swipeTo(currentIndex + 1); // свайп вліво
+    } else {
+      swipeTo(currentIndex - 1); // свайп вправо
     }
   }
-}
 
+  function swipeTo(index) {
+    if (index < 0 || index >= window.clientGallery.length) return;
+    currentIndex = index;
+    sliderTrack.style.transform = `translateX(-${currentIndex * 100}vw)`;
+  }
+}
 async function downloadAll() {
   alert("📥 Downloading started! Don’t close the page until all photos are downloaded.");
 
