@@ -8,8 +8,6 @@ const heroSection = document.getElementById("hero");
 const pinSection = document.getElementById("pin-section");
 const gallerySection = document.getElementById("gallery-section");
 const pinError = document.getElementById("pin-error");
-document.querySelector(".arrow.left").onclick = () => showPhotoAt(currentIndex - 1);
-document.querySelector(".arrow.right").onclick = () => showPhotoAt(currentIndex + 1);
 
 
 window.checkPin = checkPin;
