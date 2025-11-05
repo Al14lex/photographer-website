@@ -228,23 +228,34 @@ function enableModalView() {
   const sliderTrack = document.getElementById("sliderTrack");
   const closeBtn = document.querySelector(".close-modal");
   const galleryPhotos = document.querySelectorAll(".gallery-photo");
+  let currentIndex = 0;
 
-  // 🧹 Побудувати слайдер один раз при відкритті
   function buildSlides() {
-  sliderTrack.innerHTML = "";
-  window.clientGallery.forEach((url) => {
-    const slide = document.createElement("div");
-    slide.className = "slider-image";
-    const image = document.createElement("img");
-    image.src = url;
-    slide.appendChild(image);
-    sliderTrack.appendChild(slide);
-  });
+    sliderTrack.innerHTML = "";
 
-  // ✅ Встановлюємо правильну ширину треку
-  sliderTrack.style.width = `${window.clientGallery.length * 100}vw`;
-}
+    window.clientGallery.forEach((url) => {
+      const slide = document.createElement("div");
+      slide.className = "slider-image";
 
+      const image = document.createElement("img");
+      image.src = url;
+
+      // 🧼 Гарантовано НЕ додаємо gallery-photo!
+      // і явно скидаємо можливі стилі
+      image.className = "";
+      image.style.opacity = "1";
+      image.style.visibility = "visible";
+      image.style.filter = "none";
+      image.style.transform = "none";
+      image.style.display = "block";
+
+      slide.appendChild(image);
+      sliderTrack.appendChild(slide);
+    });
+
+    // 🔧 оновлюємо ширину слайдера
+    sliderTrack.style.width = `${window.clientGallery.length * 100}vw`;
+  }
 
   function openModal(index) {
     currentIndex = index;
@@ -260,65 +271,51 @@ function enableModalView() {
     modal.classList.add("hide");
     document.body.classList.remove("no-scroll");
   }
-function goTo(i) {
-  currentIndex = i;
-  sliderTrack.style.transform = `translateX(-${currentIndex * 100}vw)`;
-}
 
-// клавіатурні стрілки
-window.addEventListener("keydown", (e) => {
-  if (!modal.classList.contains("show")) return;
-  if (e.key === "ArrowRight" && currentIndex < window.clientGallery.length - 1) goTo(currentIndex + 1);
-  if (e.key === "ArrowLeft" && currentIndex > 0) goTo(currentIndex - 1);
-  if (e.key === "Escape") closeModal();
-});
+  function goTo(i) {
+    currentIndex = i;
+    sliderTrack.style.transform = `translateX(-${currentIndex * 100}vw)`;
+  }
 
-// ресайз (vw сам перераховується, але підстрахуємось)
-window.addEventListener("resize", () => {
-  if (modal.classList.contains("show")) goTo(currentIndex);
-});
+  // Стрілки клавіатури
+  window.addEventListener("keydown", (e) => {
+    if (!modal.classList.contains("show")) return;
+    if (e.key === "ArrowRight" && currentIndex < window.clientGallery.length - 1) goTo(currentIndex + 1);
+    if (e.key === "ArrowLeft" && currentIndex > 0) goTo(currentIndex - 1);
+    if (e.key === "Escape") closeModal();
+  });
+
+  // Ресайз
+  window.addEventListener("resize", () => {
+    if (modal.classList.contains("show")) goTo(currentIndex);
+  });
+
+  // Клік по фото
   galleryPhotos.forEach((img, index) => {
     img.onclick = () => openModal(index);
   });
 
+  // Закриття
   closeBtn.onclick = closeModal;
   modal.onclick = (e) => { if (e.target === modal) closeModal(); };
 
   // Swipe
-  // let startX = 0;
-  // sliderTrack.addEventListener("touchstart", e => startX = e.touches[0].clientX);
-  // sliderTrack.addEventListener("touchend", e => {
-  //   const diff = e.changedTouches[0].clientX - startX;
-  //   if (Math.abs(diff) < 50) return;
-  //   if (diff < 0 && currentIndex < window.clientGallery.length - 1) currentIndex++;
-  //   if (diff > 0 && currentIndex > 0) currentIndex--;
-  //   sliderTrack.style.transform = `translateX(-${currentIndex * 100}vw)`;
-  // });
   let startX = 0;
+  sliderTrack.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
 
-sliderTrack.addEventListener("touchstart", (e) => {
-  startX = e.touches[0].clientX;
-});
+  sliderTrack.addEventListener("touchmove", (e) => {
+    e.preventDefault(); // блокує прокрутку сторінки під модалкою
+  }, { passive: false });
 
-sliderTrack.addEventListener("touchmove", (e) => {
-  e.preventDefault(); // ✅ блокує "проскрол" сторінки під модалкою
-}, { passive: false });
-
-sliderTrack.addEventListener("touchend", (e) => {
-  const diff = e.changedTouches[0].clientX - startX;
-
-  if (Math.abs(diff) < 50) return;
-
-  if (diff < 0 && currentIndex < window.clientGallery.length - 1) {
-    currentIndex++;
-  }
-  if (diff > 0 && currentIndex > 0) {
-    currentIndex--;
-  }
-
-  sliderTrack.style.transform = `translateX(-${currentIndex * 100}vw)`;
-});
-
+  sliderTrack.addEventListener("touchend", (e) => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) < 50) return;
+    if (diff < 0 && currentIndex < window.clientGallery.length - 1) currentIndex++;
+    if (diff > 0 && currentIndex > 0) currentIndex--;
+    goTo(currentIndex);
+  });
 }
 
 
