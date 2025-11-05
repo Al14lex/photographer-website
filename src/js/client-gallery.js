@@ -248,10 +248,11 @@ function enableModalView() {
       li.className = "glide__slide";
       const img = document.createElement("img");
       img.src = url;
-      img.style.maxWidth = "100vw";
-      img.style.maxHeight = "100vh";
+      img.style.maxWidth = "90vw";
+      img.style.maxHeight = "90vh";
       img.style.objectFit = "contain";
-      img.style.margin = "0 auto";
+      img.style.margin = "auto";
+      img.style.borderRadius = "8px"
       img.style.display = "block";
       li.appendChild(img);
       glideSlides.appendChild(li);

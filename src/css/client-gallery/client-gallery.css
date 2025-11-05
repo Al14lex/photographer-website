@@ -271,7 +271,7 @@ background-color: var(--color-bg-hover);
 .photo-modal {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgb(58 48 40 / 70%);
     z-index: 10000;
     display: flex;
     justify-content: center;
@@ -285,11 +285,17 @@ background-color: var(--color-bg-hover);
     opacity: 1;
     pointer-events: all;
 }
+.glide{
+    height: 100%;
+}
+.glide__track {
+    height: 100%;}
 
 .glide__slide {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
 }
 
 .close-modal {
