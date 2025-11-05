@@ -288,6 +288,9 @@ background-color: var(--color-bg-hover);
 #glideSlides{
     height: 100%;
 }
+.glide{
+    height: 100%; 
+}
 .glide__track {
     height: 100%;}
 
