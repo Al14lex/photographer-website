@@ -285,7 +285,7 @@ background-color: var(--color-bg-hover);
     opacity: 1;
     pointer-events: all;
 }
-.glide{
+#glideSlides{
     height: 100%;
 }
 .glide__track {
