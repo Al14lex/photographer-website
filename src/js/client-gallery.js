@@ -225,30 +225,52 @@ function enableModalView() {
 
   // 🧹 Побудувати слайдер один раз при відкритті
   function buildSlides() {
-    sliderTrack.innerHTML = "";
-    window.clientGallery.forEach((url) => {
-      const slide = document.createElement("div");
-      slide.className = "slider-image";
-      const image = document.createElement("img");
-      image.src = url;
-      slide.appendChild(image);
-      sliderTrack.appendChild(slide);
-    });
-  }
+  sliderTrack.innerHTML = "";
+  window.clientGallery.forEach((url) => {
+    const slide = document.createElement("div");
+    slide.className = "slider-image";
+    const image = document.createElement("img");
+    image.src = url;
+    slide.appendChild(image);
+    sliderTrack.appendChild(slide);
+  });
+
+  // ✅ Встановлюємо правильну ширину треку
+  sliderTrack.style.width = `${window.clientGallery.length * 100}vw`;
+}
+
 
   function openModal(index) {
     currentIndex = index;
     buildSlides();
     modal.classList.add("show");
     modal.classList.remove("hide");
+    document.body.classList.add("no-scroll");
     sliderTrack.style.transform = `translateX(-${currentIndex * 100}vw)`;
   }
 
   function closeModal() {
     modal.classList.remove("show");
     modal.classList.add("hide");
+    document.body.classList.remove("no-scroll");
   }
+function goTo(i) {
+  currentIndex = i;
+  sliderTrack.style.transform = `translateX(-${currentIndex * 100}vw)`;
+}
 
+// клавіатурні стрілки
+window.addEventListener("keydown", (e) => {
+  if (!modal.classList.contains("show")) return;
+  if (e.key === "ArrowRight" && currentIndex < window.clientGallery.length - 1) goTo(currentIndex + 1);
+  if (e.key === "ArrowLeft" && currentIndex > 0) goTo(currentIndex - 1);
+  if (e.key === "Escape") closeModal();
+});
+
+// ресайз (vw сам перераховується, але підстрахуємось)
+window.addEventListener("resize", () => {
+  if (modal.classList.contains("show")) goTo(currentIndex);
+});
   galleryPhotos.forEach((img, index) => {
     img.onclick = () => openModal(index);
   });
@@ -257,15 +279,40 @@ function enableModalView() {
   modal.onclick = (e) => { if (e.target === modal) closeModal(); };
 
   // Swipe
+  // let startX = 0;
+  // sliderTrack.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+  // sliderTrack.addEventListener("touchend", e => {
+  //   const diff = e.changedTouches[0].clientX - startX;
+  //   if (Math.abs(diff) < 50) return;
+  //   if (diff < 0 && currentIndex < window.clientGallery.length - 1) currentIndex++;
+  //   if (diff > 0 && currentIndex > 0) currentIndex--;
+  //   sliderTrack.style.transform = `translateX(-${currentIndex * 100}vw)`;
+  // });
   let startX = 0;
-  sliderTrack.addEventListener("touchstart", e => startX = e.touches[0].clientX);
-  sliderTrack.addEventListener("touchend", e => {
-    const diff = e.changedTouches[0].clientX - startX;
-    if (Math.abs(diff) < 50) return;
-    if (diff < 0 && currentIndex < window.clientGallery.length - 1) currentIndex++;
-    if (diff > 0 && currentIndex > 0) currentIndex--;
-    sliderTrack.style.transform = `translateX(-${currentIndex * 100}vw)`;
-  });
+
+sliderTrack.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
+});
+
+sliderTrack.addEventListener("touchmove", (e) => {
+  e.preventDefault(); // ✅ блокує "проскрол" сторінки під модалкою
+}, { passive: false });
+
+sliderTrack.addEventListener("touchend", (e) => {
+  const diff = e.changedTouches[0].clientX - startX;
+
+  if (Math.abs(diff) < 50) return;
+
+  if (diff < 0 && currentIndex < window.clientGallery.length - 1) {
+    currentIndex++;
+  }
+  if (diff > 0 && currentIndex > 0) {
+    currentIndex--;
+  }
+
+  sliderTrack.style.transform = `translateX(-${currentIndex * 100}vw)`;
+});
+
 }
 
 
