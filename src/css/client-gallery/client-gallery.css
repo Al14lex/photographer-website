@@ -375,19 +375,6 @@ background-color: var(--color-bg-hover);
         }
  }
 
- .arrow {
-     position: absolute;
-     top: 50%;
-     font-size: 40px;
-     color: white;
-     cursor: pointer;
-     z-index: 99999;
-     user-select: none;
-     padding: 10px;
-     background: rgba(0, 0, 0, 0.2);
-     border-radius: 50%;
-     transform: translateY(-50%);
- }
 
  .modal-content-photo {
      transition: opacity 0.3s ease;

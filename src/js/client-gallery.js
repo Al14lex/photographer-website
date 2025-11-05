@@ -175,9 +175,15 @@ function renderGallery() {
     gallery.appendChild(imgWrapper);
   });
 
-  // ✅ Після того як фото додані до DOM — викликаємо enableModalView
-  enableModalView();
+  // ⏳ Гарантуємо, що DOM вже оновлений перед викликом enableModalView
+  requestAnimationFrame(() => {
+    enableModalView();
+  });
+
+  // Або:
+  // setTimeout(() => enableModalView(), 0);
 }
+
 
 
 // function enableModalView() {
