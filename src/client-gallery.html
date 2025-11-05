@@ -34,10 +34,7 @@
   </head>
   <body>
     <header class="header" id="header">
-      <div class="header-client-container container">
-        <h1>Welcome to your photo gallery</h1>
-        <!-- <a href="https://www.aleksandraphoto.com/">VISIT THE WEBSITE</a> -->
-      </div>
+      <h1 class="welcome">Welcome to your photo gallery</h1>
     </header>
 
     <div id="hero" class="hero-client-gallery">
@@ -85,7 +82,7 @@
         ></span>
       </p>
     </div>
-    <a href="https://www.aleksandraphoto.com/" style="margin: 20px auto"
+    <a href="https://www.aleksandraphoto.com/" class="link-to-website"
       >VISIT THE WEBSITE</a
     >
     <footer class="footer">
@@ -191,7 +188,9 @@
     ></div>
     <div id="photoModal" class="photo-modal hide">
       <span class="close-modal">&times;</span>
+      <span class="arrow left">&larr;</span>
       <img class="modal-content-photo" id="modalImage" alt="Full photo" />
+      <span class="arrow right">&rarr;</span>
     </div>
     <script>
       const ua = navigator.userAgent.toLowerCase();

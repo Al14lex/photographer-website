@@ -8,6 +8,9 @@ const heroSection = document.getElementById("hero");
 const pinSection = document.getElementById("pin-section");
 const gallerySection = document.getElementById("gallery-section");
 const pinError = document.getElementById("pin-error");
+document.querySelector(".arrow.left").onclick = () => showPhotoAt(currentIndex - 1);
+document.querySelector(".arrow.right").onclick = () => showPhotoAt(currentIndex + 1);
+
 
 window.checkPin = checkPin;
 window.downloadAll = downloadAll;
@@ -175,40 +178,113 @@ function renderGallery() {
 enableModalView();
 }
 
+// function enableModalView() {
+//   const modal = document.getElementById("photoModal");
+//   const modalImg = document.getElementById("modalImage");
+//   const closeBtn = document.querySelector(".close-modal");
+
+//   document.querySelectorAll(".gallery-photo").forEach((img) => {
+//     img.addEventListener("click", () => {
+//       modalImg.src = img.src;
+//       modal.classList.add("show");
+//       modal.classList.remove("hide");
+//     });
+//   });
+
+//   const closeModal = () => {
+//     modal.classList.add("hide");
+//     modal.classList.remove("show");
+//     setTimeout(() => {
+//       modalImg.src = ""; 
+//     }, 400); 
+//   };
+
+//   closeBtn.onclick = closeModal;
+
+//   window.addEventListener("keydown", (e) => {
+//     if (e.key === "Escape") {
+//       closeModal();
+//     }
+//   });
+
+//   modal.onclick = (e) => {
+//     if (e.target === modal) {
+//       closeModal();
+//     }
+//   };
+// }
+let currentIndex = 0;
+
 function enableModalView() {
   const modal = document.getElementById("photoModal");
   const modalImg = document.getElementById("modalImage");
   const closeBtn = document.querySelector(".close-modal");
 
-  document.querySelectorAll(".gallery-photo").forEach((img) => {
+  const galleryPhotos = document.querySelectorAll(".gallery-photo");
+
+  galleryPhotos.forEach((img, index) => {
     img.addEventListener("click", () => {
+      currentIndex = index;
       modalImg.src = img.src;
       modal.classList.add("show");
       modal.classList.remove("hide");
     });
   });
 
+ function showPhotoAt(index) {
+  if (index < 0 || index >= window.clientGallery.length) return;
+  modalImg.classList.add("fade");
+  setTimeout(() => {
+    currentIndex = index;
+    modalImg.src = window.clientGallery[currentIndex];
+    modalImg.classList.remove("fade");
+  }, 150);
+}
+
+
   const closeModal = () => {
     modal.classList.add("hide");
     modal.classList.remove("show");
     setTimeout(() => {
-      modalImg.src = ""; 
-    }, 400); 
+      modalImg.src = "";
+    }, 400);
   };
 
   closeBtn.onclick = closeModal;
-
   window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      closeModal();
-    }
+    if (e.key === "Escape") closeModal();
+    if (e.key === "ArrowLeft") showPhotoAt(currentIndex - 1);
+    if (e.key === "ArrowRight") showPhotoAt(currentIndex + 1);
   });
 
   modal.onclick = (e) => {
-    if (e.target === modal) {
-      closeModal();
-    }
+    if (e.target === modal) closeModal();
   };
+
+  // === Swipe support for mobile ===
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  modalImg.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  modalImg.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipeGesture();
+  });
+
+  function handleSwipeGesture() {
+    const swipeThreshold = 50; // pixels
+
+    if (touchEndX < touchStartX - swipeThreshold) {
+      // swipe left
+      showPhotoAt(currentIndex + 1);
+    } else if (touchEndX > touchStartX + swipeThreshold) {
+      // swipe right
+      showPhotoAt(currentIndex - 1);
+    }
+  }
 }
 
 async function downloadAll() {
